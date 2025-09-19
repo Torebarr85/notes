@@ -1,13 +1,8 @@
 # **NETWORKING**
 
 **what is an IP Address? // You SUCK at Subnetting // EP 1**
-
-[x] https://www.youtube.com/watch?v=5WfiTHiU4x8
-
-[ ] https://www.youtube.com/watch?v=tcae4TSSMo8
-
-
-[ ] https://www.youtube.com/watch?v=8bhvn9tQk8o
+THE ENTIRE PLAYLIST:
+[ ] https://www.youtube.com/watch?v=5WfiTHiU4x8&list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF
 
 
 - ip address like a phone number to identify devices. 192.168.1.204
@@ -40,4 +35,12 @@ He does it all. give ip addresses to our devices in our network and could help u
 so from 0 to 255 = 256 ip addresses and you can use just 253
 
 
+# **we ran OUT of IP Addresses!!**
+https://www.youtube.com/watch?v=tcae4TSSMo8&t=613s
+
+Cosa contiene una subnet
+
+- Network ID: il primo indirizzo del blocco. Identifica la rete.
+- Host: gli indirizzi usabili dai dispositivi.
+- Broadcast: l’ultimo indirizzo. Serve per inviare a “tutti” nella subnet.
 
