@@ -38,9 +38,133 @@ so from 0 to 255 = 256 ip addresses and you can use just 253
 # **we ran OUT of IP Addresses!!**
 https://www.youtube.com/watch?v=tcae4TSSMo8&t=613s
 
-Cosa contiene una subnet
+**Cosa contiene una subnet**
 
 - Network ID: il primo indirizzo del blocco. Identifica la rete.
 - Host: gli indirizzi usabili dai dispositivi.
 - Broadcast: l’ultimo indirizzo. Serve per inviare a “tutti” nella subnet.
+  
+**Idee chiave**
 
+- IPv4 = 4 numeri (ottetti). Esempio: 192.168.1.130
+- Maschera: 255.255.255.0
+- 255 = parte “rete” (quartiere)
+- 0 = parte “host” (case)
+
+**Quindi: 255.255.255.0 = /24**
+
+- primi 3 numeri fissi = rete
+- ultimo numero variabile = host
+
+**Esempio pratico con /24:**
+
+- Rete: 192.168.1.0/24
+- Network ID: 192.168.1.0 (nome del quartiere)
+- Broadcast: 192.168.1.255 (megafono a tutti)
+- Host usabili: 192.168.1.1–192.168.1.254 (254 case)
+
+**Regola lampo**
+
+- Più 255 = rete più grande, subnet più “stretta” per gli host
+- Più 0 (o numeri piccoli tipo 128,192,224…) = più spazio agli host
+
+
+
+**Procedura chiara per passare da maschera a numero di host**
+
+Conta i bit di rete (prefisso) dalla maschera.
+Usa questa mappa per ogni ottetto:
+
+255 → 8 bit
+
+254 → 7
+
+252 → 6
+
+248 → 5
+
+240 → 4
+
+224 → 3
+
+192 → 2
+
+128 → 1
+
+0 → 0
+
+Host bits = 32 − prefisso.
+
+Indirizzi totali = 2host bits
+.
+
+Usabili = totali − 2
+
+**Trucco calcolo quanti subnet usabili ho**
+![alt text](attachments/trucco-calcolo-hosts.png) 
+
+
+
+Esempio visivo
+![alt text](attachments/esempio.png) 
+Subnet: 192.168.1.0/24 ↔ maschera 255.255.255.0
+Chiave pratica:
+
+Primo indirizzo = Network ID → non si usa per i device
+
+Ultimo indirizzo = Broadcast → messaggi a tutti
+
+In mezzo = Host → indirizzi assegnabili ai device
+
+
+Sintesi chiara con metafora + nome tecnico.
+* **Subnet (sottorete) = “quartiere”**
+
+  * Tecnico: **Subnet**. È un gruppo di indirizzi IP che stanno nella stessa rete logica.
+
+* **Network ID (indirizzo di rete) = “nome del quartiere”**
+
+  * Tecnico: **Network ID**. È il **primo** indirizzo del blocco. Non si assegna ai dispositivi.
+
+* **Broadcast address = “megafono del quartiere”**
+
+  * Tecnico: **Broadcast**. È l’**ultimo** indirizzo del blocco. Messaggi a tutti gli host della subnet.
+
+* **Host = “case del quartiere”**
+
+  * Tecnico: **Host addresses**. Gli indirizzi **tra** Network ID e Broadcast che puoi assegnare a PC, telefoni, stampanti.
+
+* **CIDR / prefisso = “taglia del quartiere”**
+
+  * Tecnico: **Prefisso CIDR** (es. **/24**, **/26**). Più grande il numero, **più piccolo** il quartiere.
+
+* **Subnet mask (maschera) = “stampo del quartiere”**
+
+  * Tecnico: **Maschera** (es. **255.255.255.0**). Dice quali bit sono “rete” e quali “host”.
+  * Equivalenze comuni:
+
+    * **/24** ↔ **255.255.255.0**
+    * **/26** ↔ **255.255.255.192**
+    * **/28** ↔ **255.255.255.240**
+
+* **Esempio base**
+
+  * Subnet: **192.168.1.0/24**
+
+    * **Network ID**: 192.168.1.0 → “nome quartiere”
+    * **Broadcast**: 192.168.1.255 → “megafono”
+    * **Host usabili**: 192.168.1.1–192.168.1.254 → “case” (254 case)
+
+* **Esempio quartiere più piccolo**
+
+  * Subnet: **192.168.1.128/26**
+
+    * **Network ID**: 192.168.1.128
+    * **Broadcast**: 192.168.1.191
+    * **Host**: 192.168.1.129–190 (62 case)
+
+* **Tabellino “taglie del quartiere”**
+
+  * **/24** → 256 indirizzi totali → **254 host**
+  * **/26** → 64 totali → **62 host**
+  * **/28** → 16 totali → **14 host**
