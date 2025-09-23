@@ -8,6 +8,8 @@
 
 [ ]  https://www.youtube.com/watch?v=PNhq_4d-5ek&list=PLy7NrYWoggjzDAxOxWazuVSsndW3fUinz
 
+
+
 **what is shall? what is bash?**
 
 - CLI => a way to interapt with computer by writing commands
@@ -21,6 +23,16 @@
 - find . -name "*.log" -mtime -1
 - trova nella cartella attuale i file .log che sono stati modificati nell'ultimo giorno
 ![alt text](attachments/commands-log-11.png)
+
+- create a SHELL SCRIPT = just a file.sh with linux commands
+- chmod +x file.sh
+- #!/bin/bash  called shebang and tells which language 
+- echo -e "\n per andare a capo some comments for human readibility"
+- create variables: LOG_VAR="path/to/logs" and use $LOG_VAR
+- FRUITS_ARRAY=("banana" "mela" "pera") to create array in bash remember without comma
+- ${FRUITS_ARRAY[0]} to access array in bash
+
+
 
 **13 Linux Commands Every Engineer Should Know (Real-World Example)**
 

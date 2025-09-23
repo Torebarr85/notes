@@ -168,3 +168,10 @@ Sintesi chiara con metafora + nome tecnico.
   * **/24** → 256 indirizzi totali → **254 host**
   * **/26** → 64 totali → **62 host**
   * **/28** → 16 totali → **14 host**
+
+
+
+# **we’re out of IP Addresses….but this saved us (Private IP Addresses)**
+https://www.youtube.com/watch?v=8bhvn9tQk8o&list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF&index=3 
+
+NAT and private ip addresses
