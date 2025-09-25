@@ -14,7 +14,7 @@
 **Namespace**
 - Namespace = “stanze” dentro quel datacenter. Più namespace convivono nello stesso cluster.
 
-L’isolamento è logico: per isolare rete serve NetworkPolicy.
+L’isolamento è solo logico: per isolare rete serve NetworkPolicy.
 
 Quote/limiti si applicano a livello di namespace, non di cluster.
 
@@ -69,3 +69,43 @@ Note utili:
 
 **multi-tenancy**
 Condivisione di risorse: Invece che avere un'infrastruttura separata per ogni cliente, diversi tenant utilizzano la stessa istanza software, lo stesso sistema operativo e la stessa infrastruttura hardware sottostante
+
+
+
+
+
+# ** 🧠 CPU vs Memoria in Kubernetes — spiegato facile **
+Tipo risorsa	A cosa serve	Se sbagli cosa succede
+CPU	Quante istruzioni può eseguire il container nel tempo → calcolo	Se è troppo poca: il pod viene rallentato (throttling), ma NON crasha
+Memoria	Quanta RAM può usare per dati in uso, heap, cache ecc.	Se è troppa poca: il pod va in crash (OOMKilled)
+
+🧠 Trucco per ricordare (con analogia semplice):
+Immagina un cuoco (container) che cucina in una cucina (pod):
+
+🔹 CPU = mani del cuoco
+
+Più mani ha → più può lavorare in parallelo. Se ha solo 1 mano → lavora lentamente (throttling), ma non muore.
+
+🔹 Memoria = tavolo da lavoro (RAM)
+
+Se il tavolo è troppo piccolo e non ci sta la roba → il piatto cade per terra → crash (OOMKilled).
+
+
+
+CONSUMI RISORSE KUBE
+
+Verifica richieste/limiti dichiarati nei Pod
+
+kubectl get pod -n prov-ippv2-svts-platform-namespace -o=custom-columns='NAME:.metadata.name,CPU_REQUEST:.spec.containers[*].resources.requests.cpu,CPU_LIMIT:.spec.containers[*].resources.limits.cpu,MEM_REQUEST:.spec.containers[*].resources.requests.memory,MEM_LIMIT:.spec.containers[*].resources.limits.memory'
+
+
+
+Oppure un esempio più leggibile (usa kubectl describe):
+
+kubectl describe pod <POD_NAME> -n <NAMESPACE>
+
+
+
+
+Passaggio successivo: verifica utilizzo effettivo
+kubectl top pod -n prov-ippv2-svts-platform-namespace
