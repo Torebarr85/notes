@@ -107,5 +107,13 @@ kubectl describe pod <POD_NAME> -n <NAMESPACE>
 
 
 
-Passaggio successivo: verifica utilizzo effettivo
-kubectl top pod -n prov-ippv2-svts-platform-namespace
+
+
+**kubectl top pod -n prov-ippv2-svts-platform-namespace**
+
+🧪 A cosa servono requests e limits?
+Campo	        Significato	                                Esempio
+requests.cpu	Quanta CPU viene prenotata per il container	Garantisce che il container abbia almeno questa quantità
+limits.cpu	    Quanta CPU può usare al massimo	            Se la supera → throttling
+requests.memory	Quanta RAM prenotata	                    Il scheduler cerca un nodo con questa RAM
+limits.memory	Quanta RAM può usare al massimo	            Se la supera → OOMKilled 💥
