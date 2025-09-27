@@ -31,7 +31,8 @@
 - create variables: LOG_VAR="path/to/logs" and use $LOG_VAR
 - FRUITS_ARRAY=("banana" "mela" "pera") to create array in bash remember without comma
 - ${FRUITS_ARRAY[0]} to access array in bash
-
+- ls -la --> d iniziale = directory, - = file.
+- Permessi a terne: owner / group / others.
 
 
 **13 Linux Commands Every Engineer Should Know (Real-World Example)**
