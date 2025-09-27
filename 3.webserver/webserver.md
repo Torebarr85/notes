@@ -55,4 +55,35 @@ In pratica: funziona, ma è un anti-pattern.
 
 ✅ Sviluppo → Angular/React hanno già un mini server integrato (comodo).
 ✅ Produzione → sempre dietro un vero web server (Nginx, Apache, Caddy o CDN).
-👉 Il framework JS non è un web server, produce solo file che qualcuno deve consegnare via HTTP.
+👉 Il framework JS non è un web server, produce solo file che qualcuno deve consegnare via HTTP
+
+**Regole d’oro per ricordarlo**
+
+- Backend = già un server (parla da solo su una porta).
+- Nginx = opzionale ma utile:
+- serve i file del frontend,
+- fa da ponte verso il backend su /api,
+- ti dà ordine e controllo all’ingresso.
+
+2) Quando metti Nginx davanti anche al backend?
+
+Non per farlo parlare, ma per organizzare meglio l’ingresso.
+
+A Unico entrypoint (stesso dominio/porta)
+. vuoi unico entrypoint
+
+- Frontend (SPA): i file statici (index.html, JS, CSS) devono essere serviti da qualcuno → qui Nginx è perfetto.
+- Backend (API): vogliamo che le chiamate siano su /api/... sullo stesso dominio.
+
+Browser → http://localhost/
+           ├─ /           → Nginx serve lo SPA (file statici)
+           └─ /api/...    → Nginx fa da “ponte” al backend (proxy → backend:8080)
+
+1) “Non ti serve Nginx per far parlare il backend”
+- Un backend (es. Quarkus, Node/Express, Spring Boot) è già un server.
+- Quando lo avvii, lui ascolta su una porta (es. :8080) e risponde alle richieste HTTP.
+- Quindi se apri il browser su http://localhost:8080/hello, il backend risponde da solo.
+Non serve Nginx per “dargli voce”: la voce ce l’ha già.
+
+
+
