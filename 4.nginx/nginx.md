@@ -1,4 +1,12 @@
 # **NGINX**
+“Reverse-proxy to an app on localhost”
+NGINX riceve le richieste e le inoltra a un’app che gira sulla stessa macchina, di solito su 127.0.0.1:PORT. Così:
+
+l’app non espone porte pubbliche
+
+TLS, compressione, rate limit li fa NGINX
+
+puoi fare routing e bilanciamento
 
 **NGINX Explained - What is Nginx**
 [x]  https://www.youtube.com/watch?v=iInUBOVeBCc&t=484s
@@ -12,7 +20,6 @@
     - NGINX ingress controller act as load balancer inside the k8s cluster. Not public accessibile.
     - while the cloud load balancer (AWS ELB) is accessibile from public.
     - super security! so the cluster is never directly exposed to public access
-        
         
 ![alt text](attachments/elbnginx.png)
 
