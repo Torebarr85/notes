@@ -1,3 +1,10 @@
++++
+date = '2025-10-13T23:48:57+02:00'
+draft = false
+title = 'VIRTUAL MACHINE VS DOCKER'
+tags = ["VIRTUAL MACHINE VS DOCKER"]
++++
+
 # VIRTUAL MACHINE VS DOCKER
 
 virtualization and VM are virtualizing hardware 

@@ -1,0 +1,12 @@
+baseURL = "https://Torebarr85.github.io/notes/"
+languageCode = "en-us"
+title = "Notes"
+theme = "PaperMod"
+enableRobotsTXT = true
+
+[pagination]
+  pagerSize = 5
+
+[params]
+  defaultTheme = "auto"
+  ShowReadingTime = true

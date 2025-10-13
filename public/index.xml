@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Notes</title>
+    <link>http://localhost:1313/notes/</link>
+    <description>Recent content on Notes</description>
+    <generator>Hugo -- 0.149.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 13 Oct 2025 23:48:57 +0200</lastBuildDate>
+    <atom:link href="http://localhost:1313/notes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>VIRTUAL MACHINE VS DOCKER</title>
+      <link>http://localhost:1313/notes/posts/docker/docker/</link>
+      <pubDate>Mon, 13 Oct 2025 23:48:57 +0200</pubDate>
+      <guid>http://localhost:1313/notes/posts/docker/docker/</guid>
+      <description>&lt;h1 id=&#34;virtual-machine-vs-docker&#34;&gt;VIRTUAL MACHINE VS DOCKER&lt;/h1&gt;
+&lt;p&gt;virtualization and VM are virtualizing hardware&lt;/p&gt;
+&lt;p&gt;while Docker virtualize OS operating system&lt;/p&gt;
+&lt;p&gt;docker is a crazy microcomputer and gonna replace VM&lt;/p&gt;
+&lt;p&gt;because Docker containers are so lightweight and fast!&lt;/p&gt;
+&lt;h1 id=&#34;step-5---docker&#34;&gt;STEP 5 - DOCKER&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;you need to learn Docker RIGHT NOW!! // Docker Containers 101&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=eGz9DS-aIeY&#34;&gt;https://www.youtube.com/watch?v=eGz9DS-aIeY&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Docker vs. Kubernetes: The ONLY Video You Need to Finally Understand Containers!&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=oGPjzCBZGzg&#34;&gt;https://www.youtube.com/watch?v=oGPjzCBZGzg&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;DOCKER = is used to package application in container.&lt;/li&gt;
+&lt;li&gt;Docker alone is useful for
+&lt;ul&gt;
+&lt;li&gt;single container apps&lt;/li&gt;
+&lt;li&gt;and local development environments&lt;/li&gt;
+&lt;li&gt;docker simplify building and testing apps&lt;/li&gt;
+&lt;li&gt;but if you want to manage, deploy and scale many applications? docker alone fall short. → KUBERNETES is essential&lt;/li&gt;
+&lt;li&gt;kubernetes ensure apps run reliably at scale&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/notes/posts/kubernetes/kubernetes/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/posts/kubernetes/kubernetes/</guid>
+      <description>&lt;h1 id=&#34;kubernetes&#34;&gt;Kubernetes&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Cluster&lt;/strong&gt;
+&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;attachments/cluster.jpeg&#34;&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Cluster = l’intero datacenter Kubernetes&lt;/li&gt;
+&lt;li&gt;Cos’è il cluster EKS:  composto da Control plane + Worker nodes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;Control plane:&lt;/em&gt; API server, scheduler, controller manager, etcd. In EKS è gestito da AWS. Non c’è un tuo “master node” su EC2.&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;Worker nodes:&lt;/em&gt; le istanze dove girano i Pod. Sono EC2 (providerID AWS), pronte, v1.33.4-eks-…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Comando utile: kubectl get nodes -o wide&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Namespace&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Namespace = “stanze” dentro quel datacenter. Più namespace convivono nello stesso cluster.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;L’isolamento è solo logico: per isolare rete serve NetworkPolicy.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/notes/posts/linux/linux/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/posts/linux/linux/</guid>
+      <description>&lt;h1 id=&#34;linux&#34;&gt;&lt;strong&gt;LINUX&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Struttura del file system Linux spiegata: da / a /usr | Nozioni di base su Linux&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[x]  &lt;a href=&#34;https://www.youtube.com/watch?v=ISJ44S5sZu8&amp;amp;list=PLmQB6ao4XoI9S4cIKIRsLQKDHhBPesSQ5&amp;amp;index=9&#34;&gt;https://www.youtube.com/watch?v=ISJ44S5sZu8&amp;amp;list=PLmQB6ao4XoI9S4cIKIRsLQKDHhBPesSQ5&amp;amp;index=9&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Bash Scripting Tutorial for Beginners&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;[ ]  &lt;a href=&#34;https://www.youtube.com/watch?v=PNhq_4d-5ek&amp;amp;list=PLy7NrYWoggjzDAxOxWazuVSsndW3fUinz&#34;&gt;https://www.youtube.com/watch?v=PNhq_4d-5ek&amp;amp;list=PLy7NrYWoggjzDAxOxWazuVSsndW3fUinz&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;what is shall? what is bash?&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;CLI =&amp;gt; a way to interapt with computer by writing commands&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;in Linux CLI is SHELL&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;BASH =&amp;gt; Bourn-Again Shell (most common shell) is not only a shell but it&amp;rsquo;s a programming language&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;bash scripts&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;grep -c &amp;ldquo;ERR&amp;rdquo; application.log&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/notes/posts/networking/networking/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/posts/networking/networking/</guid>
+      <description>&lt;h1 id=&#34;networking&#34;&gt;&lt;strong&gt;NETWORKING&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;what is an IP Address? // You SUCK at Subnetting // EP 1&lt;/strong&gt;
+THE ENTIRE PLAYLIST:
+[ ] &lt;a href=&#34;https://www.youtube.com/watch?v=5WfiTHiU4x8&amp;amp;list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF&#34;&gt;https://www.youtube.com/watch?v=5WfiTHiU4x8&amp;amp;list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ip address like a phone number to identify devices. 192.168.1.204
+&lt;strong&gt;MR. SUBNET MASK aka NETMASK&lt;/strong&gt;
+Tells what ip addresses start with. he tells the street we live on..&lt;/li&gt;
+&lt;li&gt;subnet aka netmask 255.255.255.0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;MR. DEFAULT GATEWAY aka ROUTER&lt;/strong&gt;
+He does it all. give ip addresses to our devices in our network and could help us to get outside our network. if you wanna visit netflix for instance.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/notes/posts/nginx/nginx/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/posts/nginx/nginx/</guid>
+      <description>&lt;h1 id=&#34;nginx&#34;&gt;&lt;strong&gt;NGINX&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;“Reverse-proxy to an app on localhost”
+NGINX riceve le richieste e le inoltra a un’app che gira sulla stessa macchina, di solito su 127.0.0.1:PORT. Così:&lt;/p&gt;
+&lt;p&gt;l’app non espone porte pubbliche&lt;/p&gt;
+&lt;p&gt;TLS, compressione, rate limit li fa NGINX&lt;/p&gt;
+&lt;p&gt;puoi fare routing e bilanciamento&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NGINX Explained - What is Nginx&lt;/strong&gt;
+[x]  &lt;a href=&#34;https://www.youtube.com/watch?v=iInUBOVeBCc&amp;amp;t=484s&#34;&gt;https://www.youtube.com/watch?v=iInUBOVeBCc&amp;amp;t=484s&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;NGINX = piece of software on a server that handles HTTP requests.&lt;/li&gt;
+&lt;li&gt;NGINX once when internet was easy was only a high performance webserver but now with millions of http requests can also act as a load balancer: distributes incoming traffic acrosso multiple backend servers (with others nginx)&lt;/li&gt;
+&lt;li&gt;PROXY = Acting on behalf of another, proxy server: intermediaty servers that forwards client requests to other servers with the fewest active connections.&lt;/li&gt;
+&lt;li&gt;NGINX configurations….&lt;/li&gt;
+&lt;li&gt;NGINX in KUBERNETES: nginx as K8S Ingress Controller→ essentially a proxy , specialized load balancer for managing ingress (incoming) traffic in kubernetes.&lt;/li&gt;
+&lt;li&gt;perché se già i cloud platform come AWS hanno i loro load balancer, dovremmo usare nginx? perché lavorano insieme.
+&lt;ul&gt;
+&lt;li&gt;NGINX ingress controller act as load balancer inside the k8s cluster. Not public accessibile.&lt;/li&gt;
+&lt;li&gt;while the cloud load balancer (AWS ELB) is accessibile from public.&lt;/li&gt;
+&lt;li&gt;super security! so the cluster is never directly exposed to public access&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;attachments/elbnginx.png&#34;&gt;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/notes/posts/virtualization/virtualmachine/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/posts/virtualization/virtualmachine/</guid>
+      <description>&lt;h1 id=&#34;step-4---virtual-machine&#34;&gt;STEP 4 - VIRTUAL MACHINE&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Virtual Machines explained in 15 Mins&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;a href=&#34;https://www.youtube.com/watch?v=mQP0wqNT_DI&#34;&gt;https://www.youtube.com/watch?v=mQP0wqNT_DI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;virtual box&lt;/p&gt;
+&lt;p&gt;hypervisor… vmware&lt;/p&gt;
+&lt;p&gt;hardware&lt;/p&gt;
+&lt;p&gt;2 types of virtualization&lt;/p&gt;
+&lt;h1 id=&#34;virtual-machine-vs-docker&#34;&gt;VIRTUAL MACHINE VS DOCKER&lt;/h1&gt;
+&lt;p&gt;virtualization and VM are virtualizing hardware&lt;/p&gt;
+&lt;p&gt;while Docker virtualize OS operating system&lt;/p&gt;
+&lt;p&gt;docker is a crazy microcomputer and gonna replace VM&lt;/p&gt;
+&lt;p&gt;because Docker containers are so lightweight and fast!&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title></title>
+      <link>http://localhost:1313/notes/posts/webserver/webserver/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/posts/webserver/webserver/</guid>
+      <description>&lt;h1 id=&#34;web-server&#34;&gt;&lt;strong&gt;WEB SERVER&lt;/strong&gt;&lt;/h1&gt;
+&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9J1nJOivdyw&#34;&gt;https://www.youtube.com/watch?v=9J1nJOivdyw&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;just a piece of software that serves web content.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;listen on a port&lt;/li&gt;
+&lt;li&gt;for a request&lt;/li&gt;
+&lt;li&gt;transport protocol&lt;/li&gt;
+&lt;li&gt;response containing the resource&lt;/li&gt;
+&lt;li&gt;resource&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;🔹 1. Ogni frontend ha bisogno di un web server&lt;/p&gt;
+&lt;p&gt;Il browser non legge “file dal disco”, ha bisogno di qualcuno che glieli dia via HTTP.&lt;/p&gt;
+&lt;p&gt;Quel qualcuno è un web server: Nginx, Apache, Caddy, S3+CloudFront… o anche un serverino Node come serve.&lt;/p&gt;
+&lt;p&gt;🔹 2. Angular, React, Vue in dev mode&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
