@@ -168,3 +168,16 @@ Sintesi chiara con metafora + nome tecnico.
   * **/24** → 256 indirizzi totali → **254 host**
   * **/26** → 64 totali → **62 host**
   * **/28** → 16 totali → **14 host**
+
+
+
+**SPIEGAZIONE BROADCAST PARLA CON TUTTI**
+Significa: se mandi un messaggio all’indirizzo di broadcast, lo ricevono tutti i dispositivi della stessa subnet.
+
+Dove si manda: all’ultimo indirizzo della subnet. Esempio /24: 192.168.1.255.
+
+Chi lo riceve: tutti gli host di quel “quartiere” (.1–.254).
+
+Fin dove arriva: solo dentro la subnet. Fuori non passa.
+
+Mini-scena “rete di casa 192.168.1.0/24” Telefono si collega al Wi-Fi Invia DHCP Discover → 192.168.1.255. Il router risponde con un IP, es. 192.168.1.23. PC vuole parlare con la stampante 192.168.1.60 PC invia ARP in broadcast: “Chi ha 192.168.1.60?” Solo la stampante risponde con il suo MAC → poi comunicano.
