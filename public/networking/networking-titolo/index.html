@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/notes/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=notes/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Networking: &lt;titolo&gt; | Notes</title>
+<meta name="keywords" content="networking">
+<meta name="description" content="NETWORKING
+what is an IP Address? // You SUCK at Subnetting // EP 1
+THE ENTIRE PLAYLIST:
+[ ] https://www.youtube.com/watch?v=5WfiTHiU4x8&amp;list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF
+
+ip address like a phone number to identify devices. 192.168.1.204
+MR. SUBNET MASK aka NETMASK
+Tells what ip addresses start with. he tells the street we live on..
+subnet aka netmask 255.255.255.0
+
+MR. DEFAULT GATEWAY aka ROUTER
+He does it all. give ip addresses to our devices in our network and could help us to get outside our network. if you wanna visit netflix for instance.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/notes/networking/networking-titolo/">
+<link crossorigin="anonymous" href="/notes/assets/css/stylesheet.d0049500090a8b5b522a30f4bc70f815df41595125d25503dff47281216974cb.css" integrity="sha256-0ASVAAkKi1tSKjD0vHD4Fd9BWVEl0lUD3/RygSFpdMs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/notes/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/notes/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/notes/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/notes/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/notes/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/notes/networking/networking-titolo/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/notes/" accesskey="h" title="Notes (Alt + H)">Notes</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/notes/tags/aws/" title="Aws">
+                    <span>AWS</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/docker/" title="Docker">
+                    <span>Docker</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/kubernetes/" title="Kubernetes">
+                    <span>Kubernetes</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/linux/" title="Linux">
+                    <span>Linux</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/networking/" title="Networking">
+                    <span>Networking</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/nginx/" title="Nginx">
+                    <span>Nginx</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/virtualization/" title="Virtualization">
+                    <span>Virtualization</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/webserver/" title="Webserver">
+                    <span>Webserver</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/" title="Tags">
+                    <span>All topics</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/notes/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/notes/networking/">Networkings</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Networking: &lt;titolo&gt;
+    </h1>
+    <div class="post-meta"><span title='2025-10-14 00:00:00 +0000 UTC'>October 14, 2025</span>&nbsp;·&nbsp;<span>4 min</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#networking" aria-label="NETWORKING">NETWORKING</a></li>
+                <li>
+                    <a href="#we-ran-out-of-ip-addresses" aria-label="we ran OUT of IP Addresses!!">we ran OUT of IP Addresses!!</a></li>
+                <li>
+                    <a href="#were-out-of-ip-addressesbut-this-saved-us-private-ip-addresses" aria-label="we’re out of IP Addresses….but this saved us (Private IP Addresses)">we’re out of IP Addresses….but this saved us (Private IP Addresses)</a>
+                </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="networking"><strong>NETWORKING</strong><a hidden class="anchor" aria-hidden="true" href="#networking">#</a></h1>
+<p><strong>what is an IP Address? // You SUCK at Subnetting // EP 1</strong>
+THE ENTIRE PLAYLIST:
+[ ] <a href="https://www.youtube.com/watch?v=5WfiTHiU4x8&amp;list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF">https://www.youtube.com/watch?v=5WfiTHiU4x8&amp;list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF</a></p>
+<ul>
+<li>ip address like a phone number to identify devices. 192.168.1.204
+<strong>MR. SUBNET MASK aka NETMASK</strong>
+Tells what ip addresses start with. he tells the street we live on..</li>
+<li>subnet aka netmask 255.255.255.0</li>
+</ul>
+<p><strong>MR. DEFAULT GATEWAY aka ROUTER</strong>
+He does it all. give ip addresses to our devices in our network and could help us to get outside our network. if you wanna visit netflix for instance.</p>
+<ul>
+<li>default gateway aka router aka default router 192.168.1.1</li>
+<li>router (by DHCP) gives your devices an IP address
+<img alt="alt text" loading="lazy" src="attachments/network_portion.png"></li>
+<li>device is a HOST</li>
+<li>host number can change. but the network portion don&rsquo;t</li>
+</ul>
+<p><img alt="alt text" loading="lazy" src="attachments/subnets.png">
+<img alt="alt text" loading="lazy" src="attachments/_.png"></p>
+<ul>
+<li>
+<p>if my computer wants to call netflix (another ip address not in his neighborhood) needs &ldquo;ups&rdquo; aka default gateway aka router. he knows everything related others ip address.</p>
+</li>
+<li>
+<p>whenever any device in a network (home network or     business network etc&hellip;)  wants to talk to something outside it&rsquo;s network it has to talk to it&rsquo;s router. it&rsquo;s default gateway to get out.</p>
+</li>
+</ul>
+<p><strong>UNtouchable IP address</strong></p>
+<ul>
+<li>192.168.1.0 -&gt; network address</li>
+<li>192.168.1.255 -&gt; broadcast address</li>
+<li>and that one associated to the default gateway aka router (for example: 192.168.1.1)</li>
+</ul>
+<p>so from 0 to 255 = 256 ip addresses and you can use just 253</p>
+<h1 id="we-ran-out-of-ip-addresses"><strong>we ran OUT of IP Addresses!!</strong><a hidden class="anchor" aria-hidden="true" href="#we-ran-out-of-ip-addresses">#</a></h1>
+<p><a href="https://www.youtube.com/watch?v=tcae4TSSMo8&amp;t=613s">https://www.youtube.com/watch?v=tcae4TSSMo8&amp;t=613s</a></p>
+<p><strong>Cosa contiene una subnet</strong></p>
+<ul>
+<li>Network ID: il primo indirizzo del blocco. Identifica la rete.</li>
+<li>Host: gli indirizzi usabili dai dispositivi.</li>
+<li>Broadcast: l’ultimo indirizzo. Serve per inviare a “tutti” nella subnet.</li>
+</ul>
+<p><strong>Idee chiave</strong></p>
+<ul>
+<li>IPv4 = 4 numeri (ottetti). Esempio: 192.168.1.130</li>
+<li>Maschera: 255.255.255.0</li>
+<li>255 = parte “rete” (quartiere)</li>
+<li>0 = parte “host” (case)</li>
+</ul>
+<p><strong>Quindi: 255.255.255.0 = /24</strong></p>
+<ul>
+<li>primi 3 numeri fissi = rete</li>
+<li>ultimo numero variabile = host</li>
+</ul>
+<p><strong>Esempio pratico con /24:</strong></p>
+<ul>
+<li>Rete: 192.168.1.0/24</li>
+<li>Network ID: 192.168.1.0 (nome del quartiere)</li>
+<li>Broadcast: 192.168.1.255 (megafono a tutti)</li>
+<li>Host usabili: 192.168.1.1–192.168.1.254 (254 case)</li>
+</ul>
+<p><strong>Regola lampo</strong></p>
+<ul>
+<li>Più 255 = rete più grande, subnet più “stretta” per gli host</li>
+<li>Più 0 (o numeri piccoli tipo 128,192,224…) = più spazio agli host</li>
+</ul>
+<p><strong>Procedura chiara per passare da maschera a numero di host</strong></p>
+<p>Conta i bit di rete (prefisso) dalla maschera.
+Usa questa mappa per ogni ottetto:</p>
+<p>255 → 8 bit</p>
+<p>254 → 7</p>
+<p>252 → 6</p>
+<p>248 → 5</p>
+<p>240 → 4</p>
+<p>224 → 3</p>
+<p>192 → 2</p>
+<p>128 → 1</p>
+<p>0 → 0</p>
+<p>Host bits = 32 − prefisso.</p>
+<p>Indirizzi totali = 2host bits
+.</p>
+<p>Usabili = totali − 2</p>
+<p><strong>Trucco calcolo quanti subnet usabili ho</strong>
+<img alt="alt text" loading="lazy" src="attachments/trucco-calcolo-hosts.png"></p>
+<p>Esempio visivo
+<img alt="alt text" loading="lazy" src="attachments/esempio.png">
+Subnet: 192.168.1.0/24 ↔ maschera 255.255.255.0
+Chiave pratica:</p>
+<p>Primo indirizzo = Network ID → non si usa per i device</p>
+<p>Ultimo indirizzo = Broadcast → messaggi a tutti</p>
+<p>In mezzo = Host → indirizzi assegnabili ai device</p>
+<p>Sintesi chiara con metafora + nome tecnico.</p>
+<ul>
+<li>
+<p><strong>Subnet (sottorete) = “quartiere”</strong></p>
+<ul>
+<li>Tecnico: <strong>Subnet</strong>. È un gruppo di indirizzi IP che stanno nella stessa rete logica.</li>
+</ul>
+</li>
+<li>
+<p><strong>Network ID (indirizzo di rete) = “nome del quartiere”</strong></p>
+<ul>
+<li>Tecnico: <strong>Network ID</strong>. È il <strong>primo</strong> indirizzo del blocco. Non si assegna ai dispositivi.</li>
+</ul>
+</li>
+<li>
+<p><strong>Broadcast address = “megafono del quartiere”</strong></p>
+<ul>
+<li>Tecnico: <strong>Broadcast</strong>. È l’<strong>ultimo</strong> indirizzo del blocco. Messaggi a tutti gli host della subnet.</li>
+</ul>
+</li>
+<li>
+<p><strong>Host = “case del quartiere”</strong></p>
+<ul>
+<li>Tecnico: <strong>Host addresses</strong>. Gli indirizzi <strong>tra</strong> Network ID e Broadcast che puoi assegnare a PC, telefoni, stampanti.</li>
+</ul>
+</li>
+<li>
+<p><strong>CIDR / prefisso = “taglia del quartiere”</strong></p>
+<ul>
+<li>Tecnico: <strong>Prefisso CIDR</strong> (es. <strong>/24</strong>, <strong>/26</strong>). Più grande il numero, <strong>più piccolo</strong> il quartiere.</li>
+</ul>
+</li>
+<li>
+<p><strong>Subnet mask (maschera) = “stampo del quartiere”</strong></p>
+<ul>
+<li>
+<p>Tecnico: <strong>Maschera</strong> (es. <strong>255.255.255.0</strong>). Dice quali bit sono “rete” e quali “host”.</p>
+</li>
+<li>
+<p>Equivalenze comuni:</p>
+<ul>
+<li><strong>/24</strong> ↔ <strong>255.255.255.0</strong></li>
+<li><strong>/26</strong> ↔ <strong>255.255.255.192</strong></li>
+<li><strong>/28</strong> ↔ <strong>255.255.255.240</strong></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Esempio base</strong></p>
+<ul>
+<li>
+<p>Subnet: <strong>192.168.1.0/24</strong></p>
+<ul>
+<li><strong>Network ID</strong>: 192.168.1.0 → “nome quartiere”</li>
+<li><strong>Broadcast</strong>: 192.168.1.255 → “megafono”</li>
+<li><strong>Host usabili</strong>: 192.168.1.1–192.168.1.254 → “case” (254 case)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Esempio quartiere più piccolo</strong></p>
+<ul>
+<li>
+<p>Subnet: <strong>192.168.1.128/26</strong></p>
+<ul>
+<li><strong>Network ID</strong>: 192.168.1.128</li>
+<li><strong>Broadcast</strong>: 192.168.1.191</li>
+<li><strong>Host</strong>: 192.168.1.129–190 (62 case)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Tabellino “taglie del quartiere”</strong></p>
+<ul>
+<li><strong>/24</strong> → 256 indirizzi totali → <strong>254 host</strong></li>
+<li><strong>/26</strong> → 64 totali → <strong>62 host</strong></li>
+<li><strong>/28</strong> → 16 totali → <strong>14 host</strong></li>
+</ul>
+</li>
+</ul>
+<p><strong>SPIEGAZIONE BROADCAST PARLA CON TUTTI</strong>
+Significa: se mandi un messaggio all’indirizzo di broadcast, lo ricevono tutti i dispositivi della stessa subnet.</p>
+<p>Dove si manda: all’ultimo indirizzo della subnet. Esempio /24: 192.168.1.255.</p>
+<p>Chi lo riceve: tutti gli host di quel “quartiere” (.1–.254).</p>
+<p>Fin dove arriva: solo dentro la subnet. Fuori non passa.</p>
+<p>Mini-scena “rete di casa 192.168.1.0/24” Telefono si collega al Wi-Fi Invia DHCP Discover → 192.168.1.255. Il router risponde con un IP, es. 192.168.1.23. PC vuole parlare con la stampante 192.168.1.60 PC invia ARP in broadcast: “Chi ha 192.168.1.60?” Solo la stampante risponde con il suo MAC → poi comunicano.</p>
+<h1 id="were-out-of-ip-addressesbut-this-saved-us-private-ip-addresses"><strong>we’re out of IP Addresses….but this saved us (Private IP Addresses)</strong><a hidden class="anchor" aria-hidden="true" href="#were-out-of-ip-addressesbut-this-saved-us-private-ip-addresses">#</a></h1>
+<p><a href="https://www.youtube.com/watch?v=8bhvn9tQk8o&amp;list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF&amp;index=3">https://www.youtube.com/watch?v=8bhvn9tQk8o&amp;list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF&amp;index=3</a></p>
+<p>NAT and private ip addresses</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/notes/tags/networking/">Networking</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/notes/">Notes</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

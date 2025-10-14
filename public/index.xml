@@ -6,13 +6,13 @@
     <description>Recent content on Notes</description>
     <generator>Hugo -- 0.149.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 13 Oct 2025 23:48:57 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 14 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/notes/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>VIRTUAL MACHINE VS DOCKER</title>
-      <link>http://localhost:1313/notes/posts/docker/docker/</link>
-      <pubDate>Mon, 13 Oct 2025 23:48:57 +0200</pubDate>
-      <guid>http://localhost:1313/notes/posts/docker/docker/</guid>
+      <title>Docker vs cose</title>
+      <link>http://localhost:1313/notes/docker/docker-vs-cose/</link>
+      <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/docker/docker-vs-cose/</guid>
       <description>&lt;h1 id=&#34;virtual-machine-vs-docker&#34;&gt;VIRTUAL MACHINE VS DOCKER&lt;/h1&gt;
 &lt;p&gt;virtualization and VM are virtualizing hardware&lt;/p&gt;
 &lt;p&gt;while Docker virtualize OS operating system&lt;/p&gt;
@@ -39,10 +39,10 @@
 &lt;/ul&gt;</description>
     </item>
     <item>
-      <title></title>
-      <link>http://localhost:1313/notes/posts/kubernetes/kubernetes/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/posts/kubernetes/kubernetes/</guid>
+      <title>Kubernetes: &lt;titolo&gt;</title>
+      <link>http://localhost:1313/notes/kubernetes/kubernetes-titolo/</link>
+      <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/kubernetes/kubernetes-titolo/</guid>
       <description>&lt;h1 id=&#34;kubernetes&#34;&gt;Kubernetes&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;Cluster&lt;/strong&gt;
 &lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;attachments/cluster.jpeg&#34;&gt;&lt;/p&gt;
@@ -62,10 +62,10 @@
 &lt;p&gt;L’isolamento è solo logico: per isolare rete serve NetworkPolicy.&lt;/p&gt;</description>
     </item>
     <item>
-      <title></title>
-      <link>http://localhost:1313/notes/posts/linux/linux/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/posts/linux/linux/</guid>
+      <title>Linux: &lt;titolo&gt;</title>
+      <link>http://localhost:1313/notes/linux/linux-titolo/</link>
+      <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/linux/linux-titolo/</guid>
       <description>&lt;h1 id=&#34;linux&#34;&gt;&lt;strong&gt;LINUX&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;Struttura del file system Linux spiegata: da / a /usr | Nozioni di base su Linux&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;[x]  &lt;a href=&#34;https://www.youtube.com/watch?v=ISJ44S5sZu8&amp;amp;list=PLmQB6ao4XoI9S4cIKIRsLQKDHhBPesSQ5&amp;amp;index=9&#34;&gt;https://www.youtube.com/watch?v=ISJ44S5sZu8&amp;amp;list=PLmQB6ao4XoI9S4cIKIRsLQKDHhBPesSQ5&amp;amp;index=9&lt;/a&gt;&lt;/p&gt;
@@ -89,10 +89,10 @@
 &lt;p&gt;grep -c &amp;ldquo;ERR&amp;rdquo; application.log&lt;/p&gt;</description>
     </item>
     <item>
-      <title></title>
-      <link>http://localhost:1313/notes/posts/networking/networking/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/posts/networking/networking/</guid>
+      <title>Networking: &lt;titolo&gt;</title>
+      <link>http://localhost:1313/notes/networking/networking-titolo/</link>
+      <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/networking/networking-titolo/</guid>
       <description>&lt;h1 id=&#34;networking&#34;&gt;&lt;strong&gt;NETWORKING&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;what is an IP Address? // You SUCK at Subnetting // EP 1&lt;/strong&gt;
 THE ENTIRE PLAYLIST:
@@ -107,10 +107,10 @@ Tells what ip addresses start with. he tells the street we live on..&lt;/li&gt;
 He does it all. give ip addresses to our devices in our network and could help us to get outside our network. if you wanna visit netflix for instance.&lt;/p&gt;</description>
     </item>
     <item>
-      <title></title>
-      <link>http://localhost:1313/notes/posts/nginx/nginx/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/posts/nginx/nginx/</guid>
+      <title>Nginx: &lt;titolo&gt;</title>
+      <link>http://localhost:1313/notes/nginx/nginx-titolo/</link>
+      <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/nginx/nginx-titolo/</guid>
       <description>&lt;h1 id=&#34;nginx&#34;&gt;&lt;strong&gt;NGINX&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;“Reverse-proxy to an app on localhost”
 NGINX riceve le richieste e le inoltra a un’app che gira sulla stessa macchina, di solito su 127.0.0.1:PORT. Così:&lt;/p&gt;
@@ -136,10 +136,10 @@ NGINX riceve le richieste e le inoltra a un’app che gira sulla stessa macchina
 &lt;p&gt;&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;attachments/elbnginx.png&#34;&gt;&lt;/p&gt;</description>
     </item>
     <item>
-      <title></title>
-      <link>http://localhost:1313/notes/posts/virtualization/virtualmachine/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/posts/virtualization/virtualmachine/</guid>
+      <title>Virtualization: &lt;titolo&gt;</title>
+      <link>http://localhost:1313/notes/virtualization/virtualization-titolo/</link>
+      <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/virtualization/virtualization-titolo/</guid>
       <description>&lt;h1 id=&#34;step-4---virtual-machine&#34;&gt;STEP 4 - VIRTUAL MACHINE&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;Virtual Machines explained in 15 Mins&lt;/strong&gt;&lt;/li&gt;
@@ -156,10 +156,10 @@ NGINX riceve le richieste e le inoltra a un’app che gira sulla stessa macchina
 &lt;p&gt;because Docker containers are so lightweight and fast!&lt;/p&gt;</description>
     </item>
     <item>
-      <title></title>
-      <link>http://localhost:1313/notes/posts/webserver/webserver/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/posts/webserver/webserver/</guid>
+      <title>Webserver: &lt;titolo&gt;</title>
+      <link>http://localhost:1313/notes/webserver/webserver-titolo/</link>
+      <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/webserver/webserver-titolo/</guid>
       <description>&lt;h1 id=&#34;web-server&#34;&gt;&lt;strong&gt;WEB SERVER&lt;/strong&gt;&lt;/h1&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9J1nJOivdyw&#34;&gt;https://www.youtube.com/watch?v=9J1nJOivdyw&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;just a piece of software that serves web content.&lt;/p&gt;

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><script src="/notes/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=notes/livereload" data-no-instant defer></script><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="noindex, nofollow">
+<title>Kubernetes: &lt;titolo&gt; | Notes</title>
+<meta name="keywords" content="kubernetes">
+<meta name="description" content="Kubernetes
+Cluster
+
+
+Cluster = l’intero datacenter Kubernetes
+Cos’è il cluster EKS:  composto da Control plane &#43; Worker nodes
+
+Control plane: API server, scheduler, controller manager, etcd. In EKS è gestito da AWS. Non c’è un tuo “master node” su EC2.
+Worker nodes: le istanze dove girano i Pod. Sono EC2 (providerID AWS), pronte, v1.33.4-eks-…
+
+Comando utile: kubectl get nodes -o wide
+
+Namespace
+
+Namespace = “stanze” dentro quel datacenter. Più namespace convivono nello stesso cluster.
+
+L’isolamento è solo logico: per isolare rete serve NetworkPolicy.">
+<meta name="author" content="">
+<link rel="canonical" href="http://localhost:1313/notes/kubernetes/kubernetes-titolo/">
+<link crossorigin="anonymous" href="/notes/assets/css/stylesheet.d0049500090a8b5b522a30f4bc70f815df41595125d25503dff47281216974cb.css" integrity="sha256-0ASVAAkKi1tSKjD0vHD4Fd9BWVEl0lUD3/RygSFpdMs=" rel="preload stylesheet" as="style">
+<link rel="icon" href="http://localhost:1313/notes/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/notes/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/notes/favicon-32x32.png">
+<link rel="apple-touch-icon" href="http://localhost:1313/notes/apple-touch-icon.png">
+<link rel="mask-icon" href="http://localhost:1313/notes/safari-pinned-tab.svg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/notes/kubernetes/kubernetes-titolo/">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+    <style>
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --theme: rgb(29, 30, 32);
+                --entry: rgb(46, 46, 51);
+                --primary: rgb(218, 218, 219);
+                --secondary: rgb(155, 156, 157);
+                --tertiary: rgb(65, 66, 68);
+                --content: rgb(196, 196, 197);
+                --code-block-bg: rgb(46, 46, 51);
+                --code-bg: rgb(55, 56, 62);
+                --border: rgb(51, 51, 51);
+            }
+
+            .list {
+                background: var(--theme);
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-track {
+                background: 0 0;
+            }
+
+            .list:not(.dark)::-webkit-scrollbar-thumb {
+                border-color: var(--theme);
+            }
+        }
+
+    </style>
+</noscript>
+</head>
+
+<body class="" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "dark") {
+        document.body.classList.add('dark');
+    } else if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        document.body.classList.add('dark');
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="http://localhost:1313/notes/" accesskey="h" title="Notes (Alt + H)">Notes</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/notes/tags/aws/" title="Aws">
+                    <span>AWS</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/docker/" title="Docker">
+                    <span>Docker</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/kubernetes/" title="Kubernetes">
+                    <span>Kubernetes</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/linux/" title="Linux">
+                    <span>Linux</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/networking/" title="Networking">
+                    <span>Networking</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/nginx/" title="Nginx">
+                    <span>Nginx</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/virtualization/" title="Virtualization">
+                    <span>Virtualization</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/webserver/" title="Webserver">
+                    <span>Webserver</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/tags/" title="Tags">
+                    <span>All topics</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/notes/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/notes/kubernetes/">Kubernetes</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Kubernetes: &lt;titolo&gt;
+    </h1>
+    <div class="post-meta"><span title='2025-10-14 00:00:00 +0000 UTC'>October 14, 2025</span>&nbsp;·&nbsp;<span>6 min</span>
+
+</div>
+  </header> <div class="toc">
+    <details >
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#kubernetes" aria-label="Kubernetes">Kubernetes</a></li>
+                <li>
+                    <a href="#--cpu-vs-memoria-in-kubernetes--spiegato-facile-" aria-label="** 🧠 CPU vs Memoria in Kubernetes — spiegato facile **">** 🧠 CPU vs Memoria in Kubernetes — spiegato facile **</a><ul>
+                        
+                <li>
+                    <a href="#-step-1-capire-cosa-stai-guardando" aria-label="🧠 STEP 1: Capire cosa stai guardando">🧠 STEP 1: Capire cosa stai guardando</a></li>
+                <li>
+                    <a href="#-step-2-cerca-i-valori-anomali-o-sbilanciati" aria-label="🧪 STEP 2: Cerca i valori anomali o sbilanciati">🧪 STEP 2: Cerca i valori anomali o sbilanciati</a><ul>
+                        
+                <li>
+                    <a href="#-pattern-1-cpu-richiesta-molto-pi%c3%b9-alta-di-quanto-serve" aria-label="🟡 Pattern 1: CPU richiesta molto più alta di quanto serve">🟡 Pattern 1: CPU richiesta molto più alta di quanto serve</a></li>
+                <li>
+                    <a href="#-pattern-2-mem_request-o-mem_limit-in-formato-errato" aria-label="🔴 Pattern 2: MEM_REQUEST o MEM_LIMIT in formato errato">🔴 Pattern 2: MEM_REQUEST o MEM_LIMIT in formato errato</a></li>
+                <li>
+                    <a href="#-pattern-3-ram-limite-altissima-senza-motivo" aria-label="🔥 Pattern 3: RAM limite altissima senza motivo">🔥 Pattern 3: RAM limite altissima senza motivo</a></li>
+                <li>
+                    <a href="#-pattern-4-mem-uso-vicino-al-limite" aria-label="⚠️ Pattern 4: MEM uso vicino al limite">⚠️ Pattern 4: MEM uso vicino al limite</a></li></ul>
+                </li>
+                <li>
+                    <a href="#-step-3-confronta-coppie-di-valori" aria-label="👁️ STEP 3: Confronta coppie di valori">👁️ STEP 3: Confronta coppie di valori</a></li>
+                <li>
+                    <a href="#-esempio-pratico-analizziamo-una-riga" aria-label="🧰 Esempio pratico: analizziamo una riga">🧰 Esempio pratico: analizziamo una riga</a></li>
+                <li>
+                    <a href="#-step-4-riconosci-i-contesti" aria-label="📌 STEP 4: Riconosci i contesti">📌 STEP 4: Riconosci i contesti</a></li>
+                <li>
+                    <a href="#-trucchetto-visivo" aria-label="🧠 TRUCCHETTO VISIVO">🧠 TRUCCHETTO VISIVO</a></li>
+                <li>
+                    <a href="#-ricapitolando-come-leggere-la-tabella" aria-label="🔚 Ricapitolando: Come leggere la tabella">🔚 Ricapitolando: Come leggere la tabella</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="kubernetes">Kubernetes<a hidden class="anchor" aria-hidden="true" href="#kubernetes">#</a></h1>
+<p><strong>Cluster</strong>
+<img alt="alt text" loading="lazy" src="attachments/cluster.jpeg"></p>
+<ul>
+<li>Cluster = l’intero datacenter Kubernetes</li>
+<li>Cos’è il cluster EKS:  composto da Control plane + Worker nodes</li>
+</ul>
+<p><em>Control plane:</em> API server, scheduler, controller manager, etcd. In EKS è gestito da AWS. Non c’è un tuo “master node” su EC2.</p>
+<p><em>Worker nodes:</em> le istanze dove girano i Pod. Sono EC2 (providerID AWS), pronte, v1.33.4-eks-…</p>
+<ul>
+<li>Comando utile: kubectl get nodes -o wide</li>
+</ul>
+<p><strong>Namespace</strong></p>
+<ul>
+<li>Namespace = “stanze” dentro quel datacenter. Più namespace convivono nello stesso cluster.</li>
+</ul>
+<p>L’isolamento è solo logico: per isolare rete serve NetworkPolicy.</p>
+<p>Quote/limiti si applicano a livello di namespace, non di cluster.</p>
+<p>Cos’è un namespace</p>
+<p>Partizione logica dentro un singolo cluster.</p>
+<p>Contiene risorse “namespaced” (Pod, Service, Deployment, ConfigMap, Secret, …).</p>
+<p>Non contiene risorse “cluster-scoped” (Node, PersistentVolume, ClusterRole, CRD, …).</p>
+<p>Serve per isolamento logico, quote/limiti, RBAC e naming.</p>
+<p>Comandi tipici:</p>
+<p>kubectl get ns</p>
+<p>kubectl get pods -n <ns></p>
+<p>kubectl get all -n <ns></p>
+<p><strong>Deployment</strong>
+<img alt="alt text" loading="lazy" src="attachments/deployaml.jpeg"></p>
+<p><strong>Service</strong>
+<img alt="alt text" loading="lazy" src="attachments/serviceyaml.jpeg"></p>
+<p><strong>Worker Node</strong></p>
+<p>in EKS un worker node tipicamente corrisponde a una istanza EC2.</p>
+<ul>
+<li>Ogni EC2 registrata al cluster = 1 nodo Kubernetes.</li>
+<li>I nodi stanno in node group (ASG o managed node groups).</li>
+<li>Alternative: con Fargate non gestisci EC2; i Pod girano su infrastruttura gestita e non amministri nodi.</li>
+</ul>
+<p>Note utili:</p>
+<ul>
+<li>Un nodo può eseguire più Pod. Il limite dipende da vCPU/RAM e dai limiti Pod-per-nodo dell’istanza.</li>
+<li>Control plane EKS è separato e gestito da AWS, non è nelle tue EC2.</li>
+</ul>
+<p><strong>Kubectl</strong></p>
+<p><strong>multi-tenancy</strong>
+Condivisione di risorse: Invece che avere un&rsquo;infrastruttura separata per ogni cliente, diversi tenant utilizzano la stessa istanza software, lo stesso sistema operativo e la stessa infrastruttura hardware sottostante</p>
+<h1 id="--cpu-vs-memoria-in-kubernetes--spiegato-facile-">** 🧠 CPU vs Memoria in Kubernetes — spiegato facile **<a hidden class="anchor" aria-hidden="true" href="#--cpu-vs-memoria-in-kubernetes--spiegato-facile-">#</a></h1>
+<p>Tipo risorsa	A cosa serve	Se sbagli cosa succede
+CPU	Quante istruzioni può eseguire il container nel tempo → calcolo	Se è troppo poca: il pod viene rallentato (throttling), ma NON crasha
+Memoria	Quanta RAM può usare per dati in uso, heap, cache ecc.	Se è troppa poca: il pod va in crash (OOMKilled)</p>
+<p>🧠 Trucco per ricordare (con analogia semplice):
+Immagina un cuoco (container) che cucina in una cucina (pod):</p>
+<p>🔹 CPU = mani del cuoco</p>
+<p>Più mani ha → più può lavorare in parallelo. Se ha solo 1 mano → lavora lentamente (throttling), ma non muore.</p>
+<p>🔹 Memoria = tavolo da lavoro (RAM)</p>
+<p>Se il tavolo è troppo piccolo e non ci sta la roba → il piatto cade per terra → crash (OOMKilled).</p>
+<p>CONSUMI RISORSE KUBE</p>
+<p>Verifica richieste/limiti dichiarati nei Pod</p>
+<p>kubectl get pod -n prov-ippv2-svts-platform-namespace -o=custom-columns=&lsquo;NAME:.metadata.name,CPU_REQUEST:.spec.containers[<em>].resources.requests.cpu,CPU_LIMIT:.spec.containers[</em>].resources.limits.cpu,MEM_REQUEST:.spec.containers[<em>].resources.requests.memory,MEM_LIMIT:.spec.containers[</em>].resources.limits.memory&rsquo;</p>
+<p>Oppure un esempio più leggibile (usa kubectl describe):</p>
+<p>kubectl describe pod &lt;POD_NAME&gt; -n <NAMESPACE></p>
+<p><strong>🧠 STEP 1: Capire cosa stai guardando</strong></p>
+<p>Questa tabella mostra:</p>
+<p>Campo	Cosa significa
+NAME	Il nome del pod
+CPU_REQUEST	CPU minima garantita dal cluster
+CPU_LIMIT	CPU massima che il pod può usare
+MEM_REQUEST	RAM minima garantita
+MEM_LIMIT	RAM massima prima di essere OOMKilled (crash)</p>
+<p>✅ Se il pod consuma meno di request → tutto ok.
+⚠️ Se consuma più della request ma meno del limite → rischi throttling o crash in caso di picchi.
+🔥 Se consuma più del limite → crash immediato (OOM per RAM, throttling per CPU).</p>
+<p><strong>kubectl top pod -n prov-ippv2-svts-platform-namespace</strong></p>
+<p>🧪 A cosa servono requests e limits?
+Campo	        Significato	                                Esempio
+requests.cpu	Quanta CPU viene prenotata per il container	Garantisce che il container abbia almeno questa quantità
+limits.cpu	    Quanta CPU può usare al massimo	            Se la supera → throttling
+requests.memory	Quanta RAM prenotata	                    Il scheduler cerca un nodo con questa RAM
+limits.memory	Quanta RAM può usare al massimo	            Se la supera → OOMKilled 💥</p>
+<p>Ottima domanda. Fermiamoci a <strong>capire bene come si leggono questi dati</strong>, così la prossima volta potrai <strong>fare le analisi in autonomia</strong>, esattamente come ho fatto per SVTS e CL.</p>
+<p>Ti insegno passo per passo <strong>come leggere questi dati</strong> e valutare quando c’è <strong>spreco, rischio o tutto va bene</strong>.</p>
+<hr>
+<h2 id="-step-1-capire-cosa-stai-guardando">🧠 STEP 1: Capire cosa stai guardando<a hidden class="anchor" aria-hidden="true" href="#-step-1-capire-cosa-stai-guardando">#</a></h2>
+<p>Questa tabella mostra:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Campo</th>
+          <th>Cosa significa</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>NAME</code></td>
+          <td>Il nome del pod</td>
+      </tr>
+      <tr>
+          <td><code>CPU_REQUEST</code></td>
+          <td>CPU minima garantita dal cluster</td>
+      </tr>
+      <tr>
+          <td><code>CPU_LIMIT</code></td>
+          <td>CPU massima che il pod può usare</td>
+      </tr>
+      <tr>
+          <td><code>MEM_REQUEST</code></td>
+          <td>RAM minima garantita</td>
+      </tr>
+      <tr>
+          <td><code>MEM_LIMIT</code></td>
+          <td>RAM massima prima di essere OOMKilled (crash)</td>
+      </tr>
+  </tbody>
+</table>
+<blockquote>
+<p>✅ Se il pod <strong>consuma meno di request</strong> → tutto ok.
+⚠️ Se <strong>consuma più della request ma meno del limite</strong> → rischi throttling o crash in caso di picchi.
+🔥 Se <strong>consuma più del limite</strong> → crash immediato (OOM per RAM, throttling per CPU).</p></blockquote>
+<hr>
+<h2 id="-step-2-cerca-i-valori-anomali-o-sbilanciati">🧪 STEP 2: Cerca i valori <strong>anomali o sbilanciati</strong><a hidden class="anchor" aria-hidden="true" href="#-step-2-cerca-i-valori-anomali-o-sbilanciati">#</a></h2>
+<p>Ecco cosa cerchi <strong>a colpo d’occhio</strong>:</p>
+<h3 id="-pattern-1-cpu-richiesta-molto-più-alta-di-quanto-serve">🟡 Pattern 1: CPU richiesta molto più alta di quanto serve<a hidden class="anchor" aria-hidden="true" href="#-pattern-1-cpu-richiesta-molto-più-alta-di-quanto-serve">#</a></h3>
+<ul>
+<li>Se un pod ha <code>CPU_REQUEST=400m</code> ma <strong>consuma 5m</strong>, sta <strong>sprecando risorse prenotate</strong>.</li>
+</ul>
+<h3 id="-pattern-2-mem_request-o-mem_limit-in-formato-errato">🔴 Pattern 2: <code>MEM_REQUEST</code> o <code>MEM_LIMIT</code> in formato errato<a hidden class="anchor" aria-hidden="true" href="#-pattern-2-mem_request-o-mem_limit-in-formato-errato">#</a></h3>
+<ul>
+<li>Come <code>256M</code> invece di <code>256Mi</code> → Kubernetes potrebbe <strong>non capirlo bene</strong>, comportamento imprevedibile.</li>
+</ul>
+<h3 id="-pattern-3-ram-limite-altissima-senza-motivo">🔥 Pattern 3: RAM limite altissima senza motivo<a hidden class="anchor" aria-hidden="true" href="#-pattern-3-ram-limite-altissima-senza-motivo">#</a></h3>
+<ul>
+<li>Se <code>LIMIT=4Gi</code> ma <code>USE=500Mi</code> → stai riservando <strong>RAM che nessuno usa</strong>, ma che nessun altro pod può toccare.</li>
+</ul>
+<h3 id="-pattern-4-mem-uso-vicino-al-limite">⚠️ Pattern 4: MEM uso vicino al limite<a hidden class="anchor" aria-hidden="true" href="#-pattern-4-mem-uso-vicino-al-limite">#</a></h3>
+<ul>
+<li>Se <code>MEM_USE ≈ MEM_LIMIT</code>, sei <strong>a rischio crash</strong> per picchi minimi.</li>
+</ul>
+<hr>
+<h2 id="-step-3-confronta-coppie-di-valori">👁️ STEP 3: Confronta coppie di valori<a hidden class="anchor" aria-hidden="true" href="#-step-3-confronta-coppie-di-valori">#</a></h2>
+<p>Fai questo:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Cosa guardi</th>
+          <th>Cosa significa</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>CPU_REQUEST vs CPU_LIMIT</code></td>
+          <td>Quanto è elastico il pod? Se troppo vicino, può subire throttling</td>
+      </tr>
+      <tr>
+          <td><code>CPU_REQUEST vs USO</code></td>
+          <td>Se uso è molto basso → stai prenotando troppa CPU</td>
+      </tr>
+      <tr>
+          <td><code>MEM_REQUEST vs MEM_USE</code></td>
+          <td>Se uso &gt; request → potresti andare in OOM se i nodi sono stretti</td>
+      </tr>
+      <tr>
+          <td><code>MEM_LIMIT vs MEM_USE</code></td>
+          <td>Se uso &laquo; limite → puoi abbassare limite</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<h2 id="-esempio-pratico-analizziamo-una-riga">🧰 Esempio pratico: analizziamo una riga<a hidden class="anchor" aria-hidden="true" href="#-esempio-pratico-analizziamo-una-riga">#</a></h2>
+<pre tabindex="0"><code>prov-ippv2-pr-platform-ippv2-backend-7747c84bc5-2w6sw
+CPU_REQUEST=400m
+CPU_LIMIT=2
+MEM_REQUEST=2Gi
+MEM_LIMIT=4Gi
+</code></pre><p><strong>Domande da porti:</strong></p>
+<ol>
+<li>
+<p>⚙️ <strong>CPU</strong></p>
+<ul>
+<li>400m è 0.4 core garantiti → bene se backend fa lavoro intenso.</li>
+<li>Limite a 2 core → elastico.</li>
+<li><strong>Se uso reale è basso (es. 5m)</strong> → stai <strong>prenotando risorse inutili</strong>.</li>
+</ul>
+</li>
+<li>
+<p>🧠 <strong>Memoria</strong></p>
+<ul>
+<li>2Gi richiesti → schedulazione solo su nodi con molta RAM.</li>
+<li>4Gi limite → se non li usa, stai buttando RAM.</li>
+<li>Se uso è tipo <strong>200Mi</strong>, hai 10x di spreco.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="-step-4-riconosci-i-contesti">📌 STEP 4: Riconosci i contesti<a hidden class="anchor" aria-hidden="true" href="#-step-4-riconosci-i-contesti">#</a></h2>
+<p>L’ambiente <code>prod</code> è diverso da <code>dev</code> o <code>collaudo</code>:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Ambiente</th>
+          <th>Obiettivo</th>
+          <th>Strategia</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>dev</strong></td>
+          <td>fare test</td>
+          <td>tutto minimo, anche se crasha</td>
+      </tr>
+      <tr>
+          <td><strong>collaudo</strong></td>
+          <td>test realistici</td>
+          <td>risorse ridotte ma coerenti</td>
+      </tr>
+      <tr>
+          <td><strong>prod</strong></td>
+          <td>stabilità</td>
+          <td>richieste <strong>accurate</strong>, limiti ben tarati</td>
+      </tr>
+  </tbody>
+</table>
+<p>Quindi in <strong>PROD</strong>:</p>
+<ul>
+<li><strong>Requests vanno tarati bene</strong> (non troppo bassi)</li>
+<li><strong>Limiti vanno bilanciati</strong>: né troppo stretti, né 10x inutili</li>
+<li>I pod non devono essere &ldquo;overkill&rdquo;, altrimenti saturano il cluster</li>
+</ul>
+<hr>
+<h2 id="-trucchetto-visivo">🧠 TRUCCHETTO VISIVO<a hidden class="anchor" aria-hidden="true" href="#-trucchetto-visivo">#</a></h2>
+<p>Per ogni riga della tabella, <strong>pensa in questi 3 livelli:</strong></p>
+<pre tabindex="0"><code>[ MEM USE ] &lt; [ MEM REQUEST ] &lt; [ MEM LIMIT ]
+     OK          OK (schedulabile)    OK (non crasha)
+
+Se invece:
+[ MEM USE ] &gt; [ MEM REQUEST ] → può andare in OOM se non ha risorse libere nel nodo
+[ MEM USE ] ≈ [ MEM LIMIT ] → rischia crash!
+</code></pre><hr>
+<h2 id="-ricapitolando-come-leggere-la-tabella">🔚 Ricapitolando: Come leggere la tabella<a hidden class="anchor" aria-hidden="true" href="#-ricapitolando-come-leggere-la-tabella">#</a></h2>
+<table>
+  <thead>
+      <tr>
+          <th>Cosa cerchi</th>
+          <th>Azione</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>CPU_REQUEST &gt;&gt; uso</code></td>
+          <td>Abbassa la request</td>
+      </tr>
+      <tr>
+          <td><code>MEM_LIMIT &gt;&gt; uso</code></td>
+          <td>Abbassa il limite</td>
+      </tr>
+      <tr>
+          <td><code>MEM_REQUEST &lt; uso</code></td>
+          <td>Alza la request</td>
+      </tr>
+      <tr>
+          <td><code>Formato = 256M</code></td>
+          <td>Correggi → <code>256Mi</code></td>
+      </tr>
+      <tr>
+          <td><code>kestra = 4Gi</code></td>
+          <td>Da valutare: se uso è &lt; 1Gi, è troppo</td>
+      </tr>
+  </tbody>
+</table>
+<hr>
+<p>✅ Appena mi dai anche <code>kubectl top pod -n prov-ippv2-pr-platform-namespace</code>, ti faccio l’analisi completa in stile SVTS e CL, <strong>ma ora potrai anche capirla da solo leggendo i dati come sopra</strong>.</p>
+<p>Vuoi procedere?</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/notes/tags/kubernetes/">Kubernetes</a></li>
+    </ul>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+        <span>&copy; 2025 <a href="http://localhost:1313/notes/">Notes</a></span> · 
+
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+</body>
+
+</html>

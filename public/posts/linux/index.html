@@ -5,9 +5,29 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Web Server | Notes</title>
+<title>Linux | Notes</title>
 <meta name="keywords" content="">
-<meta name="description" content="Appunti su Web Server, NGINX, APACHE&hellip;">
+<meta name="description" content="LINUX
+Struttura del file system Linux spiegata: da / a /usr | Nozioni di base su Linux
+[x]  https://www.youtube.com/watch?v=ISJ44S5sZu8&amp;list=PLmQB6ao4XoI9S4cIKIRsLQKDHhBPesSQ5&amp;index=9
+Bash Scripting Tutorial for Beginners
+[ ]  https://www.youtube.com/watch?v=PNhq_4d-5ek&amp;list=PLy7NrYWoggjzDAxOxWazuVSsndW3fUinz
+what is shall? what is bash?
+
+
+CLI =&gt; a way to interapt with computer by writing commands
+
+
+in Linux CLI is SHELL
+
+
+BASH =&gt; Bourn-Again Shell (most common shell) is not only a shell but it&rsquo;s a programming language
+
+
+bash scripts
+
+
+grep -c &ldquo;ERR&rdquo; application.log">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/notes/posts/linux/">
 <link crossorigin="anonymous" href="/notes/assets/css/stylesheet.d0049500090a8b5b522a30f4bc70f815df41595125d25503dff47281216974cb.css" integrity="sha256-0ASVAAkKi1tSKjD0vHD4Fd9BWVEl0lUD3/RygSFpdMs=" rel="preload stylesheet" as="style">
@@ -99,41 +119,120 @@
             </div>
         </div>
         <ul id="menu">
+            <li>
+                <a href="http://localhost:1313/notes/aws/" title="AWS">
+                    <span>AWS</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/docker/" title="Docker">
+                    <span>Docker</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/kubernetes/" title="Kubernetes">
+                    <span>Kubernetes</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/linux/" title="Linux">
+                    <span>Linux</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/networking/" title="Networking">
+                    <span>Networking</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/nginx/" title="Nginx">
+                    <span>Nginx</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/virtualization/" title="Virtualization">
+                    <span>Virtualization</span>
+                </a>
+            </li>
+            <li>
+                <a href="http://localhost:1313/notes/webserver/" title="Webserver">
+                    <span>Webserver</span>
+                </a>
+            </li>
         </ul>
     </nav>
 </header>
 <main class="main"> 
-<header class="page-header">
+<header class="page-header"><div class="breadcrumbs"><a href="http://localhost:1313/notes/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/notes/posts/">Posts</a></div>
   <h1>
-    Web Server
+    Linux
   </h1>
 </header>
-<div class="post-content"><p>Appunti su Web Server, NGINX, APACHE&hellip;</p>
+<div class="post-content"><h1 id="linux"><strong>LINUX</strong><a hidden class="anchor" aria-hidden="true" href="#linux">#</a></h1>
+<p><strong>Struttura del file system Linux spiegata: da / a /usr | Nozioni di base su Linux</strong></p>
+<p>[x]  <a href="https://www.youtube.com/watch?v=ISJ44S5sZu8&amp;list=PLmQB6ao4XoI9S4cIKIRsLQKDHhBPesSQ5&amp;index=9">https://www.youtube.com/watch?v=ISJ44S5sZu8&amp;list=PLmQB6ao4XoI9S4cIKIRsLQKDHhBPesSQ5&amp;index=9</a></p>
+<p><strong>Bash Scripting Tutorial for Beginners</strong></p>
+<p>[ ]  <a href="https://www.youtube.com/watch?v=PNhq_4d-5ek&amp;list=PLy7NrYWoggjzDAxOxWazuVSsndW3fUinz">https://www.youtube.com/watch?v=PNhq_4d-5ek&amp;list=PLy7NrYWoggjzDAxOxWazuVSsndW3fUinz</a></p>
+<p><strong>what is shall? what is bash?</strong></p>
+<ul>
+<li>
+<p>CLI =&gt; a way to interapt with computer by writing commands</p>
+</li>
+<li>
+<p>in Linux CLI is SHELL</p>
+</li>
+<li>
+<p>BASH =&gt; Bourn-Again Shell (most common shell) is not only a shell but it&rsquo;s a programming language</p>
+</li>
+<li>
+<p>bash scripts</p>
+</li>
+<li>
+<p>grep -c &ldquo;ERR&rdquo; application.log</p>
+</li>
+<li>
+<p>-c the count of &hellip;</p>
+</li>
+<li>
+<p>find . -name &ldquo;*.log&rdquo; -mtime -1</p>
+</li>
+<li>
+<p>trova nella cartella attuale i file .log che sono stati modificati nell&rsquo;ultimo giorno
+<img alt="alt text" loading="lazy" src="/notes/posts/linux/attachments/commands-log-11.png"></p>
+</li>
+<li>
+<p>create a SHELL SCRIPT = just a file.sh with linux commands</p>
+</li>
+<li>
+<p>chmod +x file.sh</p>
+</li>
+<li>
+<p>#!/bin/bash  called shebang and tells which language</p>
+</li>
+<li>
+<p>echo -e &ldquo;\n per andare a capo some comments for human readibility&rdquo;</p>
+</li>
+<li>
+<p>create variables: LOG_VAR=&ldquo;path/to/logs&rdquo; and use $LOG_VAR</p>
+</li>
+<li>
+<p>FRUITS_ARRAY=(&ldquo;banana&rdquo; &ldquo;mela&rdquo; &ldquo;pera&rdquo;) to create array in bash remember without comma</p>
+</li>
+<li>
+<p>${FRUITS_ARRAY[0]} to access array in bash</p>
+</li>
+<li>
+<p>ls -la &ndash;&gt; d iniziale = directory, - = file.</p>
+</li>
+<li>
+<p>Permessi a terne: owner / group / others.</p>
+</li>
+</ul>
+<p><strong>13 Linux Commands Every Engineer Should Know (Real-World Example)</strong></p>
+<p>[x]  <a href="https://www.youtube.com/watch?v=CLh2ACdXNbc&amp;list=PLy7NrYWoggjzDAxOxWazuVSsndW3fUinz&amp;index=3">https://www.youtube.com/watch?v=CLh2ACdXNbc&amp;list=PLy7NrYWoggjzDAxOxWazuVSsndW3fUinz&amp;index=3</a></p>
 
 
 </div>
-
-<article class="post-entry"> 
-  <header class="entry-header">
-    <h2 class="entry-hint-parent">
-    </h2>
-  </header>
-  <div class="entry-content">
-    <p>LINUX Struttura del file system Linux spiegata: da / a /usr | Nozioni di base su Linux
-[x] https://www.youtube.com/watch?v=ISJ44S5sZu8&amp;list=PLmQB6ao4XoI9S4cIKIRsLQKDHhBPesSQ5&amp;index=9
-Bash Scripting Tutorial for Beginners
-[ ] https://www.youtube.com/watch?v=PNhq_4d-5ek&amp;list=PLy7NrYWoggjzDAxOxWazuVSsndW3fUinz
-what is shall? what is bash?
-CLI =&gt; a way to interapt with computer by writing commands
-in Linux CLI is SHELL
-BASH =&gt; Bourn-Again Shell (most common shell) is not only a shell but it’s a programming language
-bash scripts
-grep -c “ERR” application.log
-...</p>
-  </div>
-  <footer class="entry-footer"><span>1 min</span></footer>
-  <a class="entry-link" aria-label="post link to " href="http://localhost:1313/notes/posts/linux/linux/"></a>
-</article>
     </main>
     
 <footer class="footer">

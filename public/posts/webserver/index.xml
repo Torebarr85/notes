@@ -1,31 +1,11 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Web Server on Notes</title>
+    <title>Webserver on Notes</title>
     <link>http://localhost:1313/notes/posts/webserver/</link>
-    <description>Recent content in Web Server on Notes</description>
+    <description>Recent content in Webserver on Notes</description>
     <generator>Hugo -- 0.149.0</generator>
     <language>en-us</language>
     <atom:link href="http://localhost:1313/notes/posts/webserver/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title></title>
-      <link>http://localhost:1313/notes/posts/webserver/webserver/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/posts/webserver/webserver/</guid>
-      <description>&lt;h1 id=&#34;web-server&#34;&gt;&lt;strong&gt;WEB SERVER&lt;/strong&gt;&lt;/h1&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=9J1nJOivdyw&#34;&gt;https://www.youtube.com/watch?v=9J1nJOivdyw&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;just a piece of software that serves web content.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;listen on a port&lt;/li&gt;
-&lt;li&gt;for a request&lt;/li&gt;
-&lt;li&gt;transport protocol&lt;/li&gt;
-&lt;li&gt;response containing the resource&lt;/li&gt;
-&lt;li&gt;resource&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;🔹 1. Ogni frontend ha bisogno di un web server&lt;/p&gt;
-&lt;p&gt;Il browser non legge “file dal disco”, ha bisogno di qualcuno che glieli dia via HTTP.&lt;/p&gt;
-&lt;p&gt;Quel qualcuno è un web server: Nginx, Apache, Caddy, S3+CloudFront… o anche un serverino Node come serve.&lt;/p&gt;
-&lt;p&gt;🔹 2. Angular, React, Vue in dev mode&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>

@@ -15,7 +15,14 @@ enableRobotsTXT = true
   ShowToc = true
 
 [permalinks]
-  posts = "/:sections/:slug/"
+  aws = "/aws/:slug/"
+  docker = "/docker/:slug/"
+  kubernetes = "/kubernetes/:slug/"
+  linux = "/linux/:slug/"
+  networking = "/networking/:slug/"
+  nginx = "/nginx/:slug/"
+  virtualization = "/virtualization/:slug/"
+  webserver = "/webserver/:slug/"
 
 [taxonomies]
   tag = "tags"
@@ -23,6 +30,8 @@ enableRobotsTXT = true
 
 [markup.goldmark.renderer]
   unsafe = true
+
+
 
 
 [menu]

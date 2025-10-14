@@ -7,23 +7,5 @@
     <generator>Hugo -- 0.149.0</generator>
     <language>en-us</language>
     <atom:link href="http://localhost:1313/notes/posts/networking/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title></title>
-      <link>http://localhost:1313/notes/posts/networking/networking/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/posts/networking/networking/</guid>
-      <description>&lt;h1 id=&#34;networking&#34;&gt;&lt;strong&gt;NETWORKING&lt;/strong&gt;&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;what is an IP Address? // You SUCK at Subnetting // EP 1&lt;/strong&gt;
-THE ENTIRE PLAYLIST:
-[ ] &lt;a href=&#34;https://www.youtube.com/watch?v=5WfiTHiU4x8&amp;amp;list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF&#34;&gt;https://www.youtube.com/watch?v=5WfiTHiU4x8&amp;amp;list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;ip address like a phone number to identify devices. 192.168.1.204
-&lt;strong&gt;MR. SUBNET MASK aka NETMASK&lt;/strong&gt;
-Tells what ip addresses start with. he tells the street we live on..&lt;/li&gt;
-&lt;li&gt;subnet aka netmask 255.255.255.0&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;strong&gt;MR. DEFAULT GATEWAY aka ROUTER&lt;/strong&gt;
-He does it all. give ip addresses to our devices in our network and could help us to get outside our network. if you wanna visit netflix for instance.&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>

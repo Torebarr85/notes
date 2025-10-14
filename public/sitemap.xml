@@ -5,43 +5,55 @@
     <loc>http://localhost:1313/notes/tags/aws/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/posts/aws/</loc>
+    <loc>http://localhost:1313/notes/aws/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/tags/docker/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/posts/docker/</loc>
+    <loc>http://localhost:1313/notes/docker/docker-vs-cose/</loc>
+    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/docker/</loc>
+    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/kubernetes/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/tags/kubernetes/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/posts/kubernetes/</loc>
+    <loc>http://localhost:1313/notes/kubernetes/kubernetes-titolo/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/tags/linux/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/posts/linux/</loc>
+    <loc>http://localhost:1313/notes/linux/linux-titolo/</loc>
+    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/linux/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/tags/networking/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/posts/networking/</loc>
+    <loc>http://localhost:1313/notes/networking/networking-titolo/</loc>
+    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/networking/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/tags/nginx/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/posts/nginx/</loc>
+    <loc>http://localhost:1313/notes/nginx/nginx-titolo/</loc>
+    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/nginx/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/</loc>
-    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/notes/posts/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/tags/</loc>
@@ -50,13 +62,19 @@
     <loc>http://localhost:1313/notes/tags/virtualization/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/posts/virtualization/</loc>
+    <loc>http://localhost:1313/notes/virtualization/virtualization-titolo/</loc>
+    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/virtualization/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/tags/webserver/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/posts/webserver/</loc>
+    <loc>http://localhost:1313/notes/webserver/webserver-titolo/</loc>
+    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/webserver/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/categories/</loc>
