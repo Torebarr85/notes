@@ -1,3 +1,10 @@
++++
+title = "Virtualization: <titolo>"
+date = 2025-10-14
+draft = false
+tags = ["virtualization"]
++++
+
 # STEP 4 - VIRTUAL MACHINE
 
 - **Virtual Machines explained in 15 Mins**

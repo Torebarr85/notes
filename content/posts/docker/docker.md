@@ -1,9 +1,10 @@
 +++
-date = '2025-10-13T23:48:57+02:00'
+title = "Docker: <titolo>"
+date = 2025-10-14
 draft = false
-title = 'VIRTUAL MACHINE VS DOCKER'
-tags = ["VIRTUAL MACHINE VS DOCKER"]
+tags = ["docker"]
 +++
+
 
 # VIRTUAL MACHINE VS DOCKER
 

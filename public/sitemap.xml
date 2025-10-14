@@ -2,25 +2,6 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/notes/posts/networking/</loc>
-  </url><url>
-    <loc>http://localhost:1313/notes/posts/aws/</loc>
-  </url><url>
-    <loc>http://localhost:1313/notes/posts/docker/</loc>
-  </url><url>
-    <loc>http://localhost:1313/notes/posts/kubernetes/</loc>
-  </url><url>
-    <loc>http://localhost:1313/notes/posts/linux/</loc>
-  </url><url>
-    <loc>http://localhost:1313/notes/posts/virtualization/</loc>
-  </url><url>
-    <loc>http://localhost:1313/notes/posts/webserver/</loc>
-  </url><url>
-    <loc>http://localhost:1313/notes/posts/nginx/</loc>
-  </url><url>
-    <loc>http://localhost:1313/notes/posts/hello/</loc>
-    <lastmod>2025-10-13T23:48:57+02:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/notes/</loc>
     <lastmod>2025-10-13T23:48:57+02:00</lastmod>
   </url><url>
@@ -30,10 +11,11 @@
     <loc>http://localhost:1313/notes/tags/</loc>
     <lastmod>2025-10-13T23:48:57+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/notes/tags/test/</loc>
+    <loc>http://localhost:1313/notes/tags/virtual-machine-vs-docker/</loc>
     <lastmod>2025-10-13T23:48:57+02:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/posts/docker/docker/</loc>
+    <lastmod>2025-10-13T23:48:57+02:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/posts/kubernetes/kubernetes/</loc>
   </url><url>

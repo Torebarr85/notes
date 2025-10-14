@@ -1,3 +1,10 @@
++++
+title = "Nginx: <titolo>"
+date = 2025-10-14
+draft = false
+tags = ["nginx"]
++++
+
 # **NGINX**
 “Reverse-proxy to an app on localhost”
 NGINX riceve le richieste e le inoltra a un’app che gira sulla stessa macchina, di solito su 127.0.0.1:PORT. Così:

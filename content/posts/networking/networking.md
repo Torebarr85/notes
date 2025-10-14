@@ -1,3 +1,11 @@
++++
+title = "Networking: <titolo>"
+date = 2025-10-14
+draft = false
+tags = ["networking"]
++++
+
+
 # **NETWORKING**
 
 **what is an IP Address? // You SUCK at Subnetting // EP 1**
@@ -171,7 +179,7 @@ Sintesi chiara con metafora + nome tecnico.
 
 
 
-<<<<<<< HEAD
+
 **SPIEGAZIONE BROADCAST PARLA CON TUTTI**
 Significa: se mandi un messaggio all’indirizzo di broadcast, lo ricevono tutti i dispositivi della stessa subnet.
 
@@ -182,9 +190,9 @@ Chi lo riceve: tutti gli host di quel “quartiere” (.1–.254).
 Fin dove arriva: solo dentro la subnet. Fuori non passa.
 
 Mini-scena “rete di casa 192.168.1.0/24” Telefono si collega al Wi-Fi Invia DHCP Discover → 192.168.1.255. Il router risponde con un IP, es. 192.168.1.23. PC vuole parlare con la stampante 192.168.1.60 PC invia ARP in broadcast: “Chi ha 192.168.1.60?” Solo la stampante risponde con il suo MAC → poi comunicano.
-=======
+
 # **we’re out of IP Addresses….but this saved us (Private IP Addresses)**
 https://www.youtube.com/watch?v=8bhvn9tQk8o&list=PLIhvC56v63IKrRHh3gvZZBAGvsvOhwrRF&index=3 
 
 NAT and private ip addresses
->>>>>>> 8ef8c34642fa2742791699348a0c971720e34db7
+

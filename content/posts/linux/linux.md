@@ -1,3 +1,10 @@
++++
+title = "Linux: <titolo>"
+date = 2025-10-14
+draft = false
+tags = ["linux"]
++++
+
 # **LINUX**
 
 **Struttura del file system Linux spiegata: da / a /usr | Nozioni di base su Linux**
