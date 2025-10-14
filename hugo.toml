@@ -21,48 +21,52 @@ enableRobotsTXT = true
   tag = "tags"
   category = "categories"
 
+[markup.goldmark.renderer]
+  unsafe = true
+
+
 [menu]
   [[menu.main]]
     name = "AWS"
-    url  = "/tags/aws/"
+    pageRef = "tags/aws"
     weight = 10
 
   [[menu.main]]
     name = "Docker"
-    url  = "/tags/docker/"
+    pageRef = "tags/docker"
     weight = 20
 
   [[menu.main]]
     name = "Kubernetes"
-    url  = "/tags/kubernetes/"
+    pageRef = "tags/kubernetes"
     weight = 30
 
   [[menu.main]]
     name = "Linux"
-    url  = "/tags/linux/"
+    pageRef = "tags/linux"
     weight = 40
 
   [[menu.main]]
     name = "Networking"
-    url  = "/tags/networking/"
+    pageRef = "tags/networking"
     weight = 50
 
   [[menu.main]]
     name = "Nginx"
-    url  = "/tags/nginx/"
+    pageRef = "tags/nginx"
     weight = 60
 
   [[menu.main]]
     name = "Virtualization"
-    url  = "/tags/virtualization/"
+    pageRef = "tags/virtualization"
     weight = 70
 
   [[menu.main]]
     name = "Webserver"
-    url  = "/tags/webserver/"
+    pageRef = "tags/webserver"
     weight = 80
 
   [[menu.main]]
     name = "All topics"
-    url  = "/tags/"
+    pageRef = "tags"
     weight = 99
