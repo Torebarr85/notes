@@ -9,7 +9,7 @@ tags = ["kubernetes"]
 # Kubernetes
 
 **Cluster**
-![alt text](attachments/cluster.jpeg)
+![alt text](./attachments/cluster.jpeg)
 - Cluster = l’intero datacenter Kubernetes
 - Cos’è il cluster EKS:  composto da Control plane + Worker nodes
 
