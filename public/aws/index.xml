@@ -9,10 +9,10 @@
     <lastBuildDate>Sat, 18 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/notes/aws/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Module 1 - Introduction to the Cloud</title>
-      <link>http://localhost:1313/notes/aws/module-1-introduction-to-the-cloud/</link>
+      <title>1 - Introduction to the Cloud</title>
+      <link>http://localhost:1313/notes/aws/1-introduction-to-the-cloud/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-1-introduction-to-the-cloud/</guid>
+      <guid>http://localhost:1313/notes/aws/1-introduction-to-the-cloud/</guid>
       <description>&lt;h1 id=&#34;module-1---introduction-to-the-cloud&#34;&gt;Module 1 - Introduction to the Cloud&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -30,10 +30,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 10 - Monitoring, Compliance and Governance in the AWS Cloud</title>
-      <link>http://localhost:1313/notes/aws/module-10-monitoring-compliance-and-governance-in-the-aws-cloud/</link>
+      <title>10 - Monitoring, Compliance and Governance in the AWS Cloud</title>
+      <link>http://localhost:1313/notes/aws/10-monitoring-compliance-and-governance-in-the-aws-cloud/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-10-monitoring-compliance-and-governance-in-the-aws-cloud/</guid>
+      <guid>http://localhost:1313/notes/aws/10-monitoring-compliance-and-governance-in-the-aws-cloud/</guid>
       <description>&lt;h1 id=&#34;module-10---monitoring-compliance-and-governance-in-the-aws-cloud&#34;&gt;Module 10 - Monitoring, Compliance and Governance in the AWS Cloud&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -51,10 +51,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 11 - Pricing and Support</title>
-      <link>http://localhost:1313/notes/aws/module-11-pricing-and-support/</link>
+      <title>11 - Pricing and Support</title>
+      <link>http://localhost:1313/notes/aws/11-pricing-and-support/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-11-pricing-and-support/</guid>
+      <guid>http://localhost:1313/notes/aws/11-pricing-and-support/</guid>
       <description>&lt;h1 id=&#34;module-11---pricing-and-support&#34;&gt;Module 11 - Pricing and Support&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -72,10 +72,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 12 - Migrating to the AWS Cloud</title>
-      <link>http://localhost:1313/notes/aws/module-12-migrating-to-the-aws-cloud/</link>
+      <title>12 - Migrating to the AWS Cloud</title>
+      <link>http://localhost:1313/notes/aws/12-migrating-to-the-aws-cloud/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-12-migrating-to-the-aws-cloud/</guid>
+      <guid>http://localhost:1313/notes/aws/12-migrating-to-the-aws-cloud/</guid>
       <description>&lt;h1 id=&#34;module-12---migrating-to-the-aws-cloud&#34;&gt;Module 12 - Migrating to the AWS Cloud&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -93,10 +93,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 13 - Well-Architected Solutions</title>
-      <link>http://localhost:1313/notes/aws/module-13-well-architected-solutions/</link>
+      <title>13 - Well-Architected Solutions</title>
+      <link>http://localhost:1313/notes/aws/13-well-architected-solutions/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-13-well-architected-solutions/</guid>
+      <guid>http://localhost:1313/notes/aws/13-well-architected-solutions/</guid>
       <description>&lt;h1 id=&#34;module-13---well-architected-solutions&#34;&gt;Module 13 - Well-Architected Solutions&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -114,10 +114,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 2 - Compute in the Cloud</title>
-      <link>http://localhost:1313/notes/aws/module-2-compute-in-the-cloud/</link>
+      <title>2 - Compute in the Cloud</title>
+      <link>http://localhost:1313/notes/aws/2-compute-in-the-cloud/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-2-compute-in-the-cloud/</guid>
+      <guid>http://localhost:1313/notes/aws/2-compute-in-the-cloud/</guid>
       <description>&lt;h1 id=&#34;module-2---compute-in-the-cloud&#34;&gt;Module 2 - Compute in the Cloud&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -135,10 +135,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 3 - Exploring Compute Services</title>
-      <link>http://localhost:1313/notes/aws/module-3-exploring-compute-services/</link>
+      <title>3 - Exploring Compute Services</title>
+      <link>http://localhost:1313/notes/aws/3-exploring-compute-services/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-3-exploring-compute-services/</guid>
+      <guid>http://localhost:1313/notes/aws/3-exploring-compute-services/</guid>
       <description>&lt;h1 id=&#34;module-3---exploring-compute-services&#34;&gt;Module 3 - Exploring Compute Services&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -156,10 +156,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 4 - Going Global</title>
-      <link>http://localhost:1313/notes/aws/module-4-going-global/</link>
+      <title>4 - Going Global</title>
+      <link>http://localhost:1313/notes/aws/4-going-global/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-4-going-global/</guid>
+      <guid>http://localhost:1313/notes/aws/4-going-global/</guid>
       <description>&lt;h1 id=&#34;module-4---going-global&#34;&gt;Module 4 - Going Global&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -177,10 +177,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 5 - Networking</title>
-      <link>http://localhost:1313/notes/aws/module-5-networking/</link>
+      <title>5 - Networking</title>
+      <link>http://localhost:1313/notes/aws/5-networking/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-5-networking/</guid>
+      <guid>http://localhost:1313/notes/aws/5-networking/</guid>
       <description>&lt;h1 id=&#34;module-5---networking&#34;&gt;Module 5 - Networking&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -198,10 +198,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 6 - Storage</title>
-      <link>http://localhost:1313/notes/aws/module-6-storage/</link>
+      <title>6 - Storage</title>
+      <link>http://localhost:1313/notes/aws/6-storage/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-6-storage/</guid>
+      <guid>http://localhost:1313/notes/aws/6-storage/</guid>
       <description>&lt;h1 id=&#34;module-6---storage&#34;&gt;Module 6 - Storage&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -219,10 +219,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 7 - Databases</title>
-      <link>http://localhost:1313/notes/aws/module-7-databases/</link>
+      <title>7 - Databases</title>
+      <link>http://localhost:1313/notes/aws/7-databases/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-7-databases/</guid>
+      <guid>http://localhost:1313/notes/aws/7-databases/</guid>
       <description>&lt;h1 id=&#34;module-7---databases&#34;&gt;Module 7 - Databases&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -240,10 +240,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 8 - AI ML and Data Analytics</title>
-      <link>http://localhost:1313/notes/aws/module-8-ai-ml-and-data-analytics/</link>
+      <title>8 - AI ML and Data Analytics</title>
+      <link>http://localhost:1313/notes/aws/8-ai-ml-and-data-analytics/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-8-ai-ml-and-data-analytics/</guid>
+      <guid>http://localhost:1313/notes/aws/8-ai-ml-and-data-analytics/</guid>
       <description>&lt;h1 id=&#34;module-8---ai-ml-and-data-analytics&#34;&gt;Module 8 - AI ML and Data Analytics&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
@@ -261,10 +261,10 @@
 &lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
     <item>
-      <title>Module 9 - Security</title>
-      <link>http://localhost:1313/notes/aws/module-9-security/</link>
+      <title>9 - Security</title>
+      <link>http://localhost:1313/notes/aws/9-security/</link>
       <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/module-9-security/</guid>
+      <guid>http://localhost:1313/notes/aws/9-security/</guid>
       <description>&lt;h1 id=&#34;module-9---security&#34;&gt;Module 9 - Security&lt;/h1&gt;
 &lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
 &lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
