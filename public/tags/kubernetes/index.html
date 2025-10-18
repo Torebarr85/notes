@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/notes/tags/kubernetes/">
-<link crossorigin="anonymous" href="/notes/assets/css/stylesheet.d0049500090a8b5b522a30f4bc70f815df41595125d25503dff47281216974cb.css" integrity="sha256-0ASVAAkKi1tSKjD0vHD4Fd9BWVEl0lUD3/RygSFpdMs=" rel="preload stylesheet" as="style">
+<link crossorigin="anonymous" href="/notes/assets/css/stylesheet.a090830a421002426baafbd314e38f149d77b4c48a12ee9312700d770b27fb26.css" integrity="sha256-oJCDCkIQAkJrqvvTFOOPFJ13tMSKEu6TEnANdwsn&#43;yY=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/notes/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/notes/favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="http://localhost:1313/notes/favicon-32x32.png">
@@ -153,6 +153,22 @@
     Kubernetes
   </h1>
 </header>
+
+<article class="post-entry tag-entry"> 
+  <header class="entry-header">
+    <h2 class="entry-hint-parent">Kubernetes: Touning resources
+    </h2>
+  </header>
+  <div class="entry-content">
+    <p>Ok, andiamo dritti. Hai cambiato i values, i pod vecchi sono stati killati e i nuovi non partono. Facciamo troubleshooting in 6 check veloci. Copia–incolla e leggiamo i messaggi chiave.
+Stato rollout (capire cosa manca) kubectl rollout status deploy/prov-ippv2-pr-platform-ippv2-emailsender -n prov-ippv2-pr-platform-namespace kubectl get deploy/prov-ippv2-pr-platform-ippv2-emailsender -n prov-ippv2-pr-platform-namespace -o wide
+Requests = what the scheduler needs to place a pod cpu_request: 200m memory_request: 512Mi
+Limits memory_limit: 2048Mi # keep this to avoid OOM
+...</p>
+  </div>
+  <footer class="entry-footer"><span title='2025-10-17 00:00:00 +0000 UTC'>October 17, 2025</span>&nbsp;·&nbsp;<span>1 min</span></footer>
+  <a class="entry-link" aria-label="post link to Kubernetes: Touning resources" href="http://localhost:1313/notes/kubernetes/kubernetes-touning-resources/"></a>
+</article>
 
 <article class="post-entry tag-entry"> 
   <header class="entry-header">

@@ -4,10 +4,27 @@
     <title>Kubernetes on Notes</title>
     <link>http://localhost:1313/notes/kubernetes/</link>
     <description>Recent content in Kubernetes on Notes</description>
-    <generator>Hugo -- 0.149.0</generator>
+    <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 17 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/notes/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Kubernetes: Touning resources</title>
+      <link>http://localhost:1313/notes/kubernetes/kubernetes-touning-resources/</link>
+      <pubDate>Fri, 17 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/kubernetes/kubernetes-touning-resources/</guid>
+      <description>&lt;p&gt;Ok, andiamo dritti. Hai cambiato i values, i pod vecchi sono stati killati e i nuovi non partono. Facciamo troubleshooting in 6 check veloci. Copia–incolla e leggiamo i messaggi chiave.&lt;/p&gt;
+&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;Stato rollout (capire cosa manca)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;kubectl rollout status deploy/prov-ippv2-pr-platform-ippv2-emailsender -n prov-ippv2-pr-platform-namespace
+kubectl get deploy/prov-ippv2-pr-platform-ippv2-emailsender -n prov-ippv2-pr-platform-namespace -o wide&lt;/p&gt;
+&lt;h1 id=&#34;requests--what-the-scheduler-needs-to-place-a-pod&#34;&gt;Requests = what the scheduler needs to place a pod&lt;/h1&gt;
+&lt;p&gt;cpu_request: 200m
+memory_request: 512Mi&lt;/p&gt;
+&lt;h1 id=&#34;limits&#34;&gt;Limits&lt;/h1&gt;
+&lt;p&gt;memory_limit: 2048Mi     # keep this to avoid OOM&lt;/p&gt;</description>
+    </item>
     <item>
       <title>Kubernetes: &lt;titolo&gt;</title>
       <link>http://localhost:1313/notes/kubernetes/kubernetes-titolo/</link>
@@ -15,7 +32,7 @@
       <guid>http://localhost:1313/notes/kubernetes/kubernetes-titolo/</guid>
       <description>&lt;h1 id=&#34;kubernetes&#34;&gt;Kubernetes&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;Cluster&lt;/strong&gt;
-&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;attachments/cluster.jpeg&#34;&gt;&lt;/p&gt;
+&lt;img alt=&#34;alt text&#34; loading=&#34;lazy&#34; src=&#34;./attachments/cluster.jpeg&#34;&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;Cluster = l’intero datacenter Kubernetes&lt;/li&gt;
 &lt;li&gt;Cos’è il cluster EKS:  composto da Control plane + Worker nodes&lt;/li&gt;
