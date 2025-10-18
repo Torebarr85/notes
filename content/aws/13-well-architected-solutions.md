@@ -1,5 +1,5 @@
 +++
-title = "Module 13 - Well-Architected Solutions"
+title = "13 - Well-Architected Solutions"
 date = 2025-10-18
 draft = false
 tags = ["aws"]

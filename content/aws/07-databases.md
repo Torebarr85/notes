@@ -1,5 +1,5 @@
 +++
-title = "Module 7 - Databases"
+title = "7 - Databases"
 date = 2025-10-18
 draft = false
 tags = ["aws"]

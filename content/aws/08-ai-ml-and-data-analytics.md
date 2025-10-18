@@ -1,5 +1,5 @@
 +++
-title = "Module 8 - AI ML and Data Analytics"
+title = "8 - AI ML and Data Analytics"
 date = 2025-10-18
 draft = false
 tags = ["aws"]

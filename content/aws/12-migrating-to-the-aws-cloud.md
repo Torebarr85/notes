@@ -1,5 +1,5 @@
 +++
-title = "Module 12 - Migrating to the AWS Cloud"
+title = "12 - Migrating to the AWS Cloud"
 date = 2025-10-18
 draft = false
 tags = ["aws"]

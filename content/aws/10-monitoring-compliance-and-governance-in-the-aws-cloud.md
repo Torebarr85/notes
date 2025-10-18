@@ -1,5 +1,5 @@
 +++
-title = "Module 10 - Monitoring, Compliance and Governance in the AWS Cloud"
+title = "10 - Monitoring, Compliance and Governance in the AWS Cloud"
 date = 2025-10-18
 draft = false
 tags = ["aws"]

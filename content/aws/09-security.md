@@ -1,5 +1,5 @@
 +++
-title = "Module 9 - Security"
+title = "9 - Security"
 date = 2025-10-18
 draft = false
 tags = ["aws"]

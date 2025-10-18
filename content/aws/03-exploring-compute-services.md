@@ -1,5 +1,5 @@
 +++
-title = "Module 3 - Exploring Compute Services"
+title = "3 - Exploring Compute Services"
 date = 2025-10-18
 draft = false
 tags = ["aws"]
