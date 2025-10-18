@@ -2,6 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>http://localhost:1313/notes/tags/aws/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-1-introduction-to-the-cloud/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-10-monitoring-compliance-and-governance-in-the-aws-cloud/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-11-pricing-and-support/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-12-migrating-to-the-aws-cloud/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-13-well-architected-solutions/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-2-compute-in-the-cloud/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-3-exploring-compute-services/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-4-going-global/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-5-networking/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-6-storage/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-7-databases/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-8-ai-ml-and-data-analytics/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/aws/module-9-security/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/notes/tags/</loc>
+    <lastmod>2025-10-18T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/notes/kubernetes/</loc>
     <lastmod>2025-10-17T00:00:00+00:00</lastmod>
   </url><url>
@@ -10,21 +61,6 @@
   </url><url>
     <loc>http://localhost:1313/notes/kubernetes/kubernetes-touning-resources/</loc>
     <lastmod>2025-10-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/notes/</loc>
-    <lastmod>2025-10-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/notes/tags/</loc>
-    <lastmod>2025-10-17T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/notes/aws/</loc>
-    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/notes/tags/aws/</loc>
-    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/notes/aws/aws-titolo/</loc>
-    <lastmod>2025-10-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/notes/tags/docker/</loc>
     <lastmod>2025-10-14T00:00:00+00:00</lastmod>

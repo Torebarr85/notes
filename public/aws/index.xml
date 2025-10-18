@@ -1,19 +1,309 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Aws on Notes</title>
+    <title>AWS Cloud Practitioner Notes on Notes</title>
     <link>http://localhost:1313/notes/aws/</link>
-    <description>Recent content in Aws on Notes</description>
+    <description>Recent content in AWS Cloud Practitioner Notes on Notes</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 18 Oct 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/notes/aws/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>AWS: &lt;titolo&gt;</title>
-      <link>http://localhost:1313/notes/aws/aws-titolo/</link>
-      <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/aws-titolo/</guid>
-      <description></description>
+      <title>Module 1 - Introduction to the Cloud</title>
+      <link>http://localhost:1313/notes/aws/module-1-introduction-to-the-cloud/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-1-introduction-to-the-cloud/</guid>
+      <description>&lt;h1 id=&#34;module-1---introduction-to-the-cloud&#34;&gt;Module 1 - Introduction to the Cloud&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific reminders here.&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 10 - Monitoring, Compliance and Governance in the AWS Cloud</title>
+      <link>http://localhost:1313/notes/aws/module-10-monitoring-compliance-and-governance-in-the-aws-cloud/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-10-monitoring-compliance-and-governance-in-the-aws-cloud/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-10---monitoring-compliance-and-governance-in-the-aws-cloud&#34;&gt;Module 10 - Monitoring, Compliance and Governance in the AWS Cloud&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 11 - Pricing and Support</title>
+      <link>http://localhost:1313/notes/aws/module-11-pricing-and-support/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-11-pricing-and-support/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-11---pricing-and-support&#34;&gt;Module 11 - Pricing and Support&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 12 - Migrating to the AWS Cloud</title>
+      <link>http://localhost:1313/notes/aws/module-12-migrating-to-the-aws-cloud/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-12-migrating-to-the-aws-cloud/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-12---migrating-to-the-aws-cloud&#34;&gt;Module 12 - Migrating to the AWS Cloud&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 13 - Well-Architected Solutions</title>
+      <link>http://localhost:1313/notes/aws/module-13-well-architected-solutions/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-13-well-architected-solutions/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-13---well-architected-solutions&#34;&gt;Module 13 - Well-Architected Solutions&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 2 - Compute in the Cloud</title>
+      <link>http://localhost:1313/notes/aws/module-2-compute-in-the-cloud/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-2-compute-in-the-cloud/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-2---compute-in-the-cloud&#34;&gt;Module 2 - Compute in the Cloud&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 3 - Exploring Compute Services</title>
+      <link>http://localhost:1313/notes/aws/module-3-exploring-compute-services/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-3-exploring-compute-services/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-3---exploring-compute-services&#34;&gt;Module 3 - Exploring Compute Services&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 4 - Going Global</title>
+      <link>http://localhost:1313/notes/aws/module-4-going-global/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-4-going-global/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-4---going-global&#34;&gt;Module 4 - Going Global&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 5 - Networking</title>
+      <link>http://localhost:1313/notes/aws/module-5-networking/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-5-networking/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-5---networking&#34;&gt;Module 5 - Networking&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 6 - Storage</title>
+      <link>http://localhost:1313/notes/aws/module-6-storage/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-6-storage/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-6---storage&#34;&gt;Module 6 - Storage&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 7 - Databases</title>
+      <link>http://localhost:1313/notes/aws/module-7-databases/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-7-databases/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-7---databases&#34;&gt;Module 7 - Databases&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 8 - AI ML and Data Analytics</title>
+      <link>http://localhost:1313/notes/aws/module-8-ai-ml-and-data-analytics/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-8-ai-ml-and-data-analytics/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-8---ai-ml-and-data-analytics&#34;&gt;Module 8 - AI ML and Data Analytics&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
+    </item>
+    <item>
+      <title>Module 9 - Security</title>
+      <link>http://localhost:1313/notes/aws/module-9-security/</link>
+      <pubDate>Sat, 18 Oct 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/notes/aws/module-9-security/</guid>
+      <description>&lt;p&gt;= [&amp;ldquo;aws&amp;rdquo;]
++++&lt;/p&gt;
+&lt;h1 id=&#34;module-9---security&#34;&gt;Module 9 - Security&lt;/h1&gt;
+&lt;h2 id=&#34;-key-ideas&#34;&gt;🔹 Key Ideas&lt;/h2&gt;
+&lt;p&gt;Brief summary of what this module covers.&lt;/p&gt;
+&lt;h2 id=&#34;-main-concepts&#34;&gt;🔸 Main Concepts&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Concept 1&lt;/li&gt;
+&lt;li&gt;Concept 2&lt;/li&gt;
+&lt;li&gt;Concept 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;-example&#34;&gt;🔹 Example&lt;/h2&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;# Example AWS CLI command&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;aws --version
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;-exam-tips&#34;&gt;🔹 Exam Tips&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Add exam-specific r&lt;/p&gt;&lt;/blockquote&gt;</description>
     </item>
   </channel>
 </rss>

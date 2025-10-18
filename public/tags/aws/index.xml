@@ -6,14 +6,7 @@
     <description>Recent content in Aws on Notes</description>
     <generator>Hugo -- 0.151.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Tue, 14 Oct 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate></lastBuildDate>
     <atom:link href="http://localhost:1313/notes/tags/aws/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>AWS: &lt;titolo&gt;</title>
-      <link>http://localhost:1313/notes/aws/aws-titolo/</link>
-      <pubDate>Tue, 14 Oct 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/notes/aws/aws-titolo/</guid>
-      <description></description>
-    </item>
   </channel>
 </rss>
