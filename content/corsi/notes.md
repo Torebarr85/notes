@@ -1,3 +1,11 @@
++++
+title = "CORSI: networking per DevOps"
+date = 2025-11-15
+draft = false
+tags = ["corsi"]
++++
+
+
 *video che insegnano le BASI del networking, ma già impostate in modo utile per DevOps e Cloud.*
 
 ---
