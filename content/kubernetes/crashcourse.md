@@ -56,7 +56,7 @@ esempio: virtual box
 - chiede in prestito all'host OS di dargli dell'hardware in prestito per gestire le virtual machines: crea virtual CPU, virtual RAM, virtual STORAGE per ogni virtual machine = le risorse hardware sono shared! puoi dare solo quelle che fisicamente esistono.
 
 ***Containers vs VM***
-- virtualization and VM are virtualizing hardware → while Docker virtualize OS operating system!
+- virtualization and VM are virtualizing hardware → while Docker Docker virtualizza "l’ambiente OS", non il sistema operativo completo. Un container può farti sembrare di essere dentro un sistema Linux diverso (tipo Alpine, Ubuntu, ecc.), ma sotto usa sempre il kernel dell’host. Quindi se l’host è Windows, il kernel è Windows.
 - VM → ognuna ha il suo sistema operativo intero
 - Container → condividono lo stesso kernel dell’host
 
