@@ -1,4 +1,11 @@
 
++++
+title = "Linux: Q&A basic commands"
+date = 2025-11-15
+draft = false
+tags = ["linux"]
++++
+
 # Domanda 1 (Linux – servizi)
 
 1) “How do you check if a service is running on a Linux system?”
