@@ -150,3 +150,20 @@ richiede user, host e path remoto
 17) “How do you view recent system errors?”
 
 - journalctl -xe
+
+# Domanda 18 (rete – routing)
+
+18) “How do you check the routing table on a Linux machine?”
+
+-“ip route gives me all the active routes and the default gateway.”
+
+# Domanda 19 (grep)
+
+19) “How do you search for a keyword inside all files in a directory?”
+
+- grep -R "keyword" /path
+
+-R = ricorsivo → entra nelle cartelle
+
+cerca nel contenuto dei file, non nei nomi
+
