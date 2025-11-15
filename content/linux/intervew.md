@@ -9,7 +9,7 @@ tags = ["linux"]
 # Domanda 1 (Linux – servizi)
 
 1) “How do you check if a service is running on a Linux system?”
-- systemctl status <service>
+- **systemctl status nomeService**
 
 # Domanda 2 (processi)
 
@@ -17,15 +17,15 @@ tags = ["linux"]
 
 - ps è utile ma statico → non ti mostra il consumo in tempo reale.
 - In produzione la prima cosa è vedere chi sta mangiando CPU/RAM.
-- Lo strumento standard è top (o htop se installato).
+- Lo strumento standard è **top** (o htop se installato).
 
-# Domanda 3 (servizi + log)
+# Domanda 3 (servizi + log)
 
 3) “A service is failing to start. What do you do to understand the cause?”
 - I check systemctl status to see the error 
-- and then journalctl -u <service> -f to read the logs.
+- and then **journalctl -u nomeService -f** to read the logs.
 
-# Domanda 4 (network troubleshooting)
+# Domanda 4 (network troubleshooting)
 4) How do you verify if a machine can reach an external host?
 
 🧠 Cos’è “la macchina”?
@@ -71,19 +71,19 @@ Per capire cosa riempie un disco non guardi i processi → guardi le directory.
 
 I due comandi chiave sono:
 
-- df -h → spazio totale usato/ disponibile
-- du -sh * → quanto spazio consumano le directory
+- **df -h** → spazio totale usato/ disponibile
+- **du -sh** * → quanto spazio consumano le directory
 
 # Domanda 6 (permessi)
 
 6) “How do you make a script executable on Linux?”
 
-- chmod +x <nomeFileScript>
+- **chmod +x nomeFileScript**
 
 # Domanda 7 (DNS + troubleshooting)
 
 7) “How do you check if a DNS resolution is working correctly?”
-- I check DNS resolution with:  dig nomeDomain.com.”
+- check DNS resolution with:  **dig nomeDomain.com**
 
 # Domanda 8 (processi)
 
@@ -92,27 +92,27 @@ I due comandi chiave sono:
 
 ✔️ 1) lsof → il più chiaro
 
-- sudo lsof -i :8080
+- **sudo lsof -i :8080**
 
 ✔️ 2) ss → più moderno, già installato ovunque
 
-- ss -tulnp | grep 8080
+- **ss -tulnp | grep 8080**
 
 # Domanda 9 (file search)
 
 9) “How do you search for a file named config.yaml in the entire filesystem?”
 
-- find / -name "config.yaml"
+- **find / -name "config.yaml"**
 
 # Domanda 10 (log)
 
 10) “How do you follow a log file in real time?”
 
-“I use tail -f <logfile> to follow logs in real time.”
+“I use **tail -f nomeLogfile** to follow logs in real time.”
 
 Se vuoi essere top:
 
-“For systemd services I also use journalctl -u <service> -f.”
+“For systemd services I also use **journalctl -u nomeService -f**”
 
 # Domanda 13 (SSH)
 
@@ -136,39 +136,39 @@ richiede user, host e path remoto
 
 💬 Risposta corretta e da colloquio
 
-“I use scp localfile user@server:/path to transfer files to a remote machine.”
+“I use **scp localfile user@server:/path** to transfer files to a remote machine.”
 
 
 # Domanda 15 (tar / archivi)
 
 15) “How do you extract a .tar.gz file in Linux?”
 
-- tar -xvzf archivio.tar.gz
+- **tar -xvzf archivio.tar.gz**
 
 # Domanda 16 (systemd – restart)
 
 16) “How do you restart a systemd service?”
 
-- sudo systemctl restart <service>
+- **sudo systemctl restart nomeService**
 
 
 # Domanda 17 (system logs)
 
 17) “How do you view recent system errors?”
 
-- journalctl -xe
+- **journalctl -xe**
 
 # Domanda 18 (rete – routing)
 
 18) “How do you check the routing table on a Linux machine?”
 
--“ip route gives me all the active routes and the default gateway.”
+-“**ip route** gives me all the active routes and the default gateway.”
 
 # Domanda 19 (grep)
 
 19) “How do you search for a keyword inside all files in a directory?”
 
-- grep -R "keyword" /path
+- **grep -R "keyword" /path**
 
 -R = ricorsivo → entra nelle cartelle
 
