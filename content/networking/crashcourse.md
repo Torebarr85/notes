@@ -1,6 +1,5 @@
 +++
-title = "Networking: Beginner Crash Course
-"
+title = "Beginner Crash Course"
 date = 2025-11-23
 draft = false
 tags = ["networking"]
