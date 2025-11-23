@@ -39,7 +39,7 @@ Ogni VM ha:
 È il software che crea e gestisce le VM macchine virtuali.
 - L’hypervisor crea le VM.
 - Permette di ospitare diversi virtual computer su un fisico computer. 
-![alt text](./attachments/hypervisor.png)
+![alt text](../attachments/hypervisor.png)
 
 ***TYPE 1 hypervisor***
 esempio: VMWare

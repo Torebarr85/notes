@@ -9,7 +9,7 @@ tags = ["kubernetes"]
 # Kubernetes
 
 **Cluster**
-![alt text](./attachments/cluster.jpeg)
+![alt text](../attachments/cluster.jpeg)
 - Cluster = l’intero datacenter Kubernetes
 - Cos’è il cluster EKS:  composto da Control plane + Worker nodes
 
@@ -45,10 +45,10 @@ kubectl get pods -n <ns>
 kubectl get all -n <ns>
 
 **Deployment**
-![alt text](attachments/deployaml.jpeg)
+![alt text](../attachments/deployaml.jpeg)
 
 **Service**
-![alt text](attachments/serviceyaml.jpeg)
+![alt text](../attachments/serviceyaml.jpeg)
 
 
 **Worker Node**

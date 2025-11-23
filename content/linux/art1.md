@@ -29,7 +29,7 @@ tags = ["linux"]
 - -c the count of ...
 - find . -name "*.log" -mtime -1
 - trova nella cartella attuale i file .log che sono stati modificati nell'ultimo giorno
-![alt text](attachments/commands-log-11.png)
+![alt text](../attachments/commands-log-11.png)
 
 - create a SHELL SCRIPT = just a file.sh with linux commands
 - chmod +x file.sh

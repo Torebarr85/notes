@@ -28,13 +28,13 @@ puoi fare routing e bilanciamento
     - while the cloud load balancer (AWS ELB) is accessibile from public.
     - super security! so the cluster is never directly exposed to public access
         
-![alt text](attachments/elbnginx.png)
+![alt text](../attachments/elbnginx.png)
 
 **NGINX VS APACHE web server**
 
 are pretty much the same thing. 
 
-![alt text](attachments/nginxvsapache.png)
+![alt text](../attachments/nginxvsapache.png)
 
 
 

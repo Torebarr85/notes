@@ -23,12 +23,12 @@ He does it all. give ip addresses to our devices in our network and could help u
 
 - default gateway aka router aka default router 192.168.1.1
 - router (by DHCP) gives your devices an IP address
-![alt text](attachments/network_portion.png)
+![alt text](../attachments/network_portion.png)
 - device is a HOST
 - host number can change. but the network portion don't
   
-![alt text](attachments/subnets.png)
-![alt text](attachments/_.png)
+![alt text](../attachments/subnets.png)
+![alt text](../attachments/_.png)
 
 - if my computer wants to call netflix (another ip address not in his neighborhood) needs "ups" aka default gateway aka router. he knows everything related others ip address.
 
@@ -109,12 +109,12 @@ Indirizzi totali = 2host bits
 Usabili = totali − 2
 
 **Trucco calcolo quanti subnet usabili ho**
-![alt text](attachments/trucco-calcolo-hosts.png) 
+![alt text](../attachments/trucco-calcolo-hosts.png) 
 
 
 
 Esempio visivo
-![alt text](attachments/esempio.png) 
+![alt text](../attachments/esempio.png) 
 Subnet: 192.168.1.0/24 ↔ maschera 255.255.255.0
 Chiave pratica:
 
