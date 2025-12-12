@@ -8,8 +8,8 @@ tags = ["kubernetes"]
 # Networking e le porte in Kubernetes. 
 
 Hai questo scenario:
-
-yaml# Pod con container
+```yaml
+# Pod con container
 apiVersion: v1
 kind: Pod
 metadata:
@@ -53,12 +53,14 @@ spec:
             port:
               number: 80
 
+```
 
 Domande:
 
-L'applicazione nel container ascolta sulla porta 8080. Perché nel Service c'è port: 80 e targetPort: 8080? Qual è la differenza?
-Un altro Pod nello stesso namespace vuole chiamare questo servizio. Su quale porta fa la richiesta?
-Un utente esterno visita http://myapp.example.com. Traccia il flusso completo con tutte le porte coinvolte.
+- L'applicazione nel container ascolta sulla porta 8080. 
+- Perché nel Service c'è port: 80 e targetPort: 8080? Qual è la differenza? 
+- Un altro Pod nello stesso namespace vuole chiamare questo servizio. Su quale porta fa la richiesta? -> <serviceName>:80
+- Un utente esterno visita http://myapp.example.com. Traccia il flusso completo con tutte le porte coinvolte.
 ---
 
 **1. port vs targetPort ✅ CORRETTO**
@@ -307,8 +309,9 @@ Ingress Controller Pod (nginx) :80
 **Dettaglio tecnico:**
 L'Ingress Controller è esposto tramite un Service di tipo **LoadBalancer** o **NodePort**, così il LoadBalancer AWS sa dove inoltrare.
 
-```yaml
+
 # Service dell'Ingress Controller
+```yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -335,8 +338,9 @@ Host: myapp.example.com
 2. Cerca tra tutte le **Ingress resources** del cluster
 3. Trova la regola che matcha `myapp.example.com`
 
-```yaml
+
 # Ingress resource (configurazione)
+```yaml
 rules:
 - host: myapp.example.com    # ← Matcha questo!
   http:
