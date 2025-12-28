@@ -77,12 +77,13 @@ kubectl apply -f nginx.yaml
 # Interacting with PODs
 
 - more info on pods like ip-address, node...
-```
+```bash
 kubectl get pods -o wide
 
 kubectl exec -it nginx-tore -- /bin/bash
 
-dentro al pod puoi vedere che OS sta usando:
+-- dentro al pod puoi vedere che OS sta usando:
+
 cat /etc/os-release 
 
 ```

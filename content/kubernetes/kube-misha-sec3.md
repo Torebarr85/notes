@@ -10,7 +10,7 @@ tags = ["kubernetes"]
 # DEPLOYMENTS 
 
 
-```
+```bash
 kubectl create deployment -h | less
 
 kubectl create deploy test --image=httpd --replicas=3
@@ -23,16 +23,17 @@ test   3/3     3            3           52s
 kubectl describe deployments.apps <nomeDeployment>
 
 kubectl delete deployments.apps <nomeDeployment>
-and all the 3 pods will vanish immediately! 
+
 ```
 
+and all the 3 pods will vanish immediately! 
 
 ovviamente tutto sarà automatizzato non dobbiamo fare a mano
 coome possiamo fare in code questo?
 
 ### creaimo yaml senza applicarlo quindi usando dry run client e -o yaml per visualizzarlo
 
-```
+```bash
 ~> kubectl create deploy test2 --image=httpd --replicas=10 --dry-run=client -o yaml > deploytest.yaml
 
 
@@ -85,7 +86,7 @@ test2   10/10   10           10          48s
 - sotto il cofano il deployments non serve a creare i pods realmente ma a creare/controllare i replicaset object.
 infatti se facciamo get replicaset vedremo che nel cluster ora c'è un replicaset creato:
 
-```
+```bash
 ~> kubectl get replicasets.apps 
 NAME               DESIRED   CURRENT   READY   AGE
 test2-858c9c4dbf   10        10        10      2m54s
@@ -110,7 +111,7 @@ se un pod va in errore k8s capisce che non deve fare rolling anche degli altri.
 - logical grouping
 - name unique
 - 
-```
+```bash
 ~> kubectl get namespaces
 NAME              STATUS   AGE
 default           Active   2d9h
@@ -125,7 +126,7 @@ kubectl apply -f namespace pippo
 se non diamo indicazioni dove creo il pod lo mette nel default-namespace, diversamente aggiungiamo --namespace oppure -n ed il <nomeNamespace>
  
 per mettere default namespace pippo:
-```
+```bash
 kubectl config set-context --current --namespace=pippo
 ```
 
@@ -187,6 +188,8 @@ spec:
     ports:
     - containerPort: 9000  # porta su cui risponde il container
 ```
+
+![alt text](../attachments/mealie-deploy.jpeg)
 
 **Perché 9000?** È la porta dove Mealie ascolta le richieste HTTP.
 
