@@ -50,21 +50,136 @@ non posso preoccuparmi di quale pod riceverà la request, ma il service riceve e
 quindi punteremo l'app al service e il service will handle it
 ## why whe need  service?
 - pods are ephemeral. because they update and scaling
-
-### il comando per generare service è expose:
+- 
+## Perché servono?
+- I pod hanno IP dinamici (muoiono/ripartono)
+- Un Service fornisce un IP stabile
+- Fa load balancing tra i pod
+- 
+### il comando per generare rapidamente service è expose oppure meglio service.yaml:
 
 ```bash
-kubectl get service
-kubectl expose -h | less
+cat deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mealie
+  name: mealie
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mealie
+  template:
+    metadata:
+      labels:
+        app: mealie
+    spec:
+      containers:
+        - image: ghcr.io/mealie-recipes/mealie:v3.8.0
+          name: mealie
+        
+kubectl config set-context --current --namespace=mealie
+Context "rancher-desktop" modified.
 
-kubectl expose deployment pippo --port 8080
-service/pippo exposed
+kubectl apply -f  deployment.yaml 
+deployment.apps/mealie created
+
+
+## Creare un Service
+
+### Metodo rapido (imperativo)
+kubectl expose deployment mealie --port 9000
+service/mealie exposed
+
+kubectl get service
+NAME     TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)    AGE
+mealie   ClusterIP   10.43.160.246   <none>        9000/TCP   14s
+
+
+### Metodo dichiarativo (consigliato) 
+kubectl get service mealie -o yaml > service.yaml
+
+cat service.yaml 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2025-12-28T20:47:40Z"
+  labels:
+    app: mealie
+  name: mealie
+  namespace: mealie
+  resourceVersion: "16996"
+  uid: 0af9bcab-2fac-4459-8df1-c3d163e981cb
+spec:
+  clusterIP: 10.43.160.246
+  clusterIPs:
+  - 10.43.160.246
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - port: 9000
+    protocol: TCP
+    targetPort: 9000
+  selector:
+    app: mealie
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}
+
 
 ```
+recap possiamo expose il deployment tramite service
+perché se expose il pod e poi kill the pod (is ephemeral) you lost connection
 
-- ## ClusterIP
-  - the default 
-- ## NodePort
-  - expose a port on each node allowing direct access to the service through any node's IP address
-- ## Load Balancer
-  - used for cloud providers. to route traffic into the cluster. (can also use it in k3s/rancher-desktop)
+MA in questo modo in localhost non possiamo vederlo, per fare test locali possiamo fare il solito port forward:
+```bash
+kubectl port-forward services/mealie  9000
+Forwarding from 127.0.0.1:9000 -> 9000
+Forwarding from [::1]:9000 -> 9000
+Handling connection for 9000
+Handling connection for 9000
+Handling connection for 9000
+
+```
+Qual è la differenza tra expose e creare service.yaml?
+
+expose = crea il Service automaticamente
+service.yaml = lo crei tu manualmente (più controllo)
+
+
+## Posso accedere a ClusterIP da localhost?
+
+No, solo con port-forward (temporaneo)
+Per accesso reale usa NodePort o Ingress
+
+
+## Tipi di Service
+
+| Tipo | Visibilità | Quando usarlo |
+|------|-----------|---------------|
+| **ClusterIP** |default | Solo dentro il cluster | Microservizi interni | expose a port on each node allowing direct access to the service through any node's IP address
+| **NodePort** | Porta su ogni nodo | Test locali |
+| **LoadBalancer** | IP pubblico | Cloud (AWS, GCP) used for cloud providers. to route traffic into the cluster. (can also use it in k3s/rancher-desktop)
+
+
+ ## Test del Service
+
+### Da dentro il cluster
+```bash
+kubectl run test --image=curlimages/curl -it --rm -- sh
+curl http://mealie.mealie.svc.cluster.local:9000
+```
+
+### Da localhost (solo per debug)
+```bash
+kubectl port-forward svc/mealie 9000:9000 -n mealie
+# Vai su localhost:9000
+```
+
+**Attenzione**: port-forward NON è una soluzione per produzione!
+
