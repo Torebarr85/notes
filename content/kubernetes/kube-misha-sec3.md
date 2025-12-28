@@ -105,5 +105,154 @@ se un pod va in errore k8s capisce che non deve fare rolling anche degli altri.
 
 
 # Deployments - Namespaces
+
+- Purpose of NAMESPACES: isolating groups of resources within a single cluster
+- logical grouping
+- name unique
+- 
+```
+~> kubectl get namespaces
+NAME              STATUS   AGE
+default           Active   2d9h
+kube-node-lease   Active   2d9h
+kube-public       Active   2d9h
+kube-system       Active   2d9h
+
+~> kubectl get namespace pippo -o yaml --dry-run=client > namespace.yaml
+kubectl apply -f namespace pippo
+```
+
+se non diamo indicazioni dove creo il pod lo mette nel default-namespace, diversamente aggiungiamo --namespace oppure -n ed il <nomeNamespace>
  
+per mettere default namespace pippo:
+```
+kubectl config set-context --current --namespace=pippo
+```
+
 # Deployments - Our First Application
+# Tutorial: Deploy Mealie su Kubernetes (Step by Step)
+
+## Overview
+Deployiamo Mealie (app di ricette) su K8s usando deployment → replicaset → pods.
+
+---
+
+## Step 1: Crea Namespace
+
+```bash
+kubectl create namespace mealie
+```
+
+Verifica:
+```bash
+kubectl get namespaces
+```
+
+---
+
+## Step 2: Genera il Deployment (template)
+
+```bash
+kubectl create deployment mealie \
+  --image=nginx \
+  --dry-run=client -o yaml > deployment.yaml
+```
+
+**Cosa fa**: crea un file YAML senza applicarlo (`--dry-run`).
+
+---
+
+## Step 3: Modifica il Deployment
+
+Apri il file:
+```bash
+vim deployment.yaml
+```
+
+### Cosa modificare:
+
+**a) Aggiungi il namespace**
+```yaml
+metadata:
+  name: mealie
+  namespace: mealie  # <-- aggiungi questa riga
+```
+
+**b) Modifica l'immagine e la porta**
+```yaml
+spec:
+  containers:
+  - name: mealie
+    image: ghcr.io/mealie-recipes/mealie:v1.3.2  # sostituisci nginx con l'immagine vera
+    ports:
+    - containerPort: 9000  # porta su cui risponde il container
+```
+
+**Perché 9000?** È la porta dove Mealie ascolta le richieste HTTP.
+
+---
+
+## Step 4: Applica il Deployment
+
+```bash
+kubectl apply -f deployment.yaml
+```
+
+Verifica che il pod sia running:
+```bash
+kubectl get pods -n mealie -o wide
+```
+
+Output atteso:
+```
+NAME                      READY   STATUS    IP
+mealie-1c23b45678-abcd    1/1     Running   10.244.1.5
+```
+
+---
+
+## Step 5: Testa con Port-Forward (solo per debug locale)
+
+```bash
+kubectl port-forward pods/mealie-1c23b45678-abcd 9000:9000 -n mealie
+```
+
+**Importante**: il terminale deve rimanere aperto!
+
+Ora vai su **localhost:9000** nel browser → vedi l'app Mealie.
+
+### Quando usare port-forward?
+- ✅ Test rapidi in locale
+- ❌ NON per produzione (usa Service + Ingress)
+
+---
+
+## Prossimi passi (non in questo tutorial)
+
+1. **Creare un Service**: espone il pod stabilmente
+2. **Configurare Ingress**: rende l'app accessibile da fuori del cluster
+3. **Persistent Volume**: salva i dati anche se il pod si riavvia
+
+---
+
+## Riepilogo comandi
+
+```bash
+# 1. Namespace
+kubectl create namespace mealie
+
+# 2. Template deployment
+kubectl create deployment mealie --image=nginx --dry-run=client -o yaml > deployment.yaml
+
+# 3. Edita e applica
+vim deployment.yaml
+kubectl apply -f deployment.yaml
+
+# 4. Verifica
+kubectl get pods -n mealie -o wide
+
+# 5. Test locale
+kubectl port-forward pods/<POD_NAME> 9000:9000 -n mealie
+```
+
+---
