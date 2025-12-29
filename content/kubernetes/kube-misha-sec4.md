@@ -57,6 +57,7 @@ quindi punteremo l'app al service e il service will handle it
 - Fa load balancing tra i pod
 - 
 ### il comando per generare rapidamente service è expose oppure meglio service.yaml:
+ma ricorda: questo è solo per comprende il concetto. non si espone un service  a meno che non sia un database o altri casi particolari si usano gli *INGRESS*
 
 ```bash
 cat deployment.yaml
@@ -181,5 +182,22 @@ kubectl port-forward svc/mealie 9000:9000 -n mealie
 # Vai su localhost:9000
 ```
 
+
+
 **Attenzione**: port-forward NON è una soluzione per produzione!
+
+# INGRESS
+
+Ingress exposes HTTP adn HTTPS routes from outside the cluster
+to service within the cluster.
+
+- se vogliamo esporre l'app per i customer non possiamo fornire ip e porta ma si usa DNS qui entrano in gioco gli ingress
+- 
+### features of ingress:
+**SSL/TLS termination**
+- ovvero puoi avere un SSL certificate running on domain 
+**external URLs**
+**path based routing**
+- esempio puoi avere il path pippo/topolino e topolino porta ad un'altra app ad esempio
+
 
