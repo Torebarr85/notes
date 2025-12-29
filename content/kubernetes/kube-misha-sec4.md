@@ -185,26 +185,102 @@ kubectl port-forward svc/mealie 9000:9000 -n mealie
 
 
 **Attenzione**: port-forward NON è una soluzione per produzione!
-
 # INGRESS
 
-Ingress exposes HTTP adn HTTPS routes from outside the cluster
-to service within the cluster.
+## Cos'è un Ingress?
 
-- se vogliamo esporre l'app per i customer non possiamo fornire ip e porta ma si usa DNS qui entrano in gioco gli ingress
-- 
-### features of ingress:
-**SSL/TLS termination**
-- ovvero puoi avere un SSL certificate running on domain 
-**external URLs**
-**path based routing**
-- esempio puoi avere il path pippo/topolino e topolino porta ad un'altra app ad esempio
+Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster.
 
+**Problema:** Non possiamo dare IP e porta ai customer per accedere all'app.  
+**Soluzione:** Usare un DNS (es. `www.pippo.it`) che punta all'Ingress.
 
-NGINX
-traefik (ingress controller che cè anche in rancherdesktop)
-cilium
-cloud: agicc
+---
 
+## Features principali
 
-DNS provider CLoudflare  www.pippo.it -> k8s load balancer (created by traefik or nginx) 
+- **SSL/TLS termination**: puoi avere un certificato SSL sul dominio
+- **External URLs**: esponi l'app con un URL pubblico
+- **Path-based routing**: 
+  - Esempio: `pippo.it/app1` → Service A
+  - Esempio: `pippo.it/app2` → Service B
+
+---
+
+## Ingress Controllers (scegli uno)
+
+- **NGINX**
+- **Traefik** (incluso in Rancher Desktop)
+- **Cilium**
+- Cloud provider: AWS ALB, GCP Ingress, Azure Application Gateway
+
+---
+
+## Come funziona il flusso
+
+```
+DNS Provider (Cloudflare)
+www.pippo.it
+    ↓
+LoadBalancer (creato da Traefik/NGINX)
+porta 80/443
+    ↓
+Ingress Controller (legge le routing rules)
+    ↓
+Service (ClusterIP)
+    ↓
+Pod1 o Pod2
+```
+
+**In sintesi:** invece di usare IP address, usiamo URL grazie all'Ingress.
+
+> **REMEMBER: URL = INGRESS!**
+
+---
+
+## Verifica Traefik su Rancher Desktop
+
+```bash
+# Vedi tutti i namespace
+kubectl get pods -A
+
+# Cerca il pod traefik in kube-system
+kubectl get pods -n kube-system
+
+# Verifica il Service LoadBalancer
+kubectl get services -n kube-system
+```
+
+**Output atteso:**
+```
+NAME      TYPE           EXTERNAL-IP   PORT(S)
+traefik   LoadBalancer   localhost     80:xxx/TCP,443:xxx/TCP
+```
+
+![Screenshot del Service Traefik](attachments/image.png)
+
+---
+
+## Esempio di configurazione Ingress
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: minimal-ingress
+spec:
+  ingressClassName: nginx  # oppure traefik
+  rules:
+    - host: www.pippo.it 
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: test
+              port:
+                number: 80
+```
+
+**Cosa fa:**
+- Richieste a `www.pippo.it/` → Service `test` porta 80
