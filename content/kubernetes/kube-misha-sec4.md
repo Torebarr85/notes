@@ -182,14 +182,15 @@ kubectl port-forward svc/mealie 9000:9000 -n mealie
 # Vai su localhost:9000
 ```
 
-
-
 **Attenzione**: port-forward NON è una soluzione per produzione!
+
+
 # INGRESS
 
 ## Cos'è un Ingress?
 
 Ingress exposes HTTP and HTTPS routes from outside the cluster to services within the cluster.
+Ingress è una risorsa Kubernetes che permette di esporre applicazioni usando un dominio (FQDN) invece di un IP. Espone route HTTP/HTTPS dall'esterno del cluster verso i servizi interni.
 
 **Problema:** Non possiamo dare IP e porta ai customer per accedere all'app.  
 **Soluzione:** Usare un DNS (es. `www.pippo.it`) che punta all'Ingress.
@@ -198,7 +199,7 @@ Ingress exposes HTTP and HTTPS routes from outside the cluster to services withi
 
 ## Features principali
 
-- **SSL/TLS termination**: puoi avere un certificato SSL sul dominio
+- **SSL/TLS termination**: puoi avere un certificato SSL sul dominio. gestisce i certificati HTTPS
 - **External URLs**: esponi l'app con un URL pubblico
 - **Path-based routing**: 
   - Esempio: `pippo.it/app1` → Service A
@@ -218,15 +219,15 @@ Ingress exposes HTTP and HTTPS routes from outside the cluster to services withi
 ## Come funziona il flusso
 
 ```
-DNS Provider (Cloudflare)
-www.pippo.it
+Browser: inserisci www.pippo.it
     ↓
-LoadBalancer (creato da Traefik/NGINX)
-porta 80/443
+DNS Provider (es. Cloudflare) risolve il dominio in un IP del Load Balancer
+    ↓
+LoadBalancer (creato da Traefik/NGINX) riceve la richiesta su porta 80/443
     ↓
 Ingress Controller (legge le routing rules)
     ↓
-Service (ClusterIP)
+Service (ClusterIP) riceve il traffico dall'Ingress
     ↓
 Pod1 o Pod2
 ```
@@ -284,3 +285,6 @@ spec:
 
 **Cosa fa:**
 - Richieste a `www.pippo.it/` → Service `test` porta 80
+
+
+ 
