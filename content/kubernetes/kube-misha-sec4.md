@@ -201,3 +201,10 @@ to service within the cluster.
 - esempio puoi avere il path pippo/topolino e topolino porta ad un'altra app ad esempio
 
 
+NGINX
+traefik (ingress controller che cè anche in rancherdesktop)
+cilium
+cloud: agicc
+
+
+DNS provider CLoudflare  www.pippo.it -> k8s load balancer (created by traefik or nginx) 
