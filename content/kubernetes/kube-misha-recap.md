@@ -106,6 +106,74 @@ https://mioapp.com/api/     → api-service:8080
 ```
 Un solo dominio, routing intelligente. L'Ingress **usa i service sotto** per raggiungere i pod.
 
+# Endpoint vs URL - La differenza
+
+## Endpoint = Indirizzo di rete (IP:porta)
+
+Un **endpoint** è semplicemente un **indirizzo tecnico** dove raggiungere qualcosa:
+
+```
+10.96.0.1:8080
+192.168.1.50:3000
+my-service:80
+```
+
+È solo **IP + porta** (o nome + porta). Nessuna informazione su "cosa" stai chiedendo.
+
+## URL = Indirizzo semantico completo
+
+Un **URL** ha una **struttura completa**:
+
+```
+https://api.mioapp.com:443/users/123?active=true
+
+protocollo: https
+dominio: api.mioapp.com  
+porta: 443
+path: /users/123
+query: ?active=true
+```
+
+Contiene **informazioni sul cosa stai chiedendo**.
+
+## Esempio pratico concreto
+
+**Service (fornisce endpoint)**:
+```bash
+kubectl get svc api-service
+NAME          TYPE        CLUSTER-IP     PORT
+api-service   ClusterIP   10.96.0.15     8080
+```
+
+Endpoint = `10.96.0.15:8080`
+
+Chiami così (dall'interno del cluster):
+```bash
+curl http://10.96.0.15:8080/users
+```
+
+**Ingress (fornisce URL)**:
+```yaml
+host: api.mioapp.com
+paths:
+  - path: /users
+    service: api-service:8080
+```
+
+URL = `https://api.mioapp.com/users`
+
+Chiami così (dal browser):
+```bash
+curl https://api.mioapp.com/users
+```
+
+## In sintesi
+
+- **Service** ti dà un **endpoint stabile** (IP:porta) per raggiungere i pod
+- **Ingress** ti dà **URL leggibili** (domini+path) che mappano agli endpoint dei service
+
+L'Ingress "traduce" `api.mioapp.com/users` nell'endpoint `api-service:8080` usando le regole di routing.
+
 ## 2. ClusterIP - Quando lo usi
 
 **ClusterIP è una best practice** per comunicazione **interna** tra microservizi!
@@ -136,3 +204,5 @@ Sì, ci sono **due load balancer con scopi diversi**:
 - Esempio: 5 app = 1 LoadBalancer = €
 
 **Best practice cloud**: usa Ingress per HTTP/HTTPS (più economico, più flessibile). Usa Service LoadBalancer solo per protocolli non-HTTP (es. database TCP diretto, se necessario).
+
+
