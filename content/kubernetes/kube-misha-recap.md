@@ -206,3 +206,97 @@ Sì, ci sono **due load balancer con scopi diversi**:
 **Best practice cloud**: usa Ingress per HTTP/HTTPS (più economico, più flessibile). Usa Service LoadBalancer solo per protocolli non-HTTP (es. database TCP diretto, se necessario).
 
 
+
+
+
+# Recap Schematico: Kubernetes Networking
+
+## Struttura Base
+
+```
+POD (effimero)
+├─ Container 1 (porta 80)
+├─ Container 2 (porta 3000)
+└─ IP Pod: 10.1.2.1 (cambia se ricrei il pod)
+```
+
+**Nota**: I pod sono instabili, muoiono e rinascono con IP diversi. Servono i Service.
+
+## Service: 3 Tipi
+
+### 1. ClusterIP (default)
+```
+Service: frontend-service
+├─ Type: ClusterIP
+├─ IP interno: 192.10.8.1
+└─ Raggiungibile: SOLO dentro cluster
+```
+
+**Quando**: microservizi interni (API, DB) che non devono essere esposti fuori.
+
+### 2. LoadBalancer
+```
+Service: frontend-service
+├─ Type: LoadBalancer
+├─ ClusterIP: 192.10.8.1 (rete interna K8s)
+└─ ExternalIP: 52.10.1.1 (rete pubblica)
+```
+
+**CHIAVE**: Ogni Service ha **sempre** un ClusterIP. Il LoadBalancer aggiunge IN PIÙ un ExternalIP.
+
+**Quando**: esporre app singole direttamente (qualsiasi protocollo: HTTP, TCP, UDP).
+
+### 3. NodePort
+```
+Service: frontend-service  
+├─ Type: NodePort
+├─ ClusterIP: 192.10.8.1
+└─ Porta su ogni nodo: 30080
+```
+
+**Quando**: raramente, solo per test locali.
+
+## Flussi Completi
+
+### Flusso INTERNO (pod chiama service)
+```
+Pod A (10.1.1.5)
+  → frontend-service:80 (nome DNS)
+    → Service ClusterIP (192.10.8.1)
+      → Pod B (10.1.2.1:80)
+```
+
+**Nota**: Usa sempre il nome del service, mai gli IP dei pod!
+
+### Flusso ESTERNO con LoadBalancer
+```
+Browser (internet)
+  → 52.10.1.1:80 (ExternalIP pubblico)
+    → LoadBalancer (ponte tra reti)
+      → Service ClusterIP (192.10.8.1)
+        → Pod (10.1.2.1:80)
+```
+
+**Nota**: Il LoadBalancer ascolta su IP pubblico e inoltra alla rete interna cluster.
+
+### Flusso ESTERNO con Ingress
+```
+Browser
+  → https://myfrontend.com (URL)
+    → DNS → 52.10.1.1
+      → Ingress Controller LoadBalancer
+        → Ingress Resource (legge regole: myfrontend.com → frontend-service)
+          → Service ClusterIP (192.10.8.1)
+            → Pod (10.1.2.1:80)
+```
+
+**Nota**: L'Ingress Controller è ANCHE un LoadBalancer, ma fa routing Layer 7 (HTTP). Usa le regole Ingress per decidere quale Service chiamare.
+
+## Differenza LoadBalancer vs Ingress
+
+**LoadBalancer Service**: un IP pubblico per ogni app
+**Ingress**: un solo IP pubblico, routing intelligente per N app
+
+**Esempio cloud**:
+- 5 app con LoadBalancer = 5 IP pubblici = €€€€€
+- 5 app con Ingress = 1 IP pubblico = €
