@@ -20,7 +20,7 @@ PODS:
 ### how pods can connect to all pods on all nodes? 
 
 because of CNI Plugin = Container Networking Interface. k8S Under the hood use CNI.
-![alt text](../attachments/nic.png)
+![alt text](../networking/attachments/nic.png)
 - imagine as the docker container has the physical NIC (network interface card) with a ethernet wire :)  
 (use **ifconfig or ipconfig** to display MAC and other networking informations about your PC or VM)
 
