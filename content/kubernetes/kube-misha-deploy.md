@@ -1,6 +1,6 @@
 
 +++
-title = "Kubernetes: misha CKA - section 3"
+title = "Kubernetes: misha CKA - deployment"
 date = 2025-12-25
 draft = false
 tags = ["kubernetes"]

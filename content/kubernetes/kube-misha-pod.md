@@ -1,6 +1,6 @@
 
 +++
-title = "Kubernetes: misha CKA - section 2"
+title = "Kubernetes: misha CKA - POD"
 date = 2025-12-24
 draft = false
 tags = ["kubernetes"]
@@ -14,9 +14,12 @@ infact if you launch "docker run -it ubuntu" it will start a container like dock
 
 # POD - introduction
 
-```
+```bash
+# vedi il context:
 kubectl config current-context
+# setta il context:
 kubectl config use-context rancher-desktop
+# verifica cosa ha creato rancher desktop:
 cd .kube
 cat config
 
@@ -29,7 +32,7 @@ kubectl get pods -o wide
 
 
 - is the smallest element on a k8s cluster
-- pod of whales 
+- pod of whales (branco di balene) logo docker balena
 - pod is not a container!
 - pod is a collection of container + other resources
 - pod contains: networking and storage
@@ -47,7 +50,8 @@ api server dice allo scheduler di schedulare il pod
 evertything is a yaml obejct (technically a json object)
 
 ### how too see the yaml definition of a pod manifest:
-```
+
+```bash
 kubectl get pod <nomepod> -o yaml | less
 
 ```
@@ -55,13 +59,13 @@ kubectl get pod <nomepod> -o yaml | less
 con dry-run=client genera solo lo yaml minimo senza far nessuna azione.
 con dry-run=server genera yaml + apply to a k8s cluster e poi verrà delete afterwards = ottimo per test 
 
-```
+```bash
 kubectl run nginx-tore-yaml-ex --image=nginx --dry-run=client -o yaml
 ```
 
 - PS se vuoi fare redirect direttamente su un file fai: > nomefile.yaml)cosi puoi fare vim nginx.yaml ed editarlo ed hai già indentazione fatta bene:
   
-```
+```bash
 kubectl run nginx-tore-yaml-ex --image=nginx --dry-run=client -o yaml > nginx.yaml 
 
 kubectl apply -f nginx.yaml
