@@ -257,7 +257,7 @@ NAME      TYPE           EXTERNAL-IP   PORT(S)
 traefik   LoadBalancer   localhost     80:xxx/TCP,443:xxx/TCP
 ```
 
-![Screenshot del Service Traefik](attachments/image.png)
+![Screenshot del Service Traefik](./attachments/traefik.png)
 
 ---
 
