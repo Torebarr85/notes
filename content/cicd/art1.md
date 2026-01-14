@@ -136,6 +136,54 @@ spec:
 | **GitHub Actions** | Integrato GitHub, marketplace | Devi usare GitHub |
 
  
+
+## OLD STYLE Flusso CI/CD dove lavoro ora
+
+ ```bash
+┌─────────────────────────────────────────────────────────────┐
+│  DEVELOPER                                                  │
+│  git commit + push                                          │
+└────────────────┬────────────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────────────┐
+│  JENKINS PIPELINE (tutto in uno)                            │
+├─────────────────────────────────────────────────────────────┤
+│  1. Build Code                                              │
+│  2. Lint (Helm, Docker, K8s manifests)                      │
+│  3. Build Docker Image                                      │
+│  4. Sysdig Scan                                             │
+│  5. Push → Registry Aziendale                               │
+│     │                                                       │
+│     ▼                                                       │
+│  6. helm upgrade --set image.tag=X                          │
+│     └─→ kubectl apply (via Helm)                            │
+│                                                             │
+│  7. ⏸️  STOP → Approve manuale                              │
+│                                                             │
+│  8. Deploy Production                                       │
+└────────────────┬────────────────────────────────────────────┘
+                 │
+                 ▼
+┌─────────────────────────────────────────────────────────────┐
+│  KUBERNETES CLUSTER                                         │
+│  - Namespace: svts / collaudo / production                  │
+│  - Pods in esecuzione                                       │
+│  - Jenkins NON sa se sono healthy                           │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### In sintesi: Jenkins fa tutto: CI + CD insieme
+Repo unico con:
+
+Codice sorgente
+- Dockerfile
+- Helm charts (values-svts, values-collaudo, values-production)
+- Script di build
+
+Problema chiave: Dopo helm upgrade, Jenkins non monitora lo stato reale dei pod
  
  
+
+
  
