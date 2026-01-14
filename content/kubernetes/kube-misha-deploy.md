@@ -258,4 +258,45 @@ kubectl get pods -n mealie -o wide
 kubectl port-forward pods/<POD_NAME> 9000:9000 -n mealie
 ```
 
+
+
 ---
+
+## port-forward su Service
+
+Dopo che hai creato service: 
+
+```bash
+# 6. Test Service 
+kubectl port-forward services/<POD_NAME> 9000 -n mealie
+
+```
+
+### Cosa sta succedendo
+
+Stai creando un tunnel tra il tuo localhost e il Service dentro Kubernetes:
+```bash
+Tuo browser (localhost:9000)
+          ↓
+    kubectl port-forward (tunnel)
+          ↓
+Service mealie (porta del cluster)
+          ↓
+Pod mealie (porta 9000 del container)
+```
+
+### In dettaglio
+
+127.0.0.1:9000 → porta sul tuo laptop
+services/mealie → il Service Kubernetes che punta al pod
+→ 9000 → porta del container nel pod
+
+Quindi: apri http://localhost:9000 nel browser → kubectl inoltra la richiesta al Service → il Service la manda al pod.
+Importante
+Questo è solo per sviluppo/debug locale. Non espone nulla all'esterno del tuo laptop. Se vuoi accesso dall'esterno servono:
+
+NodePort - espone su porta fisica del nodo
+LoadBalancer - espone tramite load balancer esterno
+Ingress - espone tramite reverse proxy (nginx, traefik)
+
+Il port-forward è comodo per testare velocemente senza configurare nulla, ma chiudi il terminale e smette di funzionare.
