@@ -13,17 +13,43 @@ tags = ["cicd","argocd","helm"]
 * Con YAML plain otterresti lo stesso risultato, ma **meno aderente alla realtà**.
 
 
+Workflow reale CI/CD + GitOps:
+```
+1. Dev modifica app/index.html
+2. Commit + push su GitHub (branch main)
+3. GitHub Actions trigger:
+   - Build Docker image
+   - Tag: my-cats-app:SHA_COMMIT o my-cats-app:v1.2.3
+   - Push su Docker Hub/Registry
+   - Modifica values.yaml con nuovo tag
+   - Commit automatico values.yaml
+4. ArgoCD rileva cambio in values.yaml
+5. ArgoCD fa helm upgrade automatico
+
+Componenti da configurare:
+CI (GitHub Actions):
+
+.github/workflows/ci.yaml
+Build + push immagine
+Update values.yaml (con nuovo tag)
+
+GitOps (ArgoCD):
+
+Watcha la cartella helm-chart/
+Sync automatico quando cambia values.yaml
+```
+
 
 # A. Setup Base ArgoCD su Rancher Desktop
 
-## **1. Verifica ambiente**
+## **Verifica ambiente**
 ```bash
 kubectl cluster-info          # Verifica cluster attivo
 helm version                  # Controlla Helm installato
 kubectl get nodes             # Stato nodi K8s
 ```
 
-## **2. Struttura progetto**
+## **Struttura progetto**
 ```bash
 ├── app/
 │   └── index.html          # Il tuo "hello world"
@@ -40,14 +66,14 @@ kubectl get nodes             # Stato nodi K8s
 
 ```
 
-## **3. Namespace**
+## **Namespace**
 ```bash
 kubectl create namespace my-gitops-demo --dry-run=client -o yaml > infra/namespaces/my-gitops-demo.yaml
 kubectl create namespace argocd --dry-run=client -o yaml > infra/namespaces/argocd.yaml
 kubectl apply -f infra/namespaces/    # Crea i namespace
 ```
 
-## **4. Installazione ArgoCD**
+## **Installazione ArgoCD**
 ```bash
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 kubectl get pods -n argocd             # Verifica pod running  
@@ -67,7 +93,6 @@ pwd: pwd decoded
 ## 
 
 
-
 ---
 # B Creiamo l'applicazione + Dockerfile e Build Immagine Custom
 
@@ -84,7 +109,7 @@ pwd: pwd decoded
 
 ### containerizziamola:
 
-## **8. Creazione Dockerfile**
+## **Creazione Dockerfile**
 File `docker/Dockerfile`:
 ```dockerfile
 FROM nginx:alpine
@@ -92,21 +117,13 @@ COPY ../app/index.html /usr/share/nginx/html/
 EXPOSE 80
 ```
 
-## **9. Build immagine locale**
+## **Build immagine locale**
 ```bash
 docker build -t my-gitops-app:v1.0 -f docker/Dockerfile .  # Build immagine con tag v1.0
 docker images | grep my-gitops-app                          # Verifica immagine creata
 ```
 
-# Spiegazione comando
-
-```bash
-docker build -t my-gitops-app:v1.0 -f docker/Dockerfile .
-```
-
 --- 
-
-
 
 
 # C: Creazione Helm Chart
@@ -141,21 +158,21 @@ K8s usa l'immagine dalla cache locale di Docker invece di cercarla su registry r
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "helm-chart.fullname" . }}
+  name: my-cats-app
   labels:
-    {{- include "helm-chart.labels" . | nindent 4 }}
+    app: my-cats-app
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "helm-chart.selectorLabels" . | nindent 6 }}
+      app: my-cats-app
   template:
     metadata:
       labels:
-        {{- include "helm-chart.labels" . | nindent 8 }}
+        app: my-cats-app
     spec:
       containers:
-        - name: {{ .Chart.Name }}
+        - name: my-cats-app
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           ports:
@@ -166,18 +183,22 @@ spec:
 
 ## service: aggiunta nodePort
 ```yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-cats-app
+  labels:
+    app: my-cats-app
 spec:
   type: {{ .Values.service.type }}
   ports:
     - port: {{ .Values.service.port }}
-      targetPort: http
+      targetPort: 80
       protocol: TCP
       name: http
-      {{- if eq .Values.service.type "NodePort" }}
       nodePort: {{ .Values.service.nodePort }}
-      {{- end }}
   selector:
-    {{- include "helm-chart.selectorLabels" . | nindent 4 }}
+    app: my-cats-app
 ```
 ---
 
