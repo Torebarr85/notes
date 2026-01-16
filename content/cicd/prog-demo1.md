@@ -1,10 +1,11 @@
 
 +++
-title = "Progetto Demo CI/CD + GitOps + helm"
+title = "Progetto Demo CI/CD + GitOps + helm part 1"
 date = 2026-01-15
 draft = false
 tags = ["cicd","argocd","helm"]
 +++
+# Parte 1 goal: Setup Base ArgoCD + helm su Rancher Desktop + DEPLOY IMG DOCKER su K8S con HELM
 
 * Se l’obiettivo è imparare **GitOps in modo realistico**, usare Helm ha senso.
 * **ArgoCD supporta Helm nativamente**, senza workaround.
@@ -13,34 +14,6 @@ tags = ["cicd","argocd","helm"]
 * Con YAML plain otterresti lo stesso risultato, ma **meno aderente alla realtà**.
 
 
-Workflow reale CI/CD + GitOps:
-```
-1. Dev modifica app/index.html
-2. Commit + push su GitHub (branch main)
-3. GitHub Actions trigger:
-   - Build Docker image
-   - Tag: my-cats-app:SHA_COMMIT o my-cats-app:v1.2.3
-   - Push su Docker Hub/Registry
-   - Modifica values.yaml con nuovo tag
-   - Commit automatico values.yaml
-4. ArgoCD rileva cambio in values.yaml
-5. ArgoCD fa helm upgrade automatico
-
-Componenti da configurare:
-CI (GitHub Actions):
-
-.github/workflows/ci.yaml
-Build + push immagine
-Update values.yaml (con nuovo tag)
-
-GitOps (ArgoCD):
-
-Watcha la cartella helm-chart/
-Sync automatico quando cambia values.yaml
-```
-
-
-# A. Setup Base ArgoCD su Rancher Desktop
 
 ## **Verifica ambiente**
 ```bash
@@ -94,7 +67,7 @@ pwd: pwd decoded
 
 
 ---
-# B Creiamo l'applicazione + Dockerfile e Build Immagine Custom
+# Creiamo l'applicazione + Dockerfile e Build Immagine Custom
 
 ### creare Il file app/index.html (la nostra app)
 ```html
@@ -126,9 +99,9 @@ docker images | grep my-gitops-app                          # Verifica immagine 
 --- 
 
 
-# C: Creazione Helm Chart
+# Creazione Helm Chart
 
-## **6. Setup Helm chart**
+## **Setup Helm chart**
 ```bash
 helm create helm-chart                # Genera struttura chart
 cd helm-chart/templates/
@@ -136,7 +109,7 @@ rm -f ingress.yaml hpa.yaml serviceaccount.yaml httproute.yaml  # Rimuove file i
 rm -rf tests/
 ```
 
-## **7. Configurazione minimal per immagine locale***
+## **Configurazione minimal per immagine locale***
 modifica `values.yaml` con:
 ```yaml
 replicaCount: 1
@@ -205,14 +178,14 @@ spec:
 
 
 
-# D Test deploy manuale**
+# Test deploy manuale**
 ```bash
 helm install my-app ./helm-chart --namespace my-gitops-demo  # Installa chart
 kubectl get pods -n my-gitops-demo                           # Verifica pod running
 kubectl get svc -n my-gitops-demo                            # Verifica service NodePort
 ```
 
-## **14. Verifica applicazione**
+## **Verifica applicazione**
 Browser: `http://localhost:30080` → Deve mostrare "Hello GitOps! v1.0"
 
 ---
