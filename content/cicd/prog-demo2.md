@@ -277,6 +277,5 @@ git push origin main
 - Dovresti vedere la pipeline partire
 - **Se completa → su Docker Hub vedrai l'immagine pushata!**
  
-# 3. configurare ArgoCD
 
 

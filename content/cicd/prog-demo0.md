@@ -1,5 +1,5 @@
 +++
-title = "PROGETTO da zero CI/CD + GitOps ArgoCD + Helm"
+title = "PROGETTO da zero CI/CD + GitOps ArgoCD + Helm parte 0"
 date = 2026-01-14
 draft = false
 tags = ["cicd"]
@@ -7,13 +7,41 @@ tags = ["cicd"]
 
 # PROGETTO da zero Con ArgoCD + Helm:
 
-**In Sintesi**
-- Helm: "Come" pacchettizzare/installare/upgradare
-- ArgoCD: "Quando" e "automaticamente"
+## **Flusso completo**
 
-ArgoCD usa Helm, non lo sostituisce.
+```
+Modifichi app/index.html
+  ↓ git push
+GitHub Actions builda + pusha immagine
+  ↓ commit automatico values.yaml
+ArgoCD rileva cambio
+  ↓ helm upgrade
+App aggiornata su localhost:30080
+```
 
+---
+ 
 **Analisi:**
+
+# Recap Progetto GitOps Demo
+
+---
+
+## **Componenti**
+
+**1. App:** Frontend HTML statico servito da nginx
+
+**2. Docker:** Immagine custom con app buildabile, pushata su Docker Hub
+
+**3. Helm Chart:** Package K8s con deployment + service NodePort per esporre l'app
+
+**4. GitHub Actions (CI):** Pipeline che builda immagine, genera tag univoco (commit SHA), pusha su Docker Hub, aggiorna `values.yaml` automaticamente
+
+**5. ArgoCD (GitOps):** Watcha il repo GitHub, rileva cambi in `values.yaml`, fa `helm upgrade` automatico nel cluster
+
+**6. Rancher Desktop:** Cluster Kubernetes locale dove gira tutto
+
+---
 
 
 ```bash
@@ -58,3 +86,7 @@ ArgoCD UI → Pods: Degraded ❌
 **ArgoCD:** Dashboard che legge da K8s e mostra lo stato in UI
 
 **Quindi:** K8s monitora, ArgoCD ti fa VEDERE quello che K8s vede.
+
+
+
+ 
