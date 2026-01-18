@@ -1,7 +1,7 @@
 +++
-title = "Kubernetes Networking - Dal Pod all'Ingress"
+title = "Kubernetes Networking - Dal Pod all'Ingress (teory)"
 date = 2026-01-18
-draft = false
+draft = false 
 tags = ["kubernetes","networking","ingress"]
 +++
 
