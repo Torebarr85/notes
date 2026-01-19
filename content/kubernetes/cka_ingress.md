@@ -558,3 +558,172 @@ Service:
 
 
 
+
+
+
+
+# LoadBalancer vs Ingress - Due strade diverse
+
+## Cosa succede con LoadBalancer Service
+
+Quando fai `kubectl expose deploy pippo --type=LoadBalancer`:
+
+1. Kubernetes crea il Service tipo LoadBalancer
+2. **Se sei su cloud** (AWS/GCP/Azure):
+   - Cloud provider crea load balancer esterno
+   - Ti assegna IP pubblico (es. `203.0.113.50`)
+   - **Hai già finito** - l'app è esposta su quell'IP pubblico
+   
+3. **Se sei locale** (minikube/kind):
+   - Rimane in stato "pending" perché non c'è cloud provider
+   - Non ottieni IP esterno
+
+## NON serve Ingress dopo LoadBalancer
+
+Se usi LoadBalancer Service, l'applicazione è **già esposta all'esterno**.
+
+```
+Internet → IP pubblico load balancer (203.0.113.50:80) → direttamente al tuo Service → Pod
+```
+
+Ingress non c'entra niente qui.
+
+## Due approcci alternativi
+
+**Approccio 1: LoadBalancer per ogni app** (semplice ma costoso)
+```
+App1 → LoadBalancer Service → IP pubblico 203.0.113.50
+App2 → LoadBalancer Service → IP pubblico 203.0.113.51  
+App3 → LoadBalancer Service → IP pubblico 203.0.113.52
+```
+
+**Approccio 2: Ingress + 1 solo LoadBalancer** (raccomandato)
+```
+Tutte le app → ClusterIP Service (interno)
+               ↓
+            Ingress (regole routing)
+               ↓
+         Ingress Controller (pod nginx)
+               ↓
+         LoadBalancer Service (1 solo!)
+               ↓
+         IP pubblico unico (203.0.113.50)
+```
+
+## Quando usi cosa
+
+**LoadBalancer diretto:**
+- Test veloce
+- App singola
+- Non ti importa del costo
+- Non serve routing complesso
+
+**Ingress:**
+- Produzione
+- Multiple app
+- Vuoi routing per dominio/path
+- Vuoi risparmiare (1 load balancer invece di 10)
+- Vuoi gestire SSL centralizzato
+
+Quindi: o LoadBalancer **o** Ingress, non entrambi per la stessa app!
+
+ # Setup Standard in Produzione su Cloud
+
+## Pattern raccomandato
+
+**Per le tue applicazioni:**
+- Service tipo **ClusterIP** (quello di default)
+- Non esposti direttamente all'esterno
+
+**Per l'ingresso al cluster:**
+- 1 Ingress Controller (installato una volta)
+- Esposto con LoadBalancer Service
+- Ingress Resources per routing
+
+## Come funziona in pratica
+
+**Step 1: Crei i Service interni**
+```bash
+# Frontend
+kubectl expose deploy frontend --port=80 --type=ClusterIP
+
+# Backend  
+kubectl expose deploy backend --port=8080 --type=ClusterIP
+
+# Database
+kubectl expose deploy database --port=5432 --type=ClusterIP
+```
+
+Questi Service hanno **solo ClusterIP** - non sono raggiungibili da internet.
+
+**Step 2: Installi Ingress Controller** (una volta sola)
+```bash
+kubectl apply -f nginx-ingress-controller.yaml
+```
+
+Questo crea:
+- Pod nginx che fa da Ingress Controller
+- Service tipo **LoadBalancer** per esporre il Controller
+- Cloud provider crea load balancer esterno con IP pubblico
+
+**Step 3: Crei Ingress Resources** (regole di routing)
+```yaml
+# File ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app
+spec:
+  rules:
+  - host: esempio.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: backend
+            port:
+              number: 8080
+```
+
+## Flusso finale
+
+```
+Internet 
+  ↓
+IP pubblico (203.0.113.50) ← Load Balancer AWS
+  ↓
+Ingress Controller (pod nginx)
+  ↓
+Routing basato su path/dominio
+  ↓
+Service ClusterIP (frontend o backend)
+  ↓
+Pod
+```
+
+## Vantaggi
+
+- **1 solo IP pubblico** per tutte le app
+- **1 solo load balancer** da pagare (~$20/mese invece di $200)
+- **Routing flessibile** con domini e path
+- **SSL centralizzato** sul Controller
+
+## Riassunto
+
+**In produzione:**
+- App → ClusterIP Service ✓
+- Ingress Controller → LoadBalancer Service ✓ (1 solo)
+- Regole → Ingress Resources ✓
+
+Database mai esposto - sempre ClusterIP interno.
+
+ 
