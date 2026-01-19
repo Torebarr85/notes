@@ -206,6 +206,67 @@ Cloud Provider → Load Balancer esterno (IP pubblico)
 
 **Nota:** Funziona solo su cloud provider (AWS/GCP/Azure). Su bare-metal/killercoda non disponibile.
 
+
+# LoadBalancer Service - L'ultimo tipo di Service
+
+## Il problema che risolve
+
+**Con NodePort:**
+- Devi usare IP dei nodi: `192.168.1.100:30080`
+- Se il nodo si rompe, quell'IP non funziona più
+- Devi gestire tu il bilanciamento tra i nodi
+- Non hai un singolo punto di ingresso stabile
+
+**In produzione vuoi:**
+- Un IP pubblico fisso (`203.0.113.50`)
+- Alta disponibilità automatica
+- Bilanciamento del carico tra i nodi
+
+## La soluzione: LoadBalancer
+
+Quando crei Service tipo LoadBalancer, Kubernetes chiede al **cloud provider** (AWS, GCP, Azure) di creare un load balancer esterno vero.
+
+**Cosa succede:**
+
+1. Crei Service tipo LoadBalancer
+2. Kubernetes parla con le API del cloud (es. AWS)
+3. AWS crea un Elastic Load Balancer
+4. Ti assegna un IP pubblico fisso (o un hostname)
+5. Il load balancer AWS distribuisce traffico ai tuoi nodi
+
+## Come funziona
+
+```
+Internet → Load Balancer AWS (IP pubblico) → NodePort sui nodi → Service → Pod
+```
+
+**Nota importante**: LoadBalancer **include** anche NodePort e ClusterIP.
+
+È una "cipolla" a strati:
+- LoadBalancer (esterno)
+  - NodePort (sui nodi)
+    - ClusterIP (interno)
+      - Pod
+
+## Limiti
+
+**Problema 1**: funziona **solo su cloud** (AWS, GCP, Azure, DigitalOcean)
+- Su cluster locale (minikube, kind) non hai cloud provider
+- Non crea il load balancer esterno, rimane "pending"
+
+**Problema 2**: **un LoadBalancer per ogni Service**
+- Costi: ogni load balancer AWS costa ~$20/mese
+- Se hai 10 applicazioni = 10 load balancer = $200/mese
+
+**Soluzione in produzione**: usi **1 LoadBalancer per l'Ingress Controller**, poi Ingress gestisce routing interno.
+
+```
+LoadBalancer → Ingress Controller → tanti Service (via regole Ingress)
+```
+
+Così paghi 1 load balancer per tutto il cluster.
+
+
 ---
 
 ## 5. Ingress - Il reverse proxy per HTTP ovvero Routing HTTP/HTTPS
