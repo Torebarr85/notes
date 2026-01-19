@@ -554,13 +554,7 @@ Service:
 
 
 
-
-
-
-
-
-
-
+---------------------------
 
 # LoadBalancer vs Ingress - Due strade diverse
 
@@ -726,4 +720,125 @@ Pod
 
 Database mai esposto - sempre ClusterIP interno.
 
+ 
+
+
+ ----------------------
+
+# TL;DR Recap Tutorial: Networking in Kubernetes
+
+## 1. Service ClusterIP - Stabilità per i Pod
+
+**Problema:** Pod hanno IP che cambiano ad ogni restart.
+
+**Soluzione:** Service con ClusterIP fisso che:
+- Fornisce IP stabile (es. `10.96.5.10`)
+- Load balancing tra repliche
+- DNS interno (`pippo.default.svc.cluster.local`)
+
+**Dietro le quinte:** kube-proxy crea regole iptables che intercettano traffico al ClusterIP e lo redireggono ai pod reali.
+
+**Limite:** Accessibile solo dall'interno del cluster.
+
+---
+
+## 2. NodePort - Primo accesso esterno
+
+**Problema:** ClusterIP non raggiungibile da fuori cluster.
+
+**Soluzione:** NodePort apre porta (30000-32767) su **tutti i nodi fisici**.
+
+**Flusso:**
+```
+Browser → IP_nodo:30080 → ClusterIP:8080 → Pod:80
+```
+
+**Include:** ClusterIP + porta sui nodi.
+
+**Limite:** Porte brutte, solo per test. Non produzione.
+
+---
+
+## 3. Ingress - Routing intelligente HTTP
+
+**Problema:** Con NodePort hai porte strane, nessun routing per dominio/path.
+
+**Soluzione:** Ingress permette:
+```
+esempio.com/      → Service frontend
+esempio.com/api/  → Service backend
+```
+
+**Due componenti:**
+- **Ingress Controller** = pod (nginx) che fa reverse proxy
+- **Ingress Resource** = regole YAML di routing
+
+**Controller:** non serve file, solo **inoltra** richieste ai Service corretti.
+
+**Limite:** Solo HTTP/HTTPS, serve installare Controller.
+
+---
+
+## 4. LoadBalancer - IP pubblico su cloud
+
+**Problema:** NodePort usa IP dei nodi, non stabile.
+
+**Soluzione:** LoadBalancer chiede al cloud provider (AWS/GCP/Azure) di creare load balancer esterno con IP pubblico fisso.
+
+**Include:** LoadBalancer → NodePort → ClusterIP (a cipolla).
+
+**Limite:** 
+- Funziona solo su cloud
+- Costoso se ne usi uno per app
+
+---
+
+## 5. Pattern Produzione Standard
+
+**Setup raccomandato:**
+
+1. **App → ClusterIP Service** (interno)
+```bash
+kubectl expose deploy pippo --port=8080
+```
+
+2. **Ingress Controller → LoadBalancer** (installazione una volta)
+```bash
+kubectl apply -f ingress-nginx-controller.yaml
+```
+→ Crea automaticamente Service LoadBalancer con IP pubblico
+
+3. **Ingress Resources** (regole routing)
+```bash
+kubectl create ingress pippoingress --rule="foo.com/bar=pippo:8080"
+```
+
+**Flusso completo:**
+```
+Internet → IP pubblico (LB) → Ingress Controller → Service ClusterIP → Pod
+```
+
+**Vantaggio:** 1 solo load balancer per tutte le app, routing flessibile, SSL centralizzato.
+
+---
+
+## 6. Flusso Deployment Completo
+
+```
+1. kubectl create deployment pippo --image=nginx
+   → Crea Deployment → ReplicaSet → Pod
+
+2. kubectl expose deploy pippo --port=8080
+   → Service ClusterIP (interno)
+
+3. kubectl apply -f ingress-controller.yaml  
+   → Controller + LoadBalancer automatico
+
+4. kubectl create ingress pippoingress --rule="..."
+   → Regole routing
+
+5. Traffico: Internet → LB → Controller → Service → Pod
+```
+
+---
  
