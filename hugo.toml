@@ -36,8 +36,8 @@ enableRobotsTXT = true
 
 [menu]
   [[menu.main]]
-    name = "AWS"
-    pageRef = "tags/aws"
+    name = "CI/CD"
+    pageRef = "tags/cicd"
     weight = 10
 
   [[menu.main]]
