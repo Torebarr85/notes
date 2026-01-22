@@ -1,7 +1,7 @@
 +++
-title = "Kubernetes Networking - Dal Pod all'Ingress"
+title = "Kubernetes Networking - Dal Pod all'Ingress (teory)"
 date = 2026-01-18
-draft = false
+draft = false 
 tags = ["kubernetes","networking","ingress"]
 +++
 
@@ -49,9 +49,33 @@ spec:
 ```
 
 ### Cosa succede dietro le quinte
-1. Kubernetes crea DNS: `my-app.namespace.svc.cluster.local`
-2. Assegna ClusterIP virtuale: `10.96.5.10`
-3. **kube-proxy** crea regole iptables per distribuire traffico ai pod
+1. Kubernetes crea DNS: `my-app.namespace.svc.cluster.local` = invece di usare IP, puoi chiamare il Service per nome
+2. Assegna ClusterIP virtuale: `10.96.5.10` = rimane uguale anche se i pod dietro cambiano
+3. **kube-proxy** crea regole iptables per distribuire traffico ai pod = **Load balancing** - se hai 3 repliche dello stesso pod, il Service distribuisce le richieste tra tutti e 3
+
+## Come funziona il DNS
+
+Quando crei un Service chiamato `pippo` nel namespace `default`, Kubernetes genera automaticamente questo nome DNS completo:
+
+```
+pippo.default.svc.cluster.local
+```
+
+Spiegazione dei pezzi:
+- `pippo` = nome del Service
+- `default` = namespace dove si trova
+- `svc` = indica che è un Service (abbreviazione di "service")
+- `cluster.local` = dominio del cluster
+
+**Cosa significa in pratica?** Altri pod possono contattare il tuo Service semplicemente usando `pippo` (se sono nello stesso namespace) oppure `pippo.default` (da altri namespace).
+
+## Il ruolo di kube-proxy
+
+Quando crei un Service, il componente **kube-proxy** (che gira su ogni nodo) crea delle **regole iptables**.
+
+**iptables** è un sistema Linux per gestire il traffico di rete. Le regole che crea kube-proxy dicono: "se arriva traffico per IP 10.96.5.10 porta 8080, mandalo a uno di questi pod: 172.17.0.3:80, 172.17.0.4:80, 172.17.0.5:80".
+
+In pratica: kube-proxy **intercetta** il traffico destinato al ClusterIP e lo **redirige** verso uno dei pod reali, facendo load balancing.
 
 ---
 
@@ -111,6 +135,64 @@ Esterno → NodeIP:30080
 - **Interno:** `my-service:3000` o `10.96.x.x:3000`
 - **Esterno:** `node-ip:30500` o `node-dns:30500`
 
+
+# NodePort - Spiegazione Semplice
+
+## Situazione di partenza
+
+Hai un pod con nginx che ascolta sulla porta 80.
+
+Il pod ha IP `172.17.0.5` - ma questo IP funziona **solo dentro il cluster**.
+
+## Cosa fa ClusterIP (tipo Service di default)
+
+Crei un Service ClusterIP:
+- Kubernetes gli assegna IP `10.96.5.10`
+- Questo IP funziona **solo dentro il cluster**
+- Altri pod possono chiamare `10.96.5.10:8080` → arriva al pod porta 80
+
+**Problema**: tu, dal tuo laptop, non puoi raggiungere né `172.17.0.5` né `10.96.5.10` perché sono IP interni al cluster.
+
+## Cosa fa NodePort
+
+Dici a Kubernetes: "voglio accedere a questo Service dall'esterno".
+
+Kubernetes fa questo:
+1. Crea comunque il ClusterIP (10.96.5.10)
+2. **Apre una porta su ogni nodo fisico del cluster** (esempio: porta 30080)
+
+Ora hai questa catena:
+
+```
+Il tuo browser → IP del nodo (192.168.1.100:30080) → Service (10.96.5.10:8080) → Pod (172.17.0.5:80)
+```
+
+## Esempio concreto
+
+Cluster con 3 nodi:
+- Nodo1: `192.168.1.101`
+- Nodo2: `192.168.1.102`
+- Nodo3: `192.168.1.103`
+
+Crei NodePort su porta 30080.
+
+Kubernetes apre porta 30080 su **tutti e 3 i nodi**.
+
+Puoi accedere da:
+- `192.168.1.101:30080` → funziona
+- `192.168.1.102:30080` → funziona
+- `192.168.1.103:30080` → funziona
+
+Tutti e 3 ti portano allo stesso Service, che poi porta al pod.
+
+## La parte chiave
+
+NodePort **non sostituisce** ClusterIP. Lo **estende**.
+
+Prima: solo comunicazione interna
+Dopo: comunicazione interna + porta esposta sui nodi fisici
+
+ 
 ### LoadBalancer
 ```
 Cloud Provider → Load Balancer esterno (IP pubblico)
@@ -124,9 +206,70 @@ Cloud Provider → Load Balancer esterno (IP pubblico)
 
 **Nota:** Funziona solo su cloud provider (AWS/GCP/Azure). Su bare-metal/killercoda non disponibile.
 
+
+# LoadBalancer Service - L'ultimo tipo di Service
+
+## Il problema che risolve
+
+**Con NodePort:**
+- Devi usare IP dei nodi: `192.168.1.100:30080`
+- Se il nodo si rompe, quell'IP non funziona più
+- Devi gestire tu il bilanciamento tra i nodi
+- Non hai un singolo punto di ingresso stabile
+
+**In produzione vuoi:**
+- Un IP pubblico fisso (`203.0.113.50`)
+- Alta disponibilità automatica
+- Bilanciamento del carico tra i nodi
+
+## La soluzione: LoadBalancer
+
+Quando crei Service tipo LoadBalancer, Kubernetes chiede al **cloud provider** (AWS, GCP, Azure) di creare un load balancer esterno vero.
+
+**Cosa succede:**
+
+1. Crei Service tipo LoadBalancer
+2. Kubernetes parla con le API del cloud (es. AWS)
+3. AWS crea un Elastic Load Balancer
+4. Ti assegna un IP pubblico fisso (o un hostname)
+5. Il load balancer AWS distribuisce traffico ai tuoi nodi
+
+## Come funziona
+
+```
+Internet → Load Balancer AWS (IP pubblico) → NodePort sui nodi → Service → Pod
+```
+
+**Nota importante**: LoadBalancer **include** anche NodePort e ClusterIP.
+
+È una "cipolla" a strati:
+- LoadBalancer (esterno)
+  - NodePort (sui nodi)
+    - ClusterIP (interno)
+      - Pod
+
+## Limiti
+
+**Problema 1**: funziona **solo su cloud** (AWS, GCP, Azure, DigitalOcean)
+- Su cluster locale (minikube, kind) non hai cloud provider
+- Non crea il load balancer esterno, rimane "pending"
+
+**Problema 2**: **un LoadBalancer per ogni Service**
+- Costi: ogni load balancer AWS costa ~$20/mese
+- Se hai 10 applicazioni = 10 load balancer = $200/mese
+
+**Soluzione in produzione**: usi **1 LoadBalancer per l'Ingress Controller**, poi Ingress gestisce routing interno.
+
+```
+LoadBalancer → Ingress Controller → tanti Service (via regole Ingress)
+```
+
+Così paghi 1 load balancer per tutto il cluster.
+
+
 ---
 
-## 5. Ingress - Il reverse proxy per HTTP
+## 5. Ingress - Il reverse proxy per HTTP ovvero Routing HTTP/HTTPS
 
 ### Il problema che risolve
 
@@ -134,6 +277,33 @@ Con NodePort hai limitazioni:
 - Ogni Service occupa una porta diversa (30080, 30081, 30082...)
 - Con 50 applicazioni = 50 porte diverse
 - Gli utenti vogliono URL normali: `myapp.com/api`, `myapp.com/frontend`
+
+esempio Hai 3 applicazioni nel cluster:
+- Frontend
+- API Backend  
+- Dashboard admin
+
+Con NodePort dovresti fare:
+- `192.168.1.100:30080` → frontend
+- `192.168.1.100:30081` → backend
+- `192.168.1.100:30082` → dashboard
+
+**Problemi:**
+- Porte brutte da ricordare
+- Non puoi usare domini (esempio.com)
+- Non puoi fare routing per path (`/api`, `/admin`)
+- Nessun SSL/HTTPS centralizzato
+- In produzione vorresti: `esempio.com` → frontend, `esempio.com/api` → backend
+
+## La soluzione: Ingress
+
+Ingress ti permette di dire:
+
+```
+esempio.com/          → Service frontend (porta 80)
+esempio.com/api/      → Service backend (porta 8080)  
+esempio.com/admin/    → Service dashboard (porta 3000)
+```
 
 ### La soluzione
 
@@ -149,13 +319,45 @@ User → http://world.universe.mine:30080/europe
        Pod europe:80
 ```
 
----
+Tutto attraverso **una sola porta** (80 o 443) usando domini e path per instradare.
+
+## Componenti necessari (importante!)
+
+Ingress ha **2 parti**:
+
+1. **Ingress Resource** - file YAML dove scrivi le regole di routing
+2. **Ingress Controller** - pod che legge le regole e fa il lavoro vero (esempio: nginx, traefik)
+
+**Analogia**: Ingress Resource è il "menu del ristorante", Ingress Controller è il "cameriere che porta i piatti".
+
+## Come funziona
+
+1. Installi Ingress Controller (es. nginx) → crea un pod nginx nel cluster
+2. Questo pod nginx è esposto tramite LoadBalancer o NodePort
+3. Crei Ingress Resource con le tue regole
+4. Controller legge le regole e configura nginx automaticamente
+5. Traffico arriva al Controller → lui decide dove mandarlo
+
+**Flusso:**
+```
+Browser → Ingress Controller (nginx pod) → Service corretto → Pod
+```
+
+Il Controller fa da "smistatore intelligente" basandosi su dominio e path.
+
+## Limiti
+
+- Serve installare un Controller (non è incluso di default in tutti i cluster)
+- Funziona solo per HTTP/HTTPS (non per database o altri protocolli)
+- Configurazione più complessa rispetto a NodePort
+
+ ---
 
 ## 6. Ingress Controller vs Ingress Resource
 
 ### CRITICO: Sono DUE cose separate!
 
-#### Ingress Controller
+# Ingress Controller è un pod nginx ma in modalità reverse proxy 
 - È un **pod** (deployment) che gira nel cluster
 - Solitamente è Nginx (ma esistono altri: Traefik, HAProxy, ecc.)
 - Esposto tramite Service **NodePort** o LoadBalancer
@@ -171,8 +373,57 @@ k -n ingress-nginx get svc
 #                                            ↑     ↑
 #                                    porta interna  porta NodePort
 ```
+ ---------------------
+### spiegazione basic: 
+## Nginx in due ruoli diversi
 
-#### Ingress Resource
+**Nginx per app frontend (quello che conosci):**
+- **Problema**: il browser vuole file HTML/CSS/JS
+- **Soluzione**: nginx **serve file statici** dalla cartella `/usr/share/nginx/html`
+- **Ruolo**: web server
+
+**Nginx come Ingress Controller:**
+- **Problema**: devi instradare richieste HTTP a Service diversi in base a dominio/path
+- **Soluzione**: nginx fa da **reverse proxy** 
+- **Ruolo**: router/gateway
+
+## Reverse proxy vs Web server
+
+**Web server** (nginx classico):
+```
+Browser chiede index.html → nginx legge file dal disco → risponde con il file
+```
+
+**Reverse proxy** (Ingress Controller):
+```
+Browser chiede esempio.com/api → nginx **non ha file** → inoltra richiesta a Service backend → risponde con quello che riceve dal Service
+```
+
+## Quindi l'Ingress Controller...
+
+**Non serve file** - fa da "postino intelligente":
+
+1. Riceve richiesta HTTP
+2. Guarda dominio e path
+3. Consulta le regole nell'Ingress Resource
+4. **Inoltra** la richiesta al Service corretto
+5. Restituisce la risposta al browser
+
+## Esempio concreto
+
+```
+esempio.com/         → Controller inoltra a → Service frontend → Pod nginx (questo sì che serve file!)
+esempio.com/api/user → Controller inoltra a → Service backend → Pod con app Python
+```
+
+Il **Controller nginx** non serve niente, solo instrada.
+
+I **pod dietro ai Service** fanno il lavoro vero (servire file, elaborare API, ecc).
+
+ 
+ ---------------------
+
+# Ingress Resource
 - È la **configurazione YAML** che scrivi tu
 - Dice al controller: "per host X e path Y, inoltra al service Z"
 - Viene letta dal controller per configurarsi
@@ -301,3 +552,293 @@ Service:
 - Esterno: `node-ip:30500`
 - Container: porta 80
 
+
+
+---------------------------
+
+# LoadBalancer vs Ingress - Due strade diverse
+
+## Cosa succede con LoadBalancer Service
+
+Quando fai `kubectl expose deploy pippo --type=LoadBalancer`:
+
+1. Kubernetes crea il Service tipo LoadBalancer
+2. **Se sei su cloud** (AWS/GCP/Azure):
+   - Cloud provider crea load balancer esterno
+   - Ti assegna IP pubblico (es. `203.0.113.50`)
+   - **Hai già finito** - l'app è esposta su quell'IP pubblico
+   
+3. **Se sei locale** (minikube/kind):
+   - Rimane in stato "pending" perché non c'è cloud provider
+   - Non ottieni IP esterno
+
+## NON serve Ingress dopo LoadBalancer
+
+Se usi LoadBalancer Service, l'applicazione è **già esposta all'esterno**.
+
+```
+Internet → IP pubblico load balancer (203.0.113.50:80) → direttamente al tuo Service → Pod
+```
+
+Ingress non c'entra niente qui.
+
+## Due approcci alternativi
+
+**Approccio 1: LoadBalancer per ogni app** (semplice ma costoso)
+```
+App1 → LoadBalancer Service → IP pubblico 203.0.113.50
+App2 → LoadBalancer Service → IP pubblico 203.0.113.51  
+App3 → LoadBalancer Service → IP pubblico 203.0.113.52
+```
+
+**Approccio 2: Ingress + 1 solo LoadBalancer** (raccomandato)
+```
+Tutte le app → ClusterIP Service (interno)
+               ↓
+            Ingress (regole routing)
+               ↓
+         Ingress Controller (pod nginx)
+               ↓
+         LoadBalancer Service (1 solo!)
+               ↓
+         IP pubblico unico (203.0.113.50)
+```
+
+## Quando usi cosa
+
+**LoadBalancer diretto:**
+- Test veloce
+- App singola
+- Non ti importa del costo
+- Non serve routing complesso
+
+**Ingress:**
+- Produzione
+- Multiple app
+- Vuoi routing per dominio/path
+- Vuoi risparmiare (1 load balancer invece di 10)
+- Vuoi gestire SSL centralizzato
+
+Quindi: o LoadBalancer **o** Ingress, non entrambi per la stessa app!
+
+ # Setup Standard in Produzione su Cloud
+
+## Pattern raccomandato
+
+**Per le tue applicazioni:**
+- Service tipo **ClusterIP** (quello di default)
+- Non esposti direttamente all'esterno
+
+**Per l'ingresso al cluster:**
+- 1 Ingress Controller (installato una volta)
+- Esposto con LoadBalancer Service
+- Ingress Resources per routing
+
+## Come funziona in pratica
+
+**Step 1: Crei i Service interni**
+```bash
+# Frontend
+kubectl expose deploy frontend --port=80 --type=ClusterIP
+
+# Backend  
+kubectl expose deploy backend --port=8080 --type=ClusterIP
+
+# Database
+kubectl expose deploy database --port=5432 --type=ClusterIP
+```
+
+Questi Service hanno **solo ClusterIP** - non sono raggiungibili da internet.
+
+**Step 2: Installi Ingress Controller** (una volta sola)
+```bash
+kubectl apply -f nginx-ingress-controller.yaml
+```
+
+Questo crea:
+- Pod nginx che fa da Ingress Controller
+- Service tipo **LoadBalancer** per esporre il Controller
+- Cloud provider crea load balancer esterno con IP pubblico
+
+**Step 3: Crei Ingress Resources** (regole di routing)
+```yaml
+# File ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: my-app
+spec:
+  rules:
+  - host: esempio.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+      - path: /api
+        pathType: Prefix
+        backend:
+          service:
+            name: backend
+            port:
+              number: 8080
+```
+
+## Flusso finale
+
+```
+Internet 
+  ↓
+IP pubblico (203.0.113.50) ← Load Balancer AWS
+  ↓
+Ingress Controller (pod nginx)
+  ↓
+Routing basato su path/dominio
+  ↓
+Service ClusterIP (frontend o backend)
+  ↓
+Pod
+```
+
+## Vantaggi
+
+- **1 solo IP pubblico** per tutte le app
+- **1 solo load balancer** da pagare (~$20/mese invece di $200)
+- **Routing flessibile** con domini e path
+- **SSL centralizzato** sul Controller
+
+## Riassunto
+
+**In produzione:**
+- App → ClusterIP Service ✓
+- Ingress Controller → LoadBalancer Service ✓ (1 solo)
+- Regole → Ingress Resources ✓
+
+Database mai esposto - sempre ClusterIP interno.
+
+ 
+
+
+ ----------------------
+
+# TL;DR Recap Tutorial: Networking in Kubernetes
+
+## 1. Service ClusterIP - Stabilità per i Pod
+
+**Problema:** Pod hanno IP che cambiano ad ogni restart.
+
+**Soluzione:** Service con ClusterIP fisso che:
+- Fornisce IP stabile (es. `10.96.5.10`)
+- Load balancing tra repliche
+- DNS interno (`pippo.default.svc.cluster.local`)
+
+**Dietro le quinte:** kube-proxy crea regole iptables che intercettano traffico al ClusterIP e lo redireggono ai pod reali.
+
+**Limite:** Accessibile solo dall'interno del cluster.
+
+---
+
+## 2. NodePort - Primo accesso esterno
+
+**Problema:** ClusterIP non raggiungibile da fuori cluster.
+
+**Soluzione:** NodePort apre porta (30000-32767) su **tutti i nodi fisici**.
+
+**Flusso:**
+```
+Browser → IP_nodo:30080 → ClusterIP:8080 → Pod:80
+```
+
+**Include:** ClusterIP + porta sui nodi.
+
+**Limite:** Porte brutte, solo per test. Non produzione.
+
+---
+
+## 3. Ingress - Routing intelligente HTTP
+
+**Problema:** Con NodePort hai porte strane, nessun routing per dominio/path.
+
+**Soluzione:** Ingress permette:
+```
+esempio.com/      → Service frontend
+esempio.com/api/  → Service backend
+```
+
+**Due componenti:**
+- **Ingress Controller** = pod (nginx) che fa reverse proxy
+- **Ingress Resource** = regole YAML di routing
+
+**Controller:** non serve file, solo **inoltra** richieste ai Service corretti.
+
+**Limite:** Solo HTTP/HTTPS, serve installare Controller.
+
+---
+
+## 4. LoadBalancer - IP pubblico su cloud
+
+**Problema:** NodePort usa IP dei nodi, non stabile.
+
+**Soluzione:** LoadBalancer chiede al cloud provider (AWS/GCP/Azure) di creare load balancer esterno con IP pubblico fisso.
+
+**Include:** LoadBalancer → NodePort → ClusterIP (a cipolla).
+
+**Limite:** 
+- Funziona solo su cloud
+- Costoso se ne usi uno per app
+
+---
+
+## 5. Pattern Produzione Standard
+
+**Setup raccomandato:**
+
+1. **App → ClusterIP Service** (interno)
+```bash
+kubectl expose deploy pippo --port=8080
+```
+
+2. **Ingress Controller → LoadBalancer** (installazione una volta)
+```bash
+kubectl apply -f ingress-nginx-controller.yaml
+```
+→ Crea automaticamente Service LoadBalancer con IP pubblico
+
+3. **Ingress Resources** (regole routing)
+```bash
+kubectl create ingress pippoingress --rule="foo.com/bar=pippo:8080"
+```
+
+**Flusso completo:**
+```
+Internet → IP pubblico (LB) → Ingress Controller → Service ClusterIP → Pod
+```
+
+**Vantaggio:** 1 solo load balancer per tutte le app, routing flessibile, SSL centralizzato.
+
+---
+
+## 6. Flusso Deployment Completo
+
+```
+1. kubectl create deployment pippo --image=nginx
+   → Crea Deployment → ReplicaSet → Pod
+
+2. kubectl expose deploy pippo --port=8080
+   → Service ClusterIP (interno)
+
+3. kubectl apply -f ingress-controller.yaml  
+   → Controller + LoadBalancer automatico
+
+4. kubectl create ingress pippoingress --rule="..."
+   → Regole routing
+
+5. Traffico: Internet → LB → Controller → Service → Pod
+```
+
+---
+ 
