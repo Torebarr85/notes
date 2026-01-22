@@ -51,6 +51,12 @@ enableRobotsTXT = true
     weight = 30
 
   [[menu.main]]
+    name = "CKA"
+    pageRef = "tags/cka"
+    weight = 31
+
+
+  [[menu.main]]
     name = "Linux"
     pageRef = "tags/linux"
     weight = 40
