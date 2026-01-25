@@ -1,5 +1,5 @@
 +++
-title = "Linux: <titolo>"
+title = "struttura file system Linux"
 date = 2025-10-14
 draft = false
 tags = ["linux"]
