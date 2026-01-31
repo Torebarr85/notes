@@ -1,5 +1,5 @@
 +++
-title = "Nginx e Architettura Web"
+title = "Nginx, Architettura Web, web server vs application server"
 date = 2025-10-14
 draft = false
 tags = ["nginx"]
