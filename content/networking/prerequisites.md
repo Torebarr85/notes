@@ -54,11 +54,12 @@ In questo caso, esaminiamo l'interfaccia chiamata `eth0` che useremo per connett
 Assumiamo che sia una rete con indirizzo `192.168.1.0`. Assegniamo quindi ai sistemi degli indirizzi IP sulla stessa rete usando il comando:
 
 ```bash
-ip addr add 192.168.1.10/24 dev eth0  # Host A
+ip addr add 192.168.1.10/24 dev eth0  # Host A # Cosa fa: Dice "questa interfaccia eth0 HA questo indirizzo IP"
 ip addr add 192.168.1.11/24 dev eth0  # Host B
 ```
 
 Una volta che i link sono attivi e gli indirizzi IP sono assegnati, i computer possono ora comunicare tra loro attraverso lo switch.
+ 
 
 ### Limiti dello Switch
 
@@ -123,6 +124,27 @@ Il router è semplicemente un altro dispositivo sulla rete. Potrebbero esserci m
 
 > **Metafora**: Se la rete fosse una stanza, il gateway è la porta verso il mondo esterno, verso le altre reti o verso internet. I sistemi devono sapere dove si trova quella porta per attraversarla.
 
+## Ricapitolo:
+
+**Gateway è un RUOLO, non una proprietà automatica**
+```
+┌──────────────────────────────────────────┐
+│  Assegnare IP con ip addr add            │
+│           ↓                              │
+│  Il computer HA un indirizzo             │
+│           ↓                              │
+│  NON diventa automaticamente gateway     │
+└──────────────────────────────────────────┘
+
+┌──────────────────────────────────────────┐
+│  Per DIVENTARE un gateway serve:         │
+│                                          │
+│  1. Avere 2+ interfacce con IP           │
+│  2. Attivare ip_forward = 1              │
+│  3. Altri host devono CONFIGURARLO       │
+│     nella loro routing table             │
+└──────────────────────────────────────────┘
+```
 ### Visualizzare la Routing Table
 
 Per vedere la configurazione di routing esistente su un sistema, esegui:
@@ -142,12 +164,18 @@ In questa condizione, il tuo sistema B non sarà in grado di raggiungere il sist
 Per configurare un gateway sul sistema B per raggiungere i sistemi sulla rete `192.168.2.0`, esegui:
 
 ```bash
-ip route add 192.168.2.0/24 via 192.168.1.1
+ip route add 192.168.2.0/24 via 192.168.1.1 # Configura una strada verso un'altra rete
+# Cosa fa: Dice "per raggiungere la rete 192.168.2.0, passa dall'indirizzo 192.168.1.6"
+# È come dire: "Per andare a Milano, prendi l'uscita dell'autostrada A1"
+# Effetto: Quando devi mandare un pacchetto a 192.168.2.x, lo mandi prima a 192.168.1.6 (il router)
+
 ```
 
 Questo comando specifica che puoi raggiungere la rete `192.168.2.0` attraverso la "porta" o gateway all'indirizzo `192.168.1.1`.
 
 Eseguendo nuovamente il comando `route`, vedrai che è stata aggiunta una route per raggiungere la rete `192.168.2.0` attraverso il router.
+ 
+
 
 ### Configurazione Bidirezionale
 
