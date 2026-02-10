@@ -331,6 +331,11 @@ Ingress ha **2 parti**:
 **Analogia**: Ingress Resource è il "menu del ristorante", Ingress Controller è il "cameriere che porta i piatti".
 
 ## Come funziona
+Il "doppio ruolo" dell'Ingress Controller
+L'Ingress Controller (es. NGINX) ha bisogno di ricevere traffico dall'esterno per poterlo poi instradare ai tuoi servizi.
+Ma come ci arriva il traffico all'Ingress Controller stesso?
+Tramite un Service. E quel Service è di tipo LoadBalancer.
+
 
 1. Installi Ingress Controller (es. nginx) → crea un pod nginx nel cluster
 2. Questo pod nginx è esposto tramite LoadBalancer o NodePort
@@ -364,7 +369,7 @@ Kubernetes non include un Ingress Controller di default. Devi installarne uno.
 
 1. **Legge gli Ingress** che crei nel cluster
 2. **Configura un reverse proxy** (tipo Nginx) in base alle tue regole
-3. **Espone un servizio** (di solito LoadBalancer o NodePort) che riceve il traffico HTTP/HTTPS dall'esterno
+3. **Espone un service** (di solito LoadBalancer o NodePort) che riceve il traffico HTTP/HTTPS dall'esterno
 4. **Instrada le richieste** ai Service giusti in base a host/path
 
 ```bash
