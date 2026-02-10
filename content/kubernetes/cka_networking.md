@@ -967,236 +967,30 @@ Internet → IP pubblico (LB) → Ingress Controller → Service ClusterIP → P
 
 
 
-## 8. Network Policies - Il Firewall di Kubernetes
+## 8. Network Policies - Il Firewall tra Pod di Kubernetes 
 
-### Il Problema di Sicurezza
+### Il Problema
+Default: tutti i pod si parlano. Se frontend compromesso → accesso diretto al database.
 
-**Di default:** TUTTI i pod possono parlare con TUTTI gli altri pod.
-```
-┌──────────┐     ┌──────────┐     ┌──────────┐
-│ Frontend │────▶│ Backend  │────▶│ Database │
-│          │     │          │     │          │
-└──────────┘     └──────────┘     └──────────┘
-     │                                  ▲
-     └──────────────────────────────────┘
-              PROBLEMA! ❌
-     Frontend può parlare DIRETTAMENTE al DB
-```
-
-Se il frontend viene compromesso, l'attaccante accede al database.
-
-### Network Policy - Regole Firewall per Pod
-
-**Soluzione:** Definire chi può parlare con chi usando label.
+### La Soluzione
+Policy basata su label:
 ```yaml
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-backend-to-db
-  namespace: prod
 spec:
   podSelector:
     matchLabels:
-      app: database  # Applicala ai pod database
-  policyTypes:
-  - Ingress
+      app: database  # Chi proteggere
   ingress:
   - from:
     - podSelector:
         matchLabels:
-          app: backend  # Permetti SOLO da backend
-    ports:
-    - protocol: TCP
-      port: 5432
-```
-
-**Traduzione:** "Database accetta connessioni SOLO da pod con label `app=backend` sulla porta 5432"
-
-### Pattern: Default Deny + Whitelist
-
-**Best practice:** Blocca tutto, poi permetti esplicitamente.
-
-**Step 1: Blocca tutto**
-```yaml
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: default-deny-all
-  namespace: prod
-spec:
-  podSelector: {}  # Tutti i pod
-  policyTypes:
-  - Ingress
-  - Egress
-```
-
-**Step 2: Permetti solo le comunicazioni necessarie**
-```yaml
-# Frontend ← Ingress Controller
-# Backend ← Frontend
-# Database ← Backend
-```
-
-**Risultato finale:**
-```
-Internet → Ingress Controller
-              ↓ ✓ permesso
-          Frontend
-              ↓ ✓ permesso  
-          Backend
-              ↓ ✓ permesso
-          Database
-
-Frontend → Database: ✗ BLOCCATO
-Internet → Backend: ✗ BLOCCATO
-```
-
-### Ingress vs Egress
-
-**Ingress** = traffico IN ENTRATA nel pod
-```yaml
-ingress:
-- from:
-  - podSelector:
-      matchLabels:
-        app: frontend  # Chi può entrare
-```
-
-**Egress** = traffico IN USCITA dal pod
-```yaml
-egress:
-- to:
-  - podSelector:
-      matchLabels:
-        app: database  # Dove può andare
-```
-
-### Prerequisito Importante
-
-**Network Policies NON funzionano con tutti i CNI!**
-
-✅ Supportano Network Policies:
-- Calico
-- Cilium  
-- Weave
-
-❌ NON supporta:
-- Flannel (troppo semplice)
-
-Se installi Flannel, le Network Policies vengono ignorate.
-
-### Test Network Policy
-```bash
-# Crea pod temporaneo per testare
-kubectl run test --image=busybox -it --rm -- sh
-
-# Prova a raggiungere database (dovrebbe fallire se policy funziona)
-wget -O- database:5432
-# Timeout = policy attiva ✓
-```
-
-### Esempio Completo: Applicazione 3-Tier
-```yaml
----
-# 1. Default deny tutto
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: default-deny
-  namespace: prod
-spec:
-  podSelector: {}
-  policyTypes:
-  - Ingress
-  
----
-# 2. Permetti Ingress → Frontend
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-ingress-to-frontend
-  namespace: prod
-spec:
-  podSelector:
-    matchLabels:
-      tier: frontend
-  ingress:
-  - from:
-    - namespaceSelector:
-        matchLabels:
-          name: ingress-nginx
-    ports:
-    - port: 80
-      
----
-# 3. Permetti Frontend → Backend
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-frontend-to-backend
-  namespace: prod
-spec:
-  podSelector:
-    matchLabels:
-      tier: backend
-  ingress:
-  - from:
-    - podSelector:
-        matchLabels:
-          tier: frontend
-    ports:
-    - port: 8080
-      
----
-# 4. Permetti Backend → Database
-apiVersion: networking.k8s.io/v1
-kind: NetworkPolicy
-metadata:
-  name: allow-backend-to-db
-  namespace: prod
-spec:
-  podSelector:
-    matchLabels:
-      tier: database
-  ingress:
-  - from:
-    - podSelector:
-        matchLabels:
-          tier: backend
+          app: backend  # Chi può accedere
     ports:
     - port: 5432
 ```
 
-### Quando Usare Network Policies
+**Pattern:** Default deny (blocca tutto) + whitelist esplicito.
 
-✅ **Sempre in produzione**
-- Compliance (PCI-DSS, HIPAA)
-- Defense in depth
-- Isolare microservizi
+**Prerequisito:** CNI che supporta (Calico ✓, Flannel ✗)
 
-❌ **Non necessario in dev/test**
-- Aggiunge complessità
-- Debugging più difficile
-
-### Network Policy vs Firewall Tradizionale
-
-**Firewall tradizionale:**
-- Basato su IP e porte
-- Configurazione manuale per ogni server
-
-**Network Policy:**
-- Basato su **label** dei pod
-- Automatica: nuovi pod con stessa label = stesse regole
-- Dinamica: pod vengono e vanno, le policy rimangono
-
-**Esempio pratico:**
-
-Scala backend da 2 a 10 repliche:
-```bash
-kubectl scale deploy backend --replicas=10
-```
-
-**Firewall tradizionale:** Devi configurare manualmente 8 nuove regole
-**Network Policy:** Funziona automaticamente (usa le label, non gli IP)
----
+**Quando:** Sempre in produzione per sicurezza e compliance.
  
