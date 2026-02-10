@@ -15,6 +15,7 @@ E se sei su una rete aziendale, la tua richiesta potrebbe essere passata attrave
 Stessa parola, lavori opposti.
 
 ---
+![alt text](./attachments/image.png)
 
 ## La Distinzione Fondamentale
 

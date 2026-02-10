@@ -224,7 +224,7 @@ Browser utente
 [Service + NGINX] ← Gestisce SSL per traffico interno,
                     serve asset statici
 ```
-
+![alt text](./attachments/flusso.png)
 ### Cos'è un CDN in questo contesto?
 
 Un CDN è un **reverse proxy distribuito globalmente**:
@@ -248,7 +248,7 @@ Adatta la tua architettura ai tuoi requisiti reali:
 | API pubblica con sviluppatori esterni e tier di utilizzo | Aggiungi un API gateway |
 
 ---
-
+![alt text](./attachments/differentscenario.png)
 ## Framework decisionale rapido
 
 | Hai bisogno di... | Soluzione |
