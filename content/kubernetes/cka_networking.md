@@ -707,46 +707,63 @@ Internet → IP pubblico load balancer (203.0.113.50:80) → direttamente al tuo
 
 Ingress non c'entra niente qui.
 
-## Due approcci alternativi
 
-**Approccio 1: LoadBalancer per ogni app** (semplice ma costoso)
-```
-App1 → LoadBalancer Service → IP pubblico 203.0.113.50
-App2 → LoadBalancer Service → IP pubblico 203.0.113.51  
-App3 → LoadBalancer Service → IP pubblico 203.0.113.52
-```
+## Due modi per esporre le tue app
 
-**Approccio 2: Ingress + 1 solo LoadBalancer** (raccomandato)
+### Approccio 1: LoadBalancer diretto (per app)
+
+Ogni app ha il suo Service LoadBalancer → ogni app ha il suo IP pubblico.
 ```
-Tutte le app → ClusterIP Service (interno)
-               ↓
-            Ingress (regole routing)
-               ↓
-         Ingress Controller (pod nginx)
-               ↓
-         LoadBalancer Service (1 solo!)
-               ↓
-         IP pubblico unico (203.0.113.50)
+App1 → Service LoadBalancer → IP 203.0.113.50
+App2 → Service LoadBalancer → IP 203.0.113.51
+App3 → Service LoadBalancer → IP 203.0.113.52
 ```
 
-## Quando usi cosa
+**Pro:** Semplice, funziona per qualsiasi protocollo (TCP, UDP, non solo HTTP).
 
-**LoadBalancer diretto:**
-- Test veloce
-- App singola
-- Non ti importa del costo
-- Non serve routing complesso
+**Contro:** Costoso. 10 app = 10 load balancer = ~$200/mese.
 
-**Ingress:**
-- Produzione
-- Multiple app
-- Vuoi routing per dominio/path
-- Vuoi risparmiare (1 load balancer invece di 10)
-- Vuoi gestire SSL centralizzato
+**Quando usarlo:**
+- Protocolli non-HTTP (database, gRPC, game server)
+- Test rapidi
+- App singola che non giustifica setup Ingress
 
-Quindi: o LoadBalancer **o** Ingress, non entrambi per la stessa app!
+---
 
- # Setup Standard in Produzione su Cloud
+### Approccio 2: Ingress (raccomandato per HTTP)
+
+Le app hanno Service ClusterIP (interni). Un solo Ingress Controller 
+(esposto con LoadBalancer) fa da punto di ingresso per tutte.
+```
+App1 → ClusterIP ──┐
+App2 → ClusterIP ──┼→ Ingress Controller → 1 LoadBalancer → 1 IP pubblico
+App3 → ClusterIP ──┘
+```
+
+**Pro:** 1 solo load balancer, routing per dominio/path, SSL centralizzato.
+
+**Contro:** Setup iniziale più complesso, solo HTTP/HTTPS.
+
+**Quando usarlo:**
+- Produzione con multiple app web
+- Vuoi routing tipo `api.esempio.com`, `app.esempio.com`
+- Vuoi risparmiare sui costi
+
+---
+
+### La domanda giusta da farsi
+```
+Non è "LoadBalancer O Ingress?"
+
+È: **"Dove metto il LoadBalancer?"**
+
+- Direttamente sull'app → approccio 1
+- Sull'Ingress Controller → approccio 2
+
+In entrambi i casi, da qualche parte c'è un LoadBalancer. 
+La differenza è quanti ne usi e come fai il routing.
+```
+# Setup Standard in Produzione su Cloud
 
 ## Pattern raccomandato
 
