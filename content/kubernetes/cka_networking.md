@@ -6,6 +6,86 @@ tags = ["kubernetes","networking","ingress"]
 +++
 
 
+## 0. Le Fondamenta - Come Funziona Sotto il Cofano
+
+Prima di vedere Services e Ingress, capiamo come i pod possono parlarsi.
+
+### Ogni Pod = Computer Isolato
+
+Quando Kubernetes crea un pod:
+1. **Crea un network namespace** (bolla di rete isolata)
+2. **Assegna un IP univoco** al pod (es. 10.244.1.5)
+3. **Configura routing** per raggiungere altri pod
+
+Questo lavoro lo fa il **CNI Plugin** (Container Network Interface).
+
+### CNI Plugin - Il Costruttore di Reti
+
+**Ruolo:** Gestisce la connettività base tra pod.
+
+**Cosa fa concretamente quando crei un pod:**
+```bash
+kubectl run nginx --image=nginx
+```
+
+Il CNI (es. Calico, Flannel, Cilium):
+1. Crea namespace di rete isolato per il pod
+2. Crea **veth pair** (cavo virtuale tra pod e nodo)
+3. Assegna IP: `10.244.1.5`
+4. Collega al **bridge** (switch virtuale sul nodo)
+5. Configura routing per altri nodi
+
+**Visualizzazione:**
+```
+┌────────────────────────────────────────┐
+│          Nodo Kubernetes               │
+│                                        │
+│   Pod nginx (namespace isolato)        │
+│   └─ eth0: 10.244.1.5                 │ ← CNI assegna
+│          ↕ (veth pair = cavo)          │ ← CNI crea
+│   cni0 (bridge = switch virtuale)     │ ← CNI gestisce
+│   └─ IP: 10.244.1.1                   │
+│          ↕                             │
+│   eth0 (nodo): 192.168.1.10           │
+└────────────────────────────────────────┘
+```
+
+### Il Bridge - Lo Switch Virtuale
+
+Il **bridge** (`cni0`) è come uno switch fisico, ma software:
+- Collega tutti i pod sullo stesso nodo
+- Permette la comunicazione pod-to-pod locale
+```bash
+# Vedere il bridge sul nodo
+ip link show cni0
+
+# Vedere i veth collegati
+bridge link show
+```
+
+### CNI Popolari
+
+- **Calico:** Networking + Network Policies (il più usato)
+- **Flannel:** Semplice, solo networking base  
+- **Cilium:** Avanzato con eBPF
+- **Weave:** Con encryption
+
+**Prerequisito Kubernetes:** Il CNI deve essere installato prima che i pod possano comunicare.
+
+### CNI vs Kube-Proxy - Ruoli Separati
+
+| Componente | Cosa Fa |
+|------------|---------|
+| **CNI Plugin** | Connettività pod-to-pod diretta |
+| **Kube-Proxy** | Gestisce i Services (load balancing) |
+
+**Importante:** CNI assegna IP ai pod, kube-proxy gestisce i ClusterIP dei Services.
+
+---
+
+**Ora che sai come funziona sotto, vediamo come usare i Services...**
+
+
 # Kubernetes Networking - Dal Pod all'Ingress
 
 ---
@@ -27,6 +107,15 @@ Gli IP dei pod **cambiano continuamente**:
 - Aggiornamenti
 
 **Soluzione:** Non usare direttamente gli IP dei pod → usare i Services
+### Come Funziona Sotto
+
+Quando fai `curl 10.244.2.8:80`, il pacchetto:
+1. Esce dal namespace del pod sorgente
+2. Passa attraverso il **veth pair** (cavo virtuale gestito dal CNI)
+3. Arriva al **bridge cni0** sul nodo
+4. Il bridge lo instrada verso il pod destinazione (stesso nodo) o verso la rete del cluster (altro nodo)
+
+Tutto questo è trasparente grazie al CNI plugin.
 
 ---
 
@@ -876,5 +965,238 @@ Internet → IP pubblico (LB) → Ingress Controller → Service ClusterIP → P
 5. Traffico: Internet → LB → Controller → Service → Pod
 ```
 
+
+
+## 8. Network Policies - Il Firewall di Kubernetes
+
+### Il Problema di Sicurezza
+
+**Di default:** TUTTI i pod possono parlare con TUTTI gli altri pod.
+```
+┌──────────┐     ┌──────────┐     ┌──────────┐
+│ Frontend │────▶│ Backend  │────▶│ Database │
+│          │     │          │     │          │
+└──────────┘     └──────────┘     └──────────┘
+     │                                  ▲
+     └──────────────────────────────────┘
+              PROBLEMA! ❌
+     Frontend può parlare DIRETTAMENTE al DB
+```
+
+Se il frontend viene compromesso, l'attaccante accede al database.
+
+### Network Policy - Regole Firewall per Pod
+
+**Soluzione:** Definire chi può parlare con chi usando label.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backend-to-db
+  namespace: prod
+spec:
+  podSelector:
+    matchLabels:
+      app: database  # Applicala ai pod database
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: backend  # Permetti SOLO da backend
+    ports:
+    - protocol: TCP
+      port: 5432
+```
+
+**Traduzione:** "Database accetta connessioni SOLO da pod con label `app=backend` sulla porta 5432"
+
+### Pattern: Default Deny + Whitelist
+
+**Best practice:** Blocca tutto, poi permetti esplicitamente.
+
+**Step 1: Blocca tutto**
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny-all
+  namespace: prod
+spec:
+  podSelector: {}  # Tutti i pod
+  policyTypes:
+  - Ingress
+  - Egress
+```
+
+**Step 2: Permetti solo le comunicazioni necessarie**
+```yaml
+# Frontend ← Ingress Controller
+# Backend ← Frontend
+# Database ← Backend
+```
+
+**Risultato finale:**
+```
+Internet → Ingress Controller
+              ↓ ✓ permesso
+          Frontend
+              ↓ ✓ permesso  
+          Backend
+              ↓ ✓ permesso
+          Database
+
+Frontend → Database: ✗ BLOCCATO
+Internet → Backend: ✗ BLOCCATO
+```
+
+### Ingress vs Egress
+
+**Ingress** = traffico IN ENTRATA nel pod
+```yaml
+ingress:
+- from:
+  - podSelector:
+      matchLabels:
+        app: frontend  # Chi può entrare
+```
+
+**Egress** = traffico IN USCITA dal pod
+```yaml
+egress:
+- to:
+  - podSelector:
+      matchLabels:
+        app: database  # Dove può andare
+```
+
+### Prerequisito Importante
+
+**Network Policies NON funzionano con tutti i CNI!**
+
+✅ Supportano Network Policies:
+- Calico
+- Cilium  
+- Weave
+
+❌ NON supporta:
+- Flannel (troppo semplice)
+
+Se installi Flannel, le Network Policies vengono ignorate.
+
+### Test Network Policy
+```bash
+# Crea pod temporaneo per testare
+kubectl run test --image=busybox -it --rm -- sh
+
+# Prova a raggiungere database (dovrebbe fallire se policy funziona)
+wget -O- database:5432
+# Timeout = policy attiva ✓
+```
+
+### Esempio Completo: Applicazione 3-Tier
+```yaml
+---
+# 1. Default deny tutto
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: default-deny
+  namespace: prod
+spec:
+  podSelector: {}
+  policyTypes:
+  - Ingress
+  
+---
+# 2. Permetti Ingress → Frontend
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-ingress-to-frontend
+  namespace: prod
+spec:
+  podSelector:
+    matchLabels:
+      tier: frontend
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx
+    ports:
+    - port: 80
+      
+---
+# 3. Permetti Frontend → Backend
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-frontend-to-backend
+  namespace: prod
+spec:
+  podSelector:
+    matchLabels:
+      tier: backend
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          tier: frontend
+    ports:
+    - port: 8080
+      
+---
+# 4. Permetti Backend → Database
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backend-to-db
+  namespace: prod
+spec:
+  podSelector:
+    matchLabels:
+      tier: database
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          tier: backend
+    ports:
+    - port: 5432
+```
+
+### Quando Usare Network Policies
+
+✅ **Sempre in produzione**
+- Compliance (PCI-DSS, HIPAA)
+- Defense in depth
+- Isolare microservizi
+
+❌ **Non necessario in dev/test**
+- Aggiunge complessità
+- Debugging più difficile
+
+### Network Policy vs Firewall Tradizionale
+
+**Firewall tradizionale:**
+- Basato su IP e porte
+- Configurazione manuale per ogni server
+
+**Network Policy:**
+- Basato su **label** dei pod
+- Automatica: nuovi pod con stessa label = stesse regole
+- Dinamica: pod vengono e vanno, le policy rimangono
+
+**Esempio pratico:**
+
+Scala backend da 2 a 10 repliche:
+```bash
+kubectl scale deploy backend --replicas=10
+```
+
+**Firewall tradizionale:** Devi configurare manualmente 8 nuove regole
+**Network Policy:** Funziona automaticamente (usa le label, non gli IP)
 ---
  
