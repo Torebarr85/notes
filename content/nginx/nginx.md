@@ -1,5 +1,5 @@
 +++
-title = "Nginx: <titolo>"
+title = "Nginx explained"
 date = 2025-10-14
 draft = false
 tags = ["nginx"]
@@ -103,4 +103,6 @@ Nginx Ingress Controller usa Nginx per gestire routing HTTP verso servizi K8s.
 ```
 
 
+
+---- 
 
