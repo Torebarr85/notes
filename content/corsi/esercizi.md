@@ -132,6 +132,21 @@ docker network rm mia-rete
 **Nota chiave:** Kubernetes usa lo stesso principio — ogni Pod ha un IP, i Service fanno da DNS interno.
 
 ---
+# 1. Avvia k3s con internet
+sudo systemctl start k3s
+
+# 2. Verifica che il nodo sia Ready
+kubectl get nodes
+
+# 3. Importa le immagini che userai
+docker pull nginx
+docker pull busybox
+docker save nginx | sudo k3s ctr images import -
+docker save busybox | sudo k3s ctr images import -
+
+# 4. Verifica che k3s le veda
+sudo k3s ctr images list | grep -E "nginx|busybox"
+
 
 ## PARTE 2 — Kubernetes Troubleshooting
 
