@@ -1,8 +1,8 @@
 +++
-title: "Kubernetes Networking — Esercizi Pratici Offline"
-date: 2026-03-07
+title = "Kubernetes Networking — Esercizi Pratici Offline"
+date = 2026-03-07
 draft = false
-tags: ["corsi","kubernetes","networking","CKA","devops"]
+tags = ["corsi","kubernetes","networking","CKA","devops"]
 +++
 
 > Prerequisiti: k3s running (`kubectl get nodes` → Ready), immagini nginx e busybox già importate

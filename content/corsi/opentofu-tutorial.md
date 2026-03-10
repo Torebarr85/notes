@@ -1,8 +1,8 @@
 +++
-title: "OpenTofu: From 0 to Basic"
-date: 2026-03-07
-draft: false
-tags: ["corsi","opentofu","terraform","iac","devops"]
+title = "OpenTofu: From 0 to Basic"
+date = 2026-03-07
+draft = false
+tags = ["corsi","opentofu","terraform","iac","devops"]
 +++
 
 ## Cos'è OpenTofu?
