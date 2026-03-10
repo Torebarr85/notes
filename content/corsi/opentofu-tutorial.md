@@ -218,3 +218,88 @@ resource "aws_s3_bucket" "mio_bucket" {
 ```
 
 `tofu init` → `tofu plan` → `tofu apply` — sempre uguale.
+
+ 
+
+## Appendice: Cosa significano i blocchi nei file .tf
+
+Quando apri un file `.tf`, vedi blocchi di codice. Ecco cosa fa ognuno:
+
+### Il blocco `terraform` — "Di cosa ho bisogno"
+
+```hcl
+terraform {
+  required_providers {
+    local = {
+      source  = "hashicorp/local"
+      version = "~> 2.0"
+    }
+  }
+}
+```
+
+**In parole semplici:** "Per questo progetto, scaricami il plugin `local` versione 2.x dal catalogo ufficiale."
+
+Pensa ai provider come **app che installi**. Vuoi gestire AWS? Serve il provider AWS. Vuoi solo creare file locali? Basta il provider `local`.
+
+Il `source` è l'indirizzo da cui scaricarlo. La `version` dice "prendimi la 2-qualcosa, ma non la 3" (evita sorprese se cambiano le cose).
+
+### Il blocco `resource` — "Crea questa cosa"
+
+```hcl
+resource "local_file" "ciao" {
+  filename = "${path.module}/output/ciao.txt"
+  content  = "Hello from OpenTofu!"
+}
+```
+
+**In parole semplici:** "Crea un file chiamato `ciao.txt` nella cartella `output`, con dentro scritto 'Hello from OpenTofu!'"
+
+- `local_file` = che tipo di cosa creare (in questo caso: un file)
+- `"ciao"` = nome in codice che scegli tu (serve per riferirsi a questo file dopo)
+- `filename` e `content` = le istruzioni: dove e cosa
+
+Ogni tipo di risorsa ha parametri diversi. Un file vuole `filename` e `content`. Un bucket S3 vuole `bucket` (il nome). Un server vuole `instance_type`, `ami`, eccetera.
+
+### Il blocco `variable` — "Valore configurabile"
+
+```hcl
+variable "messaggio" {
+  description = "Testo da scrivere nel file"
+  type        = string
+  default     = "Valore di default"
+}
+```
+
+**In parole semplici:** "Definisco una variabile chiamata `messaggio`. Se non la passo io, usa questo valore di default."
+
+È come un **campo da compilare**. Invece di scrivere fisso nel codice "Hello", metti una variabile. Così puoi cambiare il valore senza toccare il codice:
+
+```bash
+tofu apply -var="messaggio=Ciao!"
+```
+
+- `type = string` = deve essere testo (non numero, non lista)
+- `default` = valore usato se non dici niente
+
+### Il blocco `output` — "Mostrami questo risultato"
+
+```hcl
+output "percorso_file" {
+  value = local_file.ciao.filename
+}
+```
+
+**In parole semplici:** "Quando hai finito, stampami il percorso del file che hai creato."
+
+Serve per **vedere i risultati**. Tipo: "Qual è l'IP pubblico del server che hai creato?" oppure "Dove hai messo il file?"
+
+`local_file.ciao.filename` significa: "vai alla risorsa che abbiamo chiamato `ciao`, prendi il suo attributo `filename`".
+
+---
+
+**Schema mentale:**
+1. `terraform {}` → installa i plugin necessari
+2. `variable {}` → input che posso cambiare
+3. `resource {}` → **la cosa concreta da creare**
+4. `output {}` → mostrami info utili alla fine
