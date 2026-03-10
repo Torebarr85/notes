@@ -1,7 +1,8 @@
 +++
-title: "Kubernetes Offline — dry-run e kubectl explain"
-date: 2026-03-07
-tags: ["kubernetes","CKA","devops","cheatsheet"]
+title = "Kubernetes Offline — dry-run e kubectl explain"
+date = 2026-03-07
+draft = false
+tags = ["corsi","kubernetes","CKA","devops","cheatsheet"]
 +++
 
 > Questo documento funziona **completamente offline**.
